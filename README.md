@@ -1,4 +1,4 @@
-# Gwent Beta AI
+# 2018 Gwent AI
 
 **A strong, fair opponent for the 2018 Gwent public beta
 (client 0.9.24.3.432), for the game's Practice mode.**
