@@ -20,7 +20,7 @@
     <Compile Include="../GwentAI/Search/RootStat.cs" />
     <Compile Include="../GwentAI/Search/WorkBudget.cs" />
     <Compile Include="../GwentAI/Search/SecondLookChoice.cs" />
-    <EmbeddedResource Include="../data/cards/roles.json" LogicalName="cards/roles.json" />
+    <Content Include="../data/cards/roles.json" Link="card-fixtures/roles.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
@@ -31,8 +31,8 @@
 
   <!-- Numeric ability parameters: client data from the user's client. scripts/answer_kinds.py
        writes one file per roles.json version (.local/cards/answer-params/<sha256 prefix>.json);
-       the build embeds the one for this checkout's roles.json, when it exists. -->
-  <Target Name="EmbedAnswerParams" BeforeTargets="PrepareForBuild">
+       the tests read the one for this checkout's roles.json, when it exists. -->
+  <Target Name="CopyAnswerParams" BeforeTargets="PrepareForBuild">
     <GetFileHash Files="$(MSBuildProjectDirectory)/../data/cards/roles.json" Algorithm="SHA256" HashEncoding="hex">
       <Output TaskParameter="Hash" PropertyName="RolesHash" />
     </GetFileHash>
@@ -40,7 +40,7 @@
       <AnswerParamsFile>$(MSBuildProjectDirectory)/../.local/cards/answer-params/$(RolesHash.ToLowerInvariant().Substring(0, 16)).json</AnswerParamsFile>
     </PropertyGroup>
     <ItemGroup>
-      <EmbeddedResource Include="$(AnswerParamsFile)" LogicalName="cards/answer-params.json" Condition="Exists('$(AnswerParamsFile)')" />
+      <Content Include="$(AnswerParamsFile)" Link="card-fixtures/answer-params.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('$(AnswerParamsFile)')" />
     </ItemGroup>
   </Target>
 </Project>

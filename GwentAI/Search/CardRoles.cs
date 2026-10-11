@@ -1,16 +1,78 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
 
 namespace GwentAI.Search
 {
-    // The card roles of data/cards/roles.json (built by scripts/card_roles.py),
-    // embedded in the mod as cards/roles.json and
-    // read once: roles, answer kinds, exposure tags and graveyard reach by
-    // template id.
+    // Client-derived roles and ability parameters, generated during setup
+    // and loaded once from the client's UserData/GwentAI/cards directory.
     public static class CardRoles
     {
         private static Data s_Data;
+
+        public const string DirectoryVariable = "GWENT_AI_CARD_DATA";
+
+        // Both hosts pass --client here; the mod passes its client root.
+        // The environment variable can select another complete directory.
+        public static void Initialize(string client, string directory = null)
+        {
+            directory = directory ?? Environment.GetEnvironmentVariable(DirectoryVariable);
+            if (string.IsNullOrEmpty(directory))
+            {
+                directory = Path.Combine(Path.Combine(Path.Combine(client, "UserData"), "GwentAI"), "cards");
+            }
+            else if (!Path.IsPathRooted(directory))
+            {
+                throw new InvalidDataException(DirectoryVariable + " must name an absolute directory");
+            }
+            s_Data = LoadDirectory(directory, client);
+        }
+
+        // Validate the client fingerprint and the pair before publishing any
+        // data. Missing or stale data must never change the AI's play silently.
+        public static Data LoadDirectory(string directory, string client)
+        {
+            string roles = RequiredFile(directory, "roles.json");
+            string numbers = RequiredFile(directory, "answer-params.json");
+            JObject manifest = JObject.Parse(RequiredFile(directory, "manifest.json"));
+            CheckClientFile(directory, manifest, "engine_sha256", Path.Combine(Path.Combine(Path.Combine(client, "Gwent_Data"), "Managed"), "Assembly-CSharp.dll"));
+            CheckClientFile(directory, manifest, "definitions_sha256", Path.Combine(Path.Combine(Path.Combine(client, "Gwent_Data"), "StreamingAssets"), "data_definitions"));
+            JObject parameters = JObject.Parse(numbers);
+            if ((string)parameters["roles_sha256"] != Sha256(roles))
+            {
+                throw new InvalidDataException("AI card roles and ability parameters in " + directory + " do not match; rerun setup to regenerate them");
+            }
+            return ParseAll(roles, numbers);
+        }
+
+        private static void CheckClientFile(string directory, JObject manifest, string field, string path)
+        {
+            string expected = (string)manifest[field];
+            if (string.IsNullOrEmpty(expected) || !File.Exists(path) || expected != FileSha256(path))
+            {
+                throw new InvalidDataException("AI card data in " + directory + " does not match " + path + "; rerun setup to regenerate it");
+            }
+        }
+
+        private static string RequiredFile(string directory, string name)
+        {
+            string path = Path.Combine(directory, name);
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException("AI card data is missing: " + path + "; run setup to generate it from your game client", path);
+            }
+            return File.ReadAllText(path);
+        }
+
+        private static string FileSha256(string path)
+        {
+            using (System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create())
+            using (Stream stream = File.OpenRead(path))
+            {
+                return BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", "").ToLowerInvariant();
+            }
+        }
 
         public static bool Has(int template, string role)
         {
@@ -64,35 +126,11 @@ namespace GwentAI.Search
         // Row token name -> what it does to its row's units each turn.
         public static Dictionary<string, List<TokenEffect>> WeatherTokens => Loaded.Weather;
 
-        public static Data Loaded => s_Data ?? (s_Data = Load());
+        public static Data Loaded => s_Data ?? throw new InvalidOperationException("AI card data has not been initialized from the game client");
 
         private static List<T> Get<T>(Dictionary<int, List<T>> map, int template)
         {
             return map.TryGetValue(template, out List<T> list) ? list : new List<T>();
-        }
-
-        private static Data Load()
-        {
-            return ParseAll(Resource("cards/roles.json"), Resource("cards/answer-params.json"));
-        }
-
-        // An embedded resource, or null. cards/answer-params.json holds the
-        // numeric parameters (amounts, thresholds, counts): data from the
-        // user's client; the build embeds it from .local when it exists
-        // (scripts/answer_kinds.py writes it), and without it those values read -1.
-        private static string Resource(string name)
-        {
-            using (Stream stream = typeof(CardRoles).Assembly.GetManifestResourceStream(name))
-            {
-                if (stream == null)
-                {
-                    return null;
-                }
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
         }
 
         public static Dictionary<int, HashSet<string>> Parse(string json)

@@ -3,6 +3,7 @@
        sources and the same GwentAI.dll the Mono host runs, with the engine
        loaded by EngineLoader. -->
   <PropertyGroup>
+    <DebugType>none</DebugType>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>

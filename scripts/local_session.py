@@ -93,15 +93,15 @@ def md5(path):
 
 
 def worker_runtime(choice, host=HOST, host_core=HOST_CORE, dotnet=None, macos=MACOS):
-    """The runtime the search workers run on, and why: Mono unless
-    GWENT_WORKER_RUNTIME=coreclr. .NET runs our search about 1.2x faster per
+    """The selected worker runtime; auto chooses a matching .NET build or Mono. .NET runs our search about 1.2x faster per
     worker on a P-core at half the memory. It must carry the
     same GwentAI.dll as the Mono host (a host rebuilt alone must not leave the
     workers on an older search). Both play identical games."""
     if choice in (None, 'mono'):
         return 'mono', 'default' if choice is None else 'GWENT_WORKER_RUNTIME=mono'
-    if choice != 'coreclr':
-        raise SystemExit(f'GWENT_WORKER_RUNTIME={choice}: mono or coreclr')
+    automatic = choice == 'auto'
+    if choice not in ('auto', 'coreclr'):
+        raise SystemExit(f'GWENT_WORKER_RUNTIME={choice}: auto, mono or coreclr')
     dotnet = dotnet if dotnet is not None else shutil.which('dotnet')
     mod = md5(host.parent / 'GwentAI.dll')
     if macos:
@@ -114,6 +114,8 @@ def worker_runtime(choice, host=HOST, host_core=HOST_CORE, dotnet=None, macos=MA
         problem = f'{host_core.parent} holds another GwentAI.dll than {host.parent}; run scripts/build-local.sh host'
     else:
         return 'coreclr', 'GWENT_WORKER_RUNTIME=coreclr; .NET build matches the host'
+    if automatic:
+        return 'mono', 'matching .NET workers unavailable; using Mono'
     raise SystemExit(f'GWENT_WORKER_RUNTIME=coreclr: {problem}')
 
 
@@ -460,6 +462,8 @@ def main(session=None):
                      'start=', 'auto', allowed=(0, 49))
         wine_command(r'C:\windows\system32\sc.exe', 'start', 'GalaxyCommunication', allowed=(0, 32))
         session.game_environment(args, env)
+        if env.get('GWENT_AI_CARD_DATA'):
+            env['GWENT_AI_CARD_DATA'] = wine_path(Path(env['GWENT_AI_CARD_DATA']))
         if args.workers > 0 and not args.stock_ai:
             endpoints = start_workers(args.workers, os.environ.copy(), session.worker_log_dir(args))
             if endpoints:

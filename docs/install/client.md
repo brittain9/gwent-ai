@@ -1,7 +1,7 @@
 # The Gwent client
 
 The project needs the original **Gwent public beta client, version
-0.9.24.3.432** (June 2018). The AI runs inside it, and the build reads the
+0.9.24.3.432** (June 2018). The AI runs inside it, and setup reads the
 card tables from it.
 
 The client is CD PROJEKT RED's software. It is **not included** in the

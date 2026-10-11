@@ -4,8 +4,14 @@ using Xunit;
 namespace GwentAI.Tests
 {
     // CardRoles.Polarity (Rollout.Aim) from the roles.json payoffs.
+    [Collection("Card data")]
     public class PolarityTests
     {
+        public PolarityTests(CardDataFixture files)
+        {
+            CardRoles.Initialize(files.Client, files.Directory);
+        }
+
         private const int ViperWitcher = 200124, TuirseachHunter = 152304, Swallow = 113310, Mandrake = 200223, VicovaroNovice = 122403;
 
         [Fact]

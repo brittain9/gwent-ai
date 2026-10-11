@@ -4,6 +4,7 @@
 #
 #   scripts/setup.sh          the AI and the headless host (Mono)
 #   scripts/setup.sh --play   also Play: Practice in the real client (Wine)
+#   scripts/setup.sh --play --prebuilt   install the downloaded release
 #
 # Linux and macOS (Apple silicon). See the install guide.
 #
@@ -23,11 +24,14 @@ CLIENT="$(dirname "$ROOT")/client"
 LOCAL="$ROOT/.local"
 
 PLAY=0
-case "${1:-}" in
-  --play) PLAY=1 ;;
-  "") ;;
-  *) sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
-esac
+PREBUILT=0
+for option in "$@"; do
+  case "$option" in
+    --play) PLAY=1 ;;
+    --prebuilt) PREBUILT=1 ;;
+    *) sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
+  esac
+done
 
 MACOS=0
 [[ "$(uname -s)" == Darwin ]] && MACOS=1
@@ -95,13 +99,13 @@ else
 fi
 
 step "Prerequisites"
-need build dotnet dotnet-sdk-10.0 dotnet-sdk-10.0 dotnet-sdk
+if ((!PREBUILT)); then need build dotnet dotnet-sdk-10.0 dotnet-sdk-10.0 dotnet-sdk; fi
 need build python3 python3 python3
 need build uv uv pipx
 need build curl curl curl
 need build unzip unzip unzip
 need build tar tar tar
-if command -v dotnet >/dev/null && [[ -z "$(dotnet --list-sdks 2>/dev/null)" ]]; then
+if ((!PREBUILT)) && command -v dotnet >/dev/null && [[ -z "$(dotnet --list-sdks 2>/dev/null)" ]]; then
   say "  missing: a .NET SDK (only the runtime is installed)"
   MISSING_BUILD+=(dotnet-sdk-10.0)
 fi
@@ -131,14 +135,16 @@ if ((MACOS)); then
   # Wine and DXVK are pinned downloads; the session's sandbox is the
   # system's sandbox-exec (platform/macos/session.sb).
   need play nginx - - nginx
-  need play x86_64-w64-mingw32-gcc - - mingw-w64
+  if ((!PREBUILT)); then need play x86_64-w64-mingw32-gcc - - mingw-w64; fi
   need play clang - - "(Command Line Tools)"
   need play openssl - - openssl
 else
   # The Play path can use tools prepared in .local instead of distribution packages.
   [[ -x "$LOCAL/wine-fedora/usr/bin/wine64" ]] || need play wine wine "wine wine64"
   [[ -x "$LOCAL/nginx/sbin/nginx" || -x /usr/sbin/nginx ]] || need play nginx nginx nginx
-  [[ -x "$LOCAL/tools/usr/bin/x86_64-w64-mingw32-gcc" ]] || need play x86_64-w64-mingw32-gcc mingw64-gcc gcc-mingw-w64-x86-64
+  if ((!PREBUILT)); then
+    [[ -x "$LOCAL/tools/usr/bin/x86_64-w64-mingw32-gcc" ]] || need play x86_64-w64-mingw32-gcc mingw64-gcc gcc-mingw-w64-x86-64
+  fi
   need play bwrap bubblewrap bubblewrap
   need play unshare util-linux util-linux
   need play ip iproute iproute2
@@ -181,6 +187,17 @@ fetch() {  # fetch URL FILE SHA256
   [[ "$(sha256 "$file.part")" == "$sum" ]] || { rm -f "$file.part"; die "SHA-256 mismatch for $url"; }
   mv "$file.part" "$file"
 }
+
+if ((PREBUILT)); then
+  step "Downloaded release"
+  required=(GwentAI.dll host/GwentAI.dll host/GwentHost.exe host/GwentHost.exe.config)
+  if ((PLAY)); then required+=(GwentBetaRestorationMod.dll GalaxyCommunication.exe netprobe.exe); fi
+  for file in "${required[@]}"; do
+    [[ -f "$ROOT/dist/$file" ]] || die "dist/$file is missing; extract the complete gwent-ai-v1.zip release."
+  done
+  [[ "$(sha256 "$ROOT/dist/GwentAI.dll")" == "$(sha256 "$ROOT/dist/host/GwentAI.dll")" ]] \
+    || die "the AI and its search workers differ; extract the complete release again."
+fi
 
 step "Downloads (.local)"
 fetch "$MELONLOADER_URL" "$LOCAL/downloads/MelonLoader.x64.zip" "$MELONLOADER_SHA256"
@@ -253,8 +270,17 @@ if ((PLAY)); then
   say "  .venv: $(cd "$ROOT" && .venv/bin/python -c 'import websockets; print("websockets", websockets.__version__)')"
 fi
 
-step "Build"
-if ((PLAY)); then "$ROOT/scripts/build-local.sh"; else "$ROOT/scripts/build-local.sh" host; fi
+if ((PREBUILT)); then
+  step "Card data from your client"
+  python3 "$ROOT/scripts/install-card-data.py" --client "$CLIENT" --out "$LOCAL/runtime-cards"
+  if ((PLAY && MACOS)); then
+    clang -arch x86_64 -O2 -Wall -Wextra -dynamiclib "$ROOT/platform/macos/session_net.c" \
+      -o "$ROOT/dist/session_net.dylib"
+  fi
+else
+  step "Build"
+  if ((PLAY)); then "$ROOT/scripts/build-local.sh"; else "$ROOT/scripts/build-local.sh" host; fi
+fi
 
 step "Decks from your client (.runtime/decks)"
 # CDPR's own deck definitions: the seven Practice opponents and the client's

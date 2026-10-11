@@ -13,7 +13,8 @@ if not (client / 'Gwent.exe').is_file():
     raise SystemExit('Extract your original Gwent client into ../client first (see the install guide).')
 loader = root / '.local/downloads/MelonLoader.x64.zip'
 needed = [loader, root / '.venv/bin/python', root / 'dist/GwentBetaRestorationMod.dll',
-          root / 'dist/GwentAI.dll', root / 'dist/GalaxyCommunication.exe']
+          root / 'dist/GwentAI.dll', root / 'dist/GalaxyCommunication.exe',
+          *(root / '.local/runtime-cards' / name for name in ('roles.json', 'answer-params.json', 'manifest.json'))]
 if missing := [str(path.relative_to(root)) for path in needed if not path.exists()]:
     raise SystemExit(f'Missing {", ".join(missing)}: run scripts/setup.sh --play first.')
 with zipfile.ZipFile(loader) as archive:
@@ -24,6 +25,10 @@ with zipfile.ZipFile(loader) as archive:
 (client / 'Mods').mkdir(exist_ok=True)
 for mod in ['GwentBetaRestorationMod.dll', 'GwentAI.dll']:
     shutil.copy2(root / 'dist' / mod, client / 'Mods' / mod)
+cards = client / 'UserData/GwentAI/cards'
+cards.mkdir(parents=True, exist_ok=True)
+for name in ['roles.json', 'answer-params.json', 'manifest.json']:
+    shutil.copy2(root / '.local/runtime-cards' / name, cards / name)
 # Practice opponents and the AI's deck knowledge (scripts/roster.py).
 subprocess.run([str(root / 'scripts/roster.py'), 'install'], check=True)
 for filename in ['config.json', 'Launch.cfg']:

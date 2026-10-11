@@ -18,12 +18,13 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_NOLOGO=1
 mkdir -p dist
 
-# The card table (data/cards/roles.json) and the numeric card-ability
-# parameters the mod embeds are derived from the user's own client; the
-# numbers go to .local.
+# Card tables and runtime data come from the user's client.
+# A build writes only .local; setup installs the runtime files into the client.
 if python3 -c 'import sys; sys.path.insert(0, "scripts"); import clientdata; sys.exit(not clientdata.DEFINITIONS.exists())'; then
   [[ -f data/cards/roles.json ]] || python3 scripts/card_roles.py
   python3 scripts/answer_kinds.py
+  card_client="$(python3 -c 'import sys; sys.path.insert(0, "scripts"); import clientdata; print(clientdata.CLIENT)')"
+  python3 scripts/install-card-data.py --client "$card_client" --out "$ROOT/.local/runtime-cards"
 fi
 # GwentHost builds the GwentAI mod too (dist/GwentAI.dll, dist/host/).
 dotnet build GwentHost/GwentHost.csproj -c Release --ignore-failed-sources
@@ -49,6 +50,13 @@ if [[ "$(uname -s)" == Linux ]] && dotnet --list-runtimes | grep -q '^Microsoft.
     echo 'build-local: GwentHost.Core did not build; search workers will run on Mono' >&2
   fi
 fi
+# Keep each frozen host with its matching local card data.
+for host_dir in dist/host dist/host-core; do
+  if [[ -d "$host_dir" && -d .local/runtime-cards ]]; then
+    mkdir -p "$host_dir/card-data"
+    cp .local/runtime-cards/{roles.json,answer-params.json,manifest.json} "$host_dir/card-data/"
+  fi
+done
 # Compare this line with the card table hash in the release notes.
 card_table() {
   [[ -f data/cards/roles.json ]] || return 0

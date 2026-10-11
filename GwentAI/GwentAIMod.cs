@@ -25,6 +25,19 @@ namespace GwentAI
             if (Environment.GetEnvironmentVariable("GWENT_STOCK_AI") == "1")
             {
                 PracticeAI.Enabled = false;
+                return;
+            }
+            bool enabled = PracticeAI.Enabled;
+            PracticeAI.Enabled = false;
+            try
+            {
+                string mods = System.IO.Path.GetDirectoryName(typeof(GwentAIMod).Assembly.Location);
+                Search.CardRoles.Initialize(System.IO.Path.GetDirectoryName(mods));
+                PracticeAI.Enabled = enabled;
+            }
+            catch (Exception ex)
+            {
+                LoggerInstance.Error("GwentAI could not load its local card data. Practice AI is disabled; run setup to regenerate the data. " + ex);
             }
         }
 

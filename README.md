@@ -14,9 +14,8 @@ this project.
 
 ## Why
 
-The 2018 public beta was, for many players, the best version of Gwent, and
-the community kept it alive: players saved the client, built a community
-server and made it run on modern systems. What was missing was a good
+The community has kept the 2018 public beta alive: players saved the
+client, built a community server, and made it run on modern systems. What was missing was a good
 opponent. The built-in AI is easy, it knows seven decks, and it can see your
 hand. This project replaces it.
 
@@ -44,41 +43,43 @@ hand. This project replaces it.
 
 ## How strong
 
-An earlier version won 30 of 30 games against the game's built-in AI, at the
-built-in AI's own thinking time, with the same strong decks on both sides
-(7 October 2026, 30 games). The measured numbers of each release, with
-their sample sizes and dates, come with the release in `results/`.
+This is still an early release. The AI won 30 out of 30 games against the
+built-in AI—a 100% win rate in that test. It can punish mistakes and
+experimental play, but you can still beat it with a strong deck you know
+well.
 
 ## Play against it
 
-Release 1 is source with a build script: you build the AI against your own
-client. Its notes are in `results/v1.md`. You will need:
+[Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest).
+The ZIP includes the mod DLL, matching search workers, and deck roster.
+See the [release notes](results/v1.md).
 
-- Your own copy of the client 0.9.24.3.432 (June 2018). The install guide
-  gives its file hashes so that you can check your copy.
-- MelonLoader 0.5.7 in the client folder; the setup script downloads it.
-- A community server for the beta. On Linux and macOS, the project's copy
-  of Somnia41205's unofficial server (MIT). On Windows, upstream's launcher.
-- To build the AI against your client: the .NET SDK, Mono 6, and Python 3.10
-  or newer with uv. The build reads your client for the card tables it
-  needs; nothing from the game is in the project.
-- On Linux and macOS: Wine, nginx, MinGW-w64 and openssl; on Linux also
-  bubblewrap and unprivileged user namespaces, and a Vulkan driver for DXVK.
+1. Extract `gwent-ai-v1.zip`. Put your own client 0.9.24.3.432 in a folder
+   named `client` beside the extracted `gwent-ai` folder.
+2. Follow the guide for [Linux](docs/install/linux.md),
+   [macOS](docs/install/macos.md), or [Windows](docs/install/windows.md)
+   to install the prerequisites and connect the community server.
+3. Start the game and choose **Single-player, then Practice**.
 
-Quick start on Linux and macOS, from the project folder with the client
-beside it:
+Quick start on Linux and macOS, from the extracted `gwent-ai` folder:
 
 ```sh
-scripts/setup.sh --play      # checks prerequisites, downloads the pinned files, builds the AI
-server/fetch-upstream.sh     # once: the community server's upstream service files
-scripts/prepare-local.py     # installs MelonLoader, the AI and its decks into the client
-scripts/run-local.sh         # starts the server, the game under Wine and the search workers
+scripts/setup.sh --play --prebuilt  # checks prerequisites and prepares your client data
+server/fetch-upstream.sh           # once: the community server's service files
+scripts/prepare-local.py           # installs the mod and decks into your client
+scripts/run-local.sh               # starts the server, game, and search workers
 ```
 
-Then choose **Single-player, then Practice**. The guides:
-`docs/install/linux.md`, `docs/install/macos.md`, `docs/install/windows.md`.
-Settings such as the think time: `docs/install/options.md`. How the code
-is organised: `docs/install/architecture.md`.
+You need your own client, MelonLoader 0.5.7 (downloaded by setup), Mono 6,
+Python 3.10+ with uv, Wine, nginx, and OpenSSL. Linux also needs bubblewrap,
+unprivileged user namespaces, and a Vulkan driver. The platform guides
+cover the details. The download does not need the .NET SDK.
+
+Prefer to build from source? Follow the [Linux build steps](docs/install/linux.md#build-from-source)
+or [macOS build steps](docs/install/macos.md#build-from-source).
+
+[Settings](docs/install/options.md) include the think time.
+[Architecture](docs/install/architecture.md) explains how the code is organised.
 
 Tested on Linux (Fedora, with Wine). macOS with Wine on Apple silicon is
 documented. Not tested on Windows yet.
@@ -114,7 +115,7 @@ Code and models: PolyForm Noncommercial 1.0.0. In plain words: run it,
 study it, change it and share it for noncommercial purposes, and keep the
 notice; do not sell it or use it commercially. Documents: CC BY-NC-ND 4.0.
 Share your games, screenshots and videos freely, with a link. Details and
-third-party notices: `LICENSE`, `NOTICE.md`.
+third-party notices: [LICENSE](LICENSE), [NOTICE.md](NOTICE.md).
 
 The community server is by Somnia41205 (MIT). Community deck lists are
 credited to their authors where used. The mod loader is MelonLoader

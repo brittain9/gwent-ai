@@ -1,62 +1,61 @@
 # macOS
 
-Tested on Apple silicon. Intel Macs are untested. First get the client and
-put it in `../client` ([client.md](client.md)).
+Documented for Apple silicon with Wine and Rosetta 2. This release has not
+been retested on macOS; Intel Macs are untested. Download
+[gwent-ai-v1.zip](https://github.com/brittain9/gwent-ai/releases/download/v1/gwent-ai-v1.zip)
+and extract it beside your [client](client.md), as `gwent-ai/` and `client/`.
 
 ## Prerequisites
 
-| Needs | Install | Tested with |
-| --- | --- | --- |
-| Xcode Command Line Tools | `xcode-select --install` | |
-| Rosetta 2 | `softwareupdate --install-rosetta` | |
-| .NET SDK | `brew install --cask dotnet-sdk` | 10.0.401 |
-| Python 3.10+ | `brew install python` | 3.14 |
-| uv | `brew install uv` | 0.10 |
-| nginx | `brew install nginx` | 1.31 |
-| MinGW-w64 GCC | `brew install mingw-w64` | 14.0 |
-| openssl | `brew install openssl` | |
+| Needs | Install |
+| --- | --- |
+| Xcode Command Line Tools | `xcode-select --install` |
+| Rosetta 2 | `softwareupdate --install-rosetta` |
+| Python 3.10+ | `brew install python` |
+| uv | `brew install uv` |
+| nginx | `brew install nginx` |
+| openssl | `brew install openssl` |
 
-`scripts/setup.sh --play` checks all of these and prints the Homebrew
-command for anything missing. It never installs system packages and never
-asks for root. It downloads the rest, pinned and checked by SHA-256:
+The download includes the AI and matching Mono workers. The .NET SDK and
+MinGW compiler are needed only when building the AI from source.
 
-- **Mono 6.14.1**, built from source into `.local/mono-x86_64` (about 20
-  minutes, once). The search workers must round floating-point arithmetic
-  the way the client's own Mono does; Homebrew's arm64 Mono does not, so
-  the workers refuse to run on it. Rosetta 2 runs the built one.
-- **Wine 11.0**, Gcenx's macOS build
-  ([macOS_Wine_builds](https://github.com/Gcenx/macOS_Wine_builds)), an
-  x86_64 program that Rosetta 2 runs. It bundles MoltenVK (Vulkan on Metal).
-- **DXVK 1.10.3 for macOS** ([DXVK-macOS](https://github.com/Gcenx/DXVK-macOS)),
-  Direct3D 11 on MoltenVK.
+Setup downloads pinned files and verifies their SHA-256 hashes:
 
-The game renders at the display's full pixel size (Retina mode).
+- Mono 6.14.1, built as x86_64 under `.local/mono-x86_64` (about 20 minutes,
+  once). The workers require the same floating-point arithmetic as the
+  client; native arm64 Mono cannot run them correctly.
+- Wine 11.0 from [Gcenx's macOS builds](https://github.com/Gcenx/macOS_Wine_builds),
+  with MoltenVK. Rosetta 2 runs it.
+- [DXVK for macOS](https://github.com/Gcenx/DXVK-macOS), for Direct3D 11.
 
-## Steps
+Setup also compiles the small macOS network helper with Xcode's compiler.
+It never installs system packages or asks for root.
+
+## Install and play
+
+From the extracted `gwent-ai` folder:
 
 ```sh
-scripts/setup.sh --play      # checks prerequisites, downloads the pinned files, builds the AI against your client
-server/fetch-upstream.sh     # once: fetches upstream's service files for the community server
-scripts/prepare-local.py     # installs MelonLoader, the AI and its deck roster into the client
-scripts/run-local.sh         # starts the server, the game under Wine and the search workers
+scripts/setup.sh --play --prebuilt
+server/fetch-upstream.sh
+scripts/prepare-local.py
+scripts/run-local.sh
 ```
 
-In the game choose **Single-player**, then **Practice**. Close the game to
-stop the session.
+Preparation installs the AI, roster and card data derived from your client.
+Choose **Single-player, then Practice**. Close the game to stop the session.
+Setup prints a card-table hash; compare it with the [release notes](../../results/v1.md).
 
-- `setup.sh` is safe to run again: finished steps are skipped. After an
-  update of the project, run `scripts/build-local.sh` and
-  `scripts/prepare-local.py` again.
-- The project ships our copy of Somnia41205's community server under
-  `server/`. `server/fetch-upstream.sh` downloads the service files that
-  only upstream carries; run it once.
-- The build reads the card tables from your own client; nothing from the
-  game is in the project. It prints a `card table: sha256 ...` line. The
-  value should match the one in the release notes (the `results/` file for
-  your release). A different value means your client differs from the one
-  the release was measured with.
-- `run-local.sh` takes the same options as on Linux ([linux.md](linux.md)):
-  `--windowed`, `--stock-ai`, `--username`, `--workers N`.
+The game uses the display's full pixel size. Options such as `--windowed`,
+`--stock-ai` and `--workers N` work as on [Linux](linux.md).
+To update, extract the next complete release and repeat setup and preparation.
+
+## Build from source
+
+Also install `brew install --cask dotnet-sdk` and `brew install mingw-w64`.
+Run `scripts/setup.sh --play` without `--prebuilt`, then the fetch,
+preparation and run commands above. After changing source, run
+`scripts/build-local.sh` and `scripts/prepare-local.py` again.
 
 ## Isolation
 

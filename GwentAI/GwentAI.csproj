@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <DebugType>none</DebugType>
     <TargetFramework>net35</TargetFramework>
     <LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -27,22 +28,7 @@
        time (PolicyModel). -->
   <ItemGroup>
     <EmbeddedResource Include="../data/eval/round.json" LogicalName="eval/round.json" />
-    <EmbeddedResource Include="../data/cards/roles.json" LogicalName="cards/roles.json" />
     <EmbeddedResource Include="../data/model/pol2.pnet" LogicalName="eval/policy.pnet" />
   </ItemGroup>
 
-  <!-- Numeric ability parameters: client data from the user's client. scripts/answer_kinds.py
-       writes one file per roles.json version (.local/cards/answer-params/<sha256 prefix>.json);
-       the build embeds the one for this checkout's roles.json, when it exists. -->
-  <Target Name="EmbedAnswerParams" BeforeTargets="PrepareForBuild">
-    <GetFileHash Files="$(MSBuildProjectDirectory)/../data/cards/roles.json" Algorithm="SHA256" HashEncoding="hex">
-      <Output TaskParameter="Hash" PropertyName="RolesHash" />
-    </GetFileHash>
-    <PropertyGroup>
-      <AnswerParamsFile>$(MSBuildProjectDirectory)/../.local/cards/answer-params/$(RolesHash.ToLowerInvariant().Substring(0, 16)).json</AnswerParamsFile>
-    </PropertyGroup>
-    <ItemGroup>
-      <EmbeddedResource Include="$(AnswerParamsFile)" LogicalName="cards/answer-params.json" Condition="Exists('$(AnswerParamsFile)')" />
-    </ItemGroup>
-  </Target>
 </Project>
