@@ -86,12 +86,12 @@ exec unshare --user --map-root-user --net bash -c '
         # Practice games are recorded in data/human-games.
         mounts+=(--bind "$GWENT_PROJECT_ROOT/data/human-games" "$GWENT_PROJECT_ROOT/data/human-games")
     fi
-    exec bwrap --ro-bind / / --dev-bind /dev /dev --tmpfs /home --tmpfs /opt --tmpfs /tmp \
+    exec bwrap --ro-bind / / --dev-bind /dev /dev --tmpfs "$(readlink -f /home)" --tmpfs /opt --tmpfs /tmp \
       --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
       --ro-bind "$(dirname "$client")" "$(dirname "$client")" \
       "${mounts[@]}" \
       --ro-bind "$GWENT_WINE_ROOT" /opt/gwent-wine \
-      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/hosts" /etc/hosts \
+      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/hosts" "$(readlink -f /etc/hosts)" \
       --ro-bind "$GWENT_PROJECT_ROOT/.runtime/resolv.conf" "$(readlink -f /etc/resolv.conf)" \
       --unshare-pid --proc /proc --cap-add CAP_NET_BIND_SERVICE --die-with-parent \
       --setenv HOME "$GWENT_PROJECT_ROOT/.runtime/home" \
