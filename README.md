@@ -112,8 +112,7 @@ after head-to-head measurement, so we do not take code for them.
 
 ## Support the project
 
-The AI is free and stays free. If you enjoy playing against it and want to
-help me keep improving it, you can buy me a coffee:
+If you enjoy the project, you can support it here:
 
 <a href="https://buymeacoffee.com/alexbrittaq"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="217"></a>
 
