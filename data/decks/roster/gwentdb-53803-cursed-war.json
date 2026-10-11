@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Cursed War",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200169,
+  "name": "King Radovid V"
+ },
+ "cards": [
+  {
+   "id": 122309,
+   "name": "Siege Support",
+   "count": 2
+  },
+  {
+   "id": 200540,
+   "name": "Aedirnian Mauler",
+   "count": 1
+  },
+  {
+   "id": 201628,
+   "name": "Tormented Mage",
+   "count": 3
+  },
+  {
+   "id": 201630,
+   "name": "Damned Sorceress",
+   "count": 3
+  },
+  {
+   "id": 201624,
+   "name": "Kaedweni Revenant",
+   "count": 3
+  },
+  {
+   "id": 201633,
+   "name": "Bloody Flail",
+   "count": 3
+  },
+  {
+   "id": 112206,
+   "name": "Ocvist",
+   "count": 1
+  },
+  {
+   "id": 113102,
+   "name": "The Last Wish",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201648,
+   "name": "Vandergrift's Blade",
+   "count": 1
+  },
+  {
+   "id": 201582,
+   "name": "Zoria Runestone",
+   "count": 1
+  },
+  {
+   "id": 113101,
+   "name": "Ragh Nar Roog",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 201632,
+   "name": "Sihil",
+   "count": 1
+  },
+  {
+   "id": 200056,
+   "name": "Aguara: True Form",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150654/https://www.gwentdb.com/decks/53803-cursed-war",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

@@ -1,0 +1,106 @@
+{
+ "name": "GwentDB: GameKing's Nilfgaard - Gwent Open #7",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 1
+  },
+  {
+   "id": 162309,
+   "name": "Nauzicaa Sergeant",
+   "count": 1
+  },
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 1
+  },
+  {
+   "id": 201619,
+   "name": "Ointment",
+   "count": 3
+  },
+  {
+   "id": 201617,
+   "name": "Recruit",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 201610,
+   "name": "Slave Infantry",
+   "count": 3
+  },
+  {
+   "id": 201661,
+   "name": "Sentry",
+   "count": 3
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200050,
+   "name": "Vreemde",
+   "count": 1
+  },
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 200032,
+   "name": "Rainfarn of Attre",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "meta",
+ "tier": "Tournament",
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150716/https://www.gwentdb.com/decks/53723-gamekings-nilfgaard-gwent-open-7",
+ "credit": "GwentDB on GwentDB (0 up, 0 down)"
+}

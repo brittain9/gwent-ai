@@ -1,0 +1,101 @@
+{
+ "name": "Variant: Deathwish (ladder variant)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 112202,
+   "name": "Eskel",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132205,
+   "name": "Morvudd",
+   "count": 1
+  },
+  {
+   "id": 132213,
+   "name": "D'ao",
+   "count": 2
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 132312,
+   "name": "Griffin",
+   "count": 3
+  },
+  {
+   "id": 132406,
+   "name": "Maerolorn",
+   "count": 1
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 2
+  },
+  {
+   "id": 200038,
+   "name": "Archespore",
+   "count": 3
+  },
+  {
+   "id": 200083,
+   "name": "Iris' Companions",
+   "count": 1
+  },
+  {
+   "id": 200221,
+   "name": "Brewess: Ritual",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 200295,
+   "name": "Rotfiend",
+   "count": 1
+  },
+  {
+   "id": 200534,
+   "name": "She-Troll of Vergen",
+   "count": 1
+  },
+  {
+   "id": 200539,
+   "name": "Slyzard",
+   "count": 1
+  },
+  {
+   "id": 201781,
+   "name": "Imlerith: Sabbath",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-deathwish.json (variant, seed 2018)",
+ "credit": "generated"
+}

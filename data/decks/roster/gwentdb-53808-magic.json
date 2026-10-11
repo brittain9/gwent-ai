@@ -1,0 +1,106 @@
+{
+ "name": "GwentDB: Magic",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200166,
+  "name": "Eithn\u00e9"
+ },
+ "cards": [
+  {
+   "id": 142308,
+   "name": "Elven Mercenary",
+   "count": 3
+  },
+  {
+   "id": 113301,
+   "name": "Alzur's Thunder",
+   "count": 2
+  },
+  {
+   "id": 113319,
+   "name": "Dimeritium Shackles",
+   "count": 1
+  },
+  {
+   "id": 113320,
+   "name": "Mardroeme",
+   "count": 1
+  },
+  {
+   "id": 200039,
+   "name": "Dol Blathanna Sentry",
+   "count": 3
+  },
+  {
+   "id": 200138,
+   "name": "Sage",
+   "count": 2
+  },
+  {
+   "id": 201645,
+   "name": "Crushing Trap",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 113309,
+   "name": "Scorch",
+   "count": 1
+  },
+  {
+   "id": 113203,
+   "name": "Skellige Storm",
+   "count": 1
+  },
+  {
+   "id": 113206,
+   "name": "White Frost",
+   "count": 1
+  },
+  {
+   "id": 143201,
+   "name": "Nature's Gift",
+   "count": 1
+  },
+  {
+   "id": 113202,
+   "name": "Merigold's Hailstorm",
+   "count": 1
+  },
+  {
+   "id": 201585,
+   "name": "Morana Runestone",
+   "count": 1
+  },
+  {
+   "id": 142108,
+   "name": "Schirr\u00fa",
+   "count": 1
+  },
+  {
+   "id": 201615,
+   "name": "Isengrim: Outlaw",
+   "count": 1
+  },
+  {
+   "id": 200058,
+   "name": "Uma's Curse",
+   "count": 1
+  },
+  {
+   "id": 200056,
+   "name": "Aguara: True Form",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150653/https://www.gwentdb.com/decks/53808-magic",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

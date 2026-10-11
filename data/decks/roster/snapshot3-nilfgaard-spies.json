@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Spies",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 162102,
+   "name": "Menno Coehoorn",
+   "count": 1
+  },
+  {
+   "id": 200032,
+   "name": "Rainfarn of Attre",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 200050,
+   "name": "Vreemde",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 162213,
+   "name": "Ceallach Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 200118,
+   "name": "Infiltrator",
+   "count": 2
+  },
+  {
+   "id": 162308,
+   "name": "Impera Enforcers",
+   "count": 3
+  },
+  {
+   "id": 162307,
+   "name": "Impera Brigade",
+   "count": 3
+  },
+  {
+   "id": 162310,
+   "name": "Nauzicaa Brigade",
+   "count": 1
+  },
+  {
+   "id": 162314,
+   "name": "Emissary",
+   "count": 3
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 3
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

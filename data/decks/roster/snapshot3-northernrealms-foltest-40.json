@@ -1,0 +1,121 @@
+{
+ "name": "Snapshot: Foltest 40",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 122101,
+   "name": "Bloody Baron",
+   "count": 1
+  },
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  },
+  {
+   "id": 122103,
+   "name": "John Natalis",
+   "count": 1
+  },
+  {
+   "id": 122102,
+   "name": "Vernon Roche",
+   "count": 1
+  },
+  {
+   "id": 200088,
+   "name": "Hubert Rejk",
+   "count": 1
+  },
+  {
+   "id": 122211,
+   "name": "Margarita of Aretuza",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 3
+  },
+  {
+   "id": 122301,
+   "name": "Ballista",
+   "count": 3
+  },
+  {
+   "id": 122318,
+   "name": "Siege Master",
+   "count": 3
+  },
+  {
+   "id": 122313,
+   "name": "Dun Banner",
+   "count": 3
+  },
+  {
+   "id": 200033,
+   "name": "Aretuza Adept",
+   "count": 3
+  },
+  {
+   "id": 122310,
+   "name": "Blue Stripe Scout",
+   "count": 3
+  },
+  {
+   "id": 122316,
+   "name": "Temerian Infantry",
+   "count": 3
+  },
+  {
+   "id": 122311,
+   "name": "Blue Stripe Commando",
+   "count": 3
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 2
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "meme",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

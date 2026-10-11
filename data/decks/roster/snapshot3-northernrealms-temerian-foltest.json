@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Temerian Foltest",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 122102,
+   "name": "Vernon Roche",
+   "count": 1
+  },
+  {
+   "id": 200529,
+   "name": "Ronvid the Incessant",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 122304,
+   "name": "Siege Tower",
+   "count": 2
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 3
+  },
+  {
+   "id": 122310,
+   "name": "Blue Stripe Scout",
+   "count": 3
+  },
+  {
+   "id": 122316,
+   "name": "Temerian Infantry",
+   "count": 3
+  },
+  {
+   "id": 122311,
+   "name": "Blue Stripe Commando",
+   "count": 3
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "meta",
+ "tier": "High Tier 2",
+ "weight": 3.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

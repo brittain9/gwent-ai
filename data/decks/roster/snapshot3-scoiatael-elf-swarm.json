@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Elf Swarm",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200166,
+  "name": "Eithn\u00e9"
+ },
+ "cards": [
+  {
+   "id": 142106,
+   "name": "Agla\u00efs",
+   "count": 1
+  },
+  {
+   "id": 142102,
+   "name": "Isengrim Faoiltiarna",
+   "count": 1
+  },
+  {
+   "id": 142103,
+   "name": "Iorveth",
+   "count": 1
+  },
+  {
+   "id": 201615,
+   "name": "Isengrim: Outlaw",
+   "count": 1
+  },
+  {
+   "id": 142203,
+   "name": "Yaevinn",
+   "count": 1
+  },
+  {
+   "id": 122216,
+   "name": "Cleaver",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 200053,
+   "name": "Artefact Compression",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 142307,
+   "name": "Vrihedd Sappers",
+   "count": 2
+  },
+  {
+   "id": 201638,
+   "name": "Elven Scout",
+   "count": 2
+  },
+  {
+   "id": 201636,
+   "name": "Half-Elf Hunter",
+   "count": 2
+  },
+  {
+   "id": 142309,
+   "name": "Vrihedd Vanguard",
+   "count": 3
+  },
+  {
+   "id": 142303,
+   "name": "Vrihedd Officer",
+   "count": 3
+  },
+  {
+   "id": 142316,
+   "name": "Blue Mountain Elite",
+   "count": 3
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "meta",
+ "tier": "Low Tier 2",
+ "weight": 2.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

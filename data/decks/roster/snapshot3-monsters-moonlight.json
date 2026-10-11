@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Moonlight",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  },
+  {
+   "id": 200220,
+   "name": "Whispess: Tribute",
+   "count": 1
+  },
+  {
+   "id": 132108,
+   "name": "Miruna",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132220,
+   "name": "Nekurat",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201700,
+   "name": "Bridge Troll",
+   "count": 2
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 3
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 3
+  },
+  {
+   "id": 200067,
+   "name": "Moonlight",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Low Tier 2",
+ "weight": 2.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

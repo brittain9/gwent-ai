@@ -1,0 +1,101 @@
+{
+ "name": "Snapshot: Sabbath",
+ "faction": "Monsters",
+ "leader": {
+  "id": 201587,
+  "name": "Whispering Hillock"
+ },
+ "cards": [
+  {
+   "id": 200220,
+   "name": "Whispess: Tribute",
+   "count": 1
+  },
+  {
+   "id": 201781,
+   "name": "Imlerith: Sabbath",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 113316,
+   "name": "Renew",
+   "count": 1
+  },
+  {
+   "id": 200083,
+   "name": "Iris' Companions",
+   "count": 1
+  },
+  {
+   "id": 132220,
+   "name": "Nekurat",
+   "count": 1
+  },
+  {
+   "id": 201657,
+   "name": "Parasite",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 200114,
+   "name": "Alpha Werewolf",
+   "count": 2
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 3
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 113320,
+   "name": "Mardroeme",
+   "count": 1
+  },
+  {
+   "id": 113307,
+   "name": "Adrenaline Rush",
+   "count": 1
+  },
+  {
+   "id": 200067,
+   "name": "Moonlight",
+   "count": 3
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meme",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

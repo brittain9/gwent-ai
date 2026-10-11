@@ -1,0 +1,101 @@
+{
+ "name": "Reddit screenshot: Improve my deck?",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 112103,
+   "name": "Geralt of Rivia",
+   "count": 1
+  },
+  {
+   "id": 112106,
+   "name": "Triss Merigold",
+   "count": 1
+  },
+  {
+   "id": 132103,
+   "name": "Woodland Spirit",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 132216,
+   "name": "Toad Prince",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 112201,
+   "name": "Dudu",
+   "count": 1
+  },
+  {
+   "id": 113306,
+   "name": "Manticore Venom",
+   "count": 1
+  },
+  {
+   "id": 112405,
+   "name": "Fiend",
+   "count": 3
+  },
+  {
+   "id": 132302,
+   "name": "Ancient Foglet",
+   "count": 3
+  },
+  {
+   "id": 132307,
+   "name": "Archgriffin",
+   "count": 1
+  },
+  {
+   "id": 201700,
+   "name": "Bridge Troll",
+   "count": 1
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 132306,
+   "name": "Ghoul",
+   "count": 3
+  },
+  {
+   "id": 113305,
+   "name": "Impenetrable Fog",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/9jcepb/ (screenshot, transcribed)",
+ "credit": "u/Celicni on r/gwent"
+}

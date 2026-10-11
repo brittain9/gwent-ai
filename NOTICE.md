@@ -1,6 +1,6 @@
 # Notice
 
-Gwent Beta AI is an educational, non-commercial hobby project. It is not
+Gwent AI is an educational, non-commercial hobby project. It is not
 affiliated with, endorsed by or connected to CD PROJEKT RED. Gwent: The
 Witcher Card Game, its client, cards, texts, art and data belong to
 CD PROJEKT RED. None of them is included here; the install steps use your
@@ -35,6 +35,9 @@ own copy of the game.
 - The community server for the beta is by Somnia41205, under the MIT
   licence. Where the project includes our changes to it, its licence and
   copyright notice travel with them.
+- The community server includes a modified copy of the dummy service of
+  comet (https://github.com/imLinguin/comet), an implementation of GOG
+  Galaxy's communication service, under the Apache License 2.0.
 - MelonLoader (Apache-2.0) and Harmony (MIT) are not included; the install
   steps download them from their official sources.
 - Community deck lists are credited to their authors where the project uses

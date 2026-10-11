@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Vanilla Ciri Olaf",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 152311,
+   "name": "An Craite Blacksmith",
+   "count": 3
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 201598,
+   "name": "Bone Talisman",
+   "count": 2
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 2
+  },
+  {
+   "id": 201656,
+   "name": "Mastercrafted Spear",
+   "count": 2
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 3
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152202,
+   "name": "Champion of Hov",
+   "count": 1
+  },
+  {
+   "id": 200020,
+   "name": "Necromancy",
+   "count": 1
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  },
+  {
+   "id": 201644,
+   "name": "Yoana",
+   "count": 1
+  },
+  {
+   "id": 112101,
+   "name": "Ciri",
+   "count": 1
+  },
+  {
+   "id": 152109,
+   "name": "Wild Boar of the Sea",
+   "count": 1
+  },
+  {
+   "id": 200103,
+   "name": "Olaf",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190825093049/https://www.gwentdb.com/decks/49412-vanilla-ciri-olaf",
+ "credit": "pearpain on GwentDB (1 up, 1 down)"
+}

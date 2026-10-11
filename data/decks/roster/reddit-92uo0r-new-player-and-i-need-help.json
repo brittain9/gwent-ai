@@ -1,0 +1,96 @@
+{
+ "name": "Reddit screenshot: New player and I need help",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200167,
+  "name": "Brouver Hoog"
+ },
+ "cards": [
+  {
+   "id": 112103,
+   "name": "Geralt of Rivia",
+   "count": 1
+  },
+  {
+   "id": 112106,
+   "name": "Triss Merigold",
+   "count": 1
+  },
+  {
+   "id": 200080,
+   "name": "Xavier Moran",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 142201,
+   "name": "Dennis Cranmer",
+   "count": 1
+  },
+  {
+   "id": 142213,
+   "name": "Yarpen Zigrin",
+   "count": 1
+  },
+  {
+   "id": 142202,
+   "name": "Ida Emean aep Sivney",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 112201,
+   "name": "Dudu",
+   "count": 1
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 142311,
+   "name": "Dwarven Mercenary",
+   "count": 2
+  },
+  {
+   "id": 142305,
+   "name": "Dwarven Skirmisher",
+   "count": 3
+  },
+  {
+   "id": 142303,
+   "name": "Vrihedd Officer",
+   "count": 1
+  },
+  {
+   "id": 142316,
+   "name": "Blue Mountain Elite",
+   "count": 3
+  },
+  {
+   "id": 201559,
+   "name": "Mahakam Volunteers",
+   "count": 3
+  },
+  {
+   "id": 200293,
+   "name": "Dwarven Agitator",
+   "count": 3
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/92uo0r/ (screenshot, transcribed)",
+ "credit": "u/sth013 on r/gwent"
+}

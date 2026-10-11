@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: Power Ranger",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200167,
+  "name": "Brouver Hoog"
+ },
+ "cards": [
+  {
+   "id": 142205,
+   "name": "Vrihedd Dragoon",
+   "count": 3
+  },
+  {
+   "id": 142306,
+   "name": "Mahakam Defender",
+   "count": 3
+  },
+  {
+   "id": 200136,
+   "name": "Farseer",
+   "count": 3
+  },
+  {
+   "id": 200293,
+   "name": "Dwarven Agitator",
+   "count": 3
+  },
+  {
+   "id": 201559,
+   "name": "Mahakam Volunteers",
+   "count": 3
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 143201,
+   "name": "Nature's Gift",
+   "count": 1
+  },
+  {
+   "id": 142213,
+   "name": "Yarpen Zigrin",
+   "count": 1
+  },
+  {
+   "id": 142201,
+   "name": "Dennis Cranmer",
+   "count": 1
+  },
+  {
+   "id": 200022,
+   "name": "Summoning Circle",
+   "count": 1
+  },
+  {
+   "id": 201653,
+   "name": "Mahakam Horn",
+   "count": 1
+  },
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 142108,
+   "name": "Schirr\u00fa",
+   "count": 1
+  },
+  {
+   "id": 142104,
+   "name": "Milva",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150653/https://www.gwentdb.com/decks/53801-power-ranger",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

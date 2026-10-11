@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Armor (imperfect, no Seltkirk of Gulet)",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 113206,
+   "name": "White Frost",
+   "count": 1
+  },
+  {
+   "id": 122102,
+   "name": "Vernon Roche",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 122203,
+   "name": "Thaler",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 122303,
+   "name": "Trebuchet",
+   "count": 1
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 1
+  },
+  {
+   "id": 122310,
+   "name": "Blue Stripe Scout",
+   "count": 3
+  },
+  {
+   "id": 122314,
+   "name": "Kaedweni Cavalry",
+   "count": 3
+  },
+  {
+   "id": 122316,
+   "name": "Temerian Infantry",
+   "count": 3
+  },
+  {
+   "id": 122317,
+   "name": "Redanian Elite",
+   "count": 3
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 200022,
+   "name": "Summoning Circle",
+   "count": 1
+  },
+  {
+   "id": 200540,
+   "name": "Aedirnian Mauler",
+   "count": 3
+  },
+  {
+   "id": 201650,
+   "name": "Sabrina's Specter",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-northernrealms-armor.json (variant, seed 2018)",
+ "credit": "generated"
+}

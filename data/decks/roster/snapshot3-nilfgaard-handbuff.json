@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Handbuff",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 200031,
+   "name": "Leo Bonhart",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201697,
+   "name": "Black Blood",
+   "count": 1
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 2
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 1
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 3
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "meta",
+ "tier": "High Tier 2",
+ "weight": 3.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

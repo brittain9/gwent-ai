@@ -1,0 +1,91 @@
+{
+ "name": "Snapshot: Machines",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200170,
+  "name": "King Henselt"
+ },
+ "cards": [
+  {
+   "id": 122101,
+   "name": "Bloody Baron",
+   "count": 1
+  },
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 122203,
+   "name": "Thaler",
+   "count": 1
+  },
+  {
+   "id": 200529,
+   "name": "Ronvid the Incessant",
+   "count": 1
+  },
+  {
+   "id": 122205,
+   "name": "S\u00edle de Tansarville",
+   "count": 1
+  },
+  {
+   "id": 113309,
+   "name": "Scorch",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 113206,
+   "name": "White Frost",
+   "count": 1
+  },
+  {
+   "id": 122214,
+   "name": "Kaedweni Sergeant",
+   "count": 3
+  },
+  {
+   "id": 122302,
+   "name": "Reinforced Ballista",
+   "count": 3
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 3
+  },
+  {
+   "id": 122318,
+   "name": "Siege Master",
+   "count": 3
+  },
+  {
+   "id": 122301,
+   "name": "Ballista",
+   "count": 3
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

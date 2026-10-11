@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: High Tier 2 Handbuff",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 3
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162204,
+   "name": "Peter Saar Gwynleve",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 200031,
+   "name": "Leo Bonhart",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150751/https://www.gwentdb.com/decks/53776-high-tier-2-handbuff",
+ "credit": "Yuuki_Haru on GwentDB (0 up, 0 down)"
+}

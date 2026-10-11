@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: All You Can Eat",
+ "faction": "Monsters",
+ "leader": {
+  "id": 201743,
+  "name": "Arachas Queen"
+ },
+ "cards": [
+  {
+   "id": 132312,
+   "name": "Griffin",
+   "count": 3
+  },
+  {
+   "id": 132305,
+   "name": "Nekker",
+   "count": 3
+  },
+  {
+   "id": 132213,
+   "name": "D'ao",
+   "count": 3
+  },
+  {
+   "id": 132308,
+   "name": "Vran Warrior",
+   "count": 3
+  },
+  {
+   "id": 132315,
+   "name": "Harpy",
+   "count": 3
+  },
+  {
+   "id": 201606,
+   "name": "Forktail",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 112209,
+   "name": "Prize-Winning Cow",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 132406,
+   "name": "Maerolorn",
+   "count": 1
+  },
+  {
+   "id": 200087,
+   "name": "Dorregaray of Vole",
+   "count": 1
+  },
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 200221,
+   "name": "Brewess: Ritual",
+   "count": 1
+  },
+  {
+   "id": 201579,
+   "name": "Phoenix",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150653/https://www.gwentdb.com/decks/53806-all-you-can-eat",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

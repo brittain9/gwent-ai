@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Reveal",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200163,
+  "name": "Morvran Voorhis"
+ },
+ "cards": [
+  {
+   "id": 162103,
+   "name": "Vattier de Rideaux",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  },
+  {
+   "id": 162101,
+   "name": "Letho of Gulet",
+   "count": 1
+  },
+  {
+   "id": 112104,
+   "name": "Regis",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 112203,
+   "name": "Vesemir",
+   "count": 1
+  },
+  {
+   "id": 112202,
+   "name": "Eskel",
+   "count": 1
+  },
+  {
+   "id": 201664,
+   "name": "Vrygheff",
+   "count": 1
+  },
+  {
+   "id": 112204,
+   "name": "Lambert",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 3
+  },
+  {
+   "id": 162317,
+   "name": "Mangonel",
+   "count": 3
+  },
+  {
+   "id": 162306,
+   "name": "Fire Scorpion",
+   "count": 3
+  },
+  {
+   "id": 162301,
+   "name": "Daerlan Soldier",
+   "count": 3
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

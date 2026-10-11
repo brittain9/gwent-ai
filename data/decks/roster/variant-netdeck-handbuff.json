@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Handbuff (ladder variant)",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 3
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 1
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 2
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 201697,
+   "name": "Black Blood",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-nilfgaard-handbuff.json (variant, seed 2018)",
+ "credit": "generated"
+}

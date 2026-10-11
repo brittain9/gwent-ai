@@ -1,0 +1,116 @@
+{
+ "name": "GwentDB: - Northern Realms -",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 122310,
+   "name": "Blue Stripe Scout",
+   "count": 3
+  },
+  {
+   "id": 122311,
+   "name": "Blue Stripe Commando",
+   "count": 3
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 2
+  },
+  {
+   "id": 122316,
+   "name": "Temerian Infantry",
+   "count": 3
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 3
+  },
+  {
+   "id": 122301,
+   "name": "Ballista",
+   "count": 2
+  },
+  {
+   "id": 122318,
+   "name": "Siege Master",
+   "count": 2
+  },
+  {
+   "id": 200033,
+   "name": "Aretuza Adept",
+   "count": 2
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 2
+  },
+  {
+   "id": 200132,
+   "name": "Witch Hunter",
+   "count": 3
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200088,
+   "name": "Hubert Rejk",
+   "count": 1
+  },
+  {
+   "id": 122101,
+   "name": "Bloody Baron",
+   "count": 1
+  },
+  {
+   "id": 122103,
+   "name": "John Natalis",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190920204943/https://www.gwentdb.com/decks/49706-northern-realms",
+ "credit": "PedjaRaven on GwentDB (1 up, 1 down)"
+}

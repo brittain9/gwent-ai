@@ -1,0 +1,106 @@
+{
+ "name": "GwentDB: \ud83d\udc3b B E A R S \ud83d\udc3b... and wolves and a boar and a cow...",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 152210,
+   "name": "Savage Bear",
+   "count": 2
+  },
+  {
+   "id": 152301,
+   "name": "Raging Berserker",
+   "count": 2
+  },
+  {
+   "id": 200021,
+   "name": "Bloodcurdling Roar",
+   "count": 2
+  },
+  {
+   "id": 200081,
+   "name": "Heymaey Herbalist",
+   "count": 2
+  },
+  {
+   "id": 200528,
+   "name": "Heymaey Spearmaiden",
+   "count": 2
+  },
+  {
+   "id": 201598,
+   "name": "Bone Talisman",
+   "count": 2
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 2
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 2
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 112209,
+   "name": "Prize-Winning Cow",
+   "count": 1
+  },
+  {
+   "id": 152206,
+   "name": "Gremist",
+   "count": 1
+  },
+  {
+   "id": 200087,
+   "name": "Dorregaray of Vole",
+   "count": 1
+  },
+  {
+   "id": 201623,
+   "name": "Giant Boar",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 201626,
+   "name": "Ciri: Nova",
+   "count": 1
+  },
+  {
+   "id": 200103,
+   "name": "Olaf",
+   "count": 1
+  },
+  {
+   "id": 200056,
+   "name": "Aguara: True Form",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190920211644/https://www.gwentdb.com/decks/51786-b-e-a-r-s-and-wolves-and-a-boar-and-a-cow",
+ "credit": "DCD7IMMaPPvZ on GwentDB (1 up, 1 down)"
+}

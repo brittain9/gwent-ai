@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Kambi Hyperthin Bear",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 152305,
+   "name": "Dimun Pirate",
+   "count": 3
+  },
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 3
+  },
+  {
+   "id": 200021,
+   "name": "Bloodcurdling Roar",
+   "count": 2
+  },
+  {
+   "id": 200036,
+   "name": "Drummond Warmonger",
+   "count": 3
+  },
+  {
+   "id": 200081,
+   "name": "Heymaey Herbalist",
+   "count": 2
+  },
+  {
+   "id": 200528,
+   "name": "Heymaey Spearmaiden",
+   "count": 2
+  },
+  {
+   "id": 113309,
+   "name": "Scorch",
+   "count": 1
+  },
+  {
+   "id": 112209,
+   "name": "Prize-Winning Cow",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200043,
+   "name": "Harald Houndsnout",
+   "count": 1
+  },
+  {
+   "id": 152104,
+   "name": "Kambi",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190818131901/https://www.gwentdb.com/decks/50141-kambi-hyperthin-bear",
+ "credit": "pearpain on GwentDB (1 up, 1 down)"
+}

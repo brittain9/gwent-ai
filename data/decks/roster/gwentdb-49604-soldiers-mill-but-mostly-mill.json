@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Soldiers/Mill but mostly Mill",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 201580,
+  "name": "Usurper"
+ },
+ "cards": [
+  {
+   "id": 162309,
+   "name": "Nauzicaa Sergeant",
+   "count": 3
+  },
+  {
+   "id": 162312,
+   "name": "Alba Spearman",
+   "count": 3
+  },
+  {
+   "id": 200294,
+   "name": "Standard Bearer",
+   "count": 3
+  },
+  {
+   "id": 200296,
+   "name": "Alba Armored Cavalry",
+   "count": 3
+  },
+  {
+   "id": 201609,
+   "name": "Slave Hunter",
+   "count": 3
+  },
+  {
+   "id": 201617,
+   "name": "Recruit",
+   "count": 3
+  },
+  {
+   "id": 162201,
+   "name": "Albrich",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162203,
+   "name": "Cynthia",
+   "count": 1
+  },
+  {
+   "id": 162206,
+   "name": "Sweers",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 200091,
+   "name": "Stregobor",
+   "count": 1
+  },
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 162107,
+   "name": "Tibor Eggebracht",
+   "count": 1
+  },
+  {
+   "id": 200071,
+   "name": "Shilard",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190825085608/https://www.gwentdb.com/decks/49604-soldiers-mill-but-mostly-mill",
+ "credit": "pearpain on GwentDB (1 up, 1 down)"
+}

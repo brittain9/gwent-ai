@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Veterans (imperfect, no Dandelion: Poet)",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 113301,
+   "name": "Alzur's Thunder",
+   "count": 3
+  },
+  {
+   "id": 113307,
+   "name": "Adrenaline Rush",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152304,
+   "name": "Tuirseach Hunter",
+   "count": 3
+  },
+  {
+   "id": 152313,
+   "name": "Tuirseach Skirmisher",
+   "count": 2
+  },
+  {
+   "id": 152317,
+   "name": "An Craite Armorsmith",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200046,
+   "name": "Tuirseach Veteran",
+   "count": 3
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 3
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-skellige-veterans.json (variant, seed 2018)",
+ "credit": "generated"
+}

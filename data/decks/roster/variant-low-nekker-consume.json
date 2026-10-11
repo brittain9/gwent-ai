@@ -1,0 +1,91 @@
+{
+ "name": "Variant: Nekker Consume (imperfect, no Brewess: Ritual)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 201743,
+  "name": "Arachas Queen"
+ },
+ "cards": [
+  {
+   "id": 112112,
+   "name": "Avallac'h: Sage",
+   "count": 1
+  },
+  {
+   "id": 112208,
+   "name": "Operator",
+   "count": 1
+  },
+  {
+   "id": 113207,
+   "name": "Commander's Horn",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132211,
+   "name": "Nekker Warrior",
+   "count": 3
+  },
+  {
+   "id": 132305,
+   "name": "Nekker",
+   "count": 3
+  },
+  {
+   "id": 132308,
+   "name": "Vran Warrior",
+   "count": 3
+  },
+  {
+   "id": 132406,
+   "name": "Maerolorn",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 200539,
+   "name": "Slyzard",
+   "count": 3
+  },
+  {
+   "id": 201579,
+   "name": "Phoenix",
+   "count": 1
+  },
+  {
+   "id": 201606,
+   "name": "Forktail",
+   "count": 3
+  },
+  {
+   "id": 201647,
+   "name": "Rock Barrage",
+   "count": 1
+  },
+  {
+   "id": 201657,
+   "name": "Parasite",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-nekker-consume.json (variant, seed 2018)",
+ "credit": "generated"
+}

@@ -1,0 +1,91 @@
+{
+ "name": "Variant: Nekker Consume (ladder variant)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 201743,
+  "name": "Arachas Queen"
+ },
+ "cards": [
+  {
+   "id": 112104,
+   "name": "Regis",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132211,
+   "name": "Nekker Warrior",
+   "count": 3
+  },
+  {
+   "id": 132213,
+   "name": "D'ao",
+   "count": 3
+  },
+  {
+   "id": 132308,
+   "name": "Vran Warrior",
+   "count": 3
+  },
+  {
+   "id": 132406,
+   "name": "Maerolorn",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200022,
+   "name": "Summoning Circle",
+   "count": 1
+  },
+  {
+   "id": 200221,
+   "name": "Brewess: Ritual",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 200539,
+   "name": "Slyzard",
+   "count": 3
+  },
+  {
+   "id": 201579,
+   "name": "Phoenix",
+   "count": 1
+  },
+  {
+   "id": 201606,
+   "name": "Forktail",
+   "count": 3
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-nekker-consume.json (variant, seed 2018)",
+ "credit": "generated"
+}

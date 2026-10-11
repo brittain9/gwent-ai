@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net35</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <ClientDir Condition="'$(ClientDir)' == ''">$(MSBuildProjectDirectory)/../../client</ClientDir>
+    <FrameworkPathOverride>$(ClientDir)/Gwent_Data/Managed</FrameworkPathOverride>
+    <EnableFrameworkPathOverride>true</EnableFrameworkPathOverride>
+    <NoStdLib>true</NoStdLib>
+    <!-- Only the host's own code lands beside the exe; engine and Harmony
+         assemblies resolve at run time (Program.Resolve). -->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <LoaderDir Condition="'$(LoaderDir)' == ''">$(MSBuildProjectDirectory)/../.local/melonloader/MelonLoader</LoaderDir>
+    <OutputPath>../dist/host/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>true</Deterministic>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/*.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/0Harmony.dll" />
+    <ProjectReference Include="../GwentAI/GwentAI.csproj" />
+  </ItemGroup>
+</Project>

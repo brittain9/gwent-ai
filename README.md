@@ -34,8 +34,8 @@ hand. This project replaces it.
   far. An opponent model, fitted on recorded games, makes the imagined
   opponent keep its gold cards and answer threats the way real players do.
 - **Learned parts.** A small policy network suggests which moves to try
-  first. A hand-fitted evaluator scores each position at the end of the
-  current round.
+  first. A small logistic model, fitted on games, scores each position at
+  the end of the current round as a chance to win the match.
 - **Fair play.** It sees only what a human in its seat would see, and it
   uses the game's own rules engine, so every card works as it did in 2018.
 - **Decks and time.** It plays the decks of the 2018 ladder, a different one
@@ -46,28 +46,39 @@ hand. This project replaces it.
 
 An earlier version won 30 of 30 games against the game's built-in AI, at the
 built-in AI's own thinking time, with the same strong decks on both sides
-(7 October 2026). Every version since has beaten the one before it head to
-head on the same deals. The measured numbers of each release, with their
-sample sizes and dates, come with the release in `results/`.
+(7 October 2026, 30 games). The measured numbers of each release, with
+their sample sizes and dates, come with the release in `results/`.
 
 ## Play against it
 
-The first release is not yet published. It will ship as source with a build
-script, and the quick start will be here. You will need:
+Release 1 is source with a build script: you build the AI against your own
+client. Its notes are in `results/v1.md`. You will need:
 
 - Your own copy of the client 0.9.24.3.432 (June 2018). The install guide
   gives its file hashes so that you can check your copy.
-- MelonLoader 0.5.7 in the client folder.
-- A community server for the beta. On Linux and macOS, the one the project
-  ships (Somnia41205's unofficial server, MIT). On Windows, upstream's
-  launcher.
+- MelonLoader 0.5.7 in the client folder; the setup script downloads it.
+- A community server for the beta. On Linux and macOS, the project's copy
+  of Somnia41205's unofficial server (MIT). On Windows, upstream's launcher.
 - To build the AI against your client: the .NET SDK, Mono 6, and Python 3.10
   or newer with uv. The build reads your client for the card tables it
-  needs; nothing from the game is in the project. On Linux and macOS the
-  game runs under Wine.
+  needs; nothing from the game is in the project.
+- On Linux and macOS: Wine, nginx, MinGW-w64 and openssl; on Linux also
+  bubblewrap and unprivileged user namespaces, and a Vulkan driver for DXVK.
 
-Then build, copy the build into the client's `Mods` folder, start the game
-and choose **Single-player, then Practice**.
+Quick start on Linux and macOS, from the project folder with the client
+beside it:
+
+```sh
+scripts/setup.sh --play      # checks prerequisites, downloads the pinned files, builds the AI
+server/fetch-upstream.sh     # once: the community server's upstream service files
+scripts/prepare-local.py     # installs MelonLoader, the AI and its decks into the client
+scripts/run-local.sh         # starts the server, the game under Wine and the search workers
+```
+
+Then choose **Single-player, then Practice**. The guides:
+`docs/install/linux.md`, `docs/install/macos.md`, `docs/install/windows.md`.
+Settings such as the think time: `docs/install/options.md`. How the code
+is organised: `docs/install/architecture.md`.
 
 Tested on Linux (Fedora, with Wine). macOS with Wine on Apple silicon is
 documented. Not tested on Windows yet.
@@ -77,6 +88,8 @@ documented. Not tested on Windows yet.
 | Part | What it is |
 |---|---|
 | Source code and model files | The AI: the search, the guesses about hidden cards, the learned move suggestions, the helper processes |
+| Community server | Our copy of Somnia41205's unofficial server for the beta (MIT), with its restoration mod, built from source |
+| Deck roster | The 2018 ladder decks the AI plays and guesses from, credited to their authors |
 | Results | The measured numbers of each release, with sample sizes and dates |
 | Install steps | How to run the AI against your own copy of the game |
 
@@ -85,8 +98,13 @@ documented. Not tested on Windows yet.
 Open an issue titled "Game report": your deck, the opponent's deck, the
 round and the turn where the AI did something odd, and what you would have
 played. A pass at the wrong time, an overcommit, or a card used badly are
-the most useful reports. Do not send anything from the game's files;
-describe the position in your own words. We read every report. Fixes to the
+the most useful reports. To attach the game itself, run
+`scripts/game-report.py --pack`: it packs your last Practice game into a
+zip for the issue. The zip holds the decks as card ids, the moves, the
+scores, the deal's seed, the AI's settings, search statistics and timings,
+the start time in UTC and the number of search workers. It holds no deck
+name you typed, no account and no path. Do not send anything from the
+game's own files. We read every report. Fixes to the
 install steps and the docs are welcome. Changes to how the AI plays are made
 after head-to-head measurement, so we do not take code for them.
 

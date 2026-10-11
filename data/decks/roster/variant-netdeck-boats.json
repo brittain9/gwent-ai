@@ -1,0 +1,101 @@
+{
+ "name": "Variant: Boats (ladder variant)",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 112213,
+   "name": "King of Beggars",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152302,
+   "name": "Berserker Marauder",
+   "count": 3
+  },
+  {
+   "id": 152306,
+   "name": "Dimun Pirate Captain",
+   "count": 2
+  },
+  {
+   "id": 152309,
+   "name": "Dimun Light Longship",
+   "count": 3
+  },
+  {
+   "id": 152311,
+   "name": "An Craite Blacksmith",
+   "count": 2
+  },
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200043,
+   "name": "Harald Houndsnout",
+   "count": 1
+  },
+  {
+   "id": 200083,
+   "name": "Iris' Companions",
+   "count": 1
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 200145,
+   "name": "Dimun Corsair",
+   "count": 3
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  },
+  {
+   "id": 200226,
+   "name": "Wolfsbane",
+   "count": 1
+  },
+  {
+   "id": 200300,
+   "name": "An Craite Whaler",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-skellige-boats.json (variant, seed 2018)",
+ "credit": "generated"
+}

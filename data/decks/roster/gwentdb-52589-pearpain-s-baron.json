@@ -1,0 +1,101 @@
+{
+ "name": "GwentDB: Pearpain's Baron",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200170,
+  "name": "King Henselt"
+ },
+ "cards": [
+  {
+   "id": 122309,
+   "name": "Siege Support",
+   "count": 2
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 2
+  },
+  {
+   "id": 122301,
+   "name": "Ballista",
+   "count": 3
+  },
+  {
+   "id": 122303,
+   "name": "Trebuchet",
+   "count": 2
+  },
+  {
+   "id": 122318,
+   "name": "Siege Master",
+   "count": 3
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 1
+  },
+  {
+   "id": 201622,
+   "name": "Kaedweni Knight",
+   "count": 3
+  },
+  {
+   "id": 122203,
+   "name": "Thaler",
+   "count": 1
+  },
+  {
+   "id": 122205,
+   "name": "S\u00edle de Tansarville",
+   "count": 1
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200529,
+   "name": "Ronvid the Incessant",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 122101,
+   "name": "Bloody Baron",
+   "count": 1
+  },
+  {
+   "id": 122103,
+   "name": "John Natalis",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190825085555/https://www.gwentdb.com/decks/52589-pearpains-baron",
+ "credit": "pearpain on GwentDB (5 up, 2 down)"
+}

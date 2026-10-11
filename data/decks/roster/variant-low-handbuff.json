@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Handbuff (imperfect, no Vesemir: Mentor)",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 112103,
+   "name": "Geralt of Rivia",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162308,
+   "name": "Impera Enforcers",
+   "count": 3
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 1
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 2
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200031,
+   "name": "Leo Bonhart",
+   "count": 1
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201609,
+   "name": "Slave Hunter",
+   "count": 3
+  },
+  {
+   "id": 201697,
+   "name": "Black Blood",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  },
+  {
+   "id": 201749,
+   "name": "Golden Froth",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-nilfgaard-handbuff.json (variant, seed 2018)",
+ "credit": "generated"
+}

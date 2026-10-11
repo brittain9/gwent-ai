@@ -1,0 +1,5 @@
+{
+  "comment": "Deck population layers. shares: how often a 2018 ladder player met each kind of deck; a judgment (no play-rate data survives for 0.9.24). prior: the layers that make up a player's knowledge of the meta (the AI's belief).",
+  "shares": {"meta": 0.50, "netdeck": 0.225, "low": 0.175, "meme": 0.10},
+  "prior": ["meta", "netdeck"]
+}

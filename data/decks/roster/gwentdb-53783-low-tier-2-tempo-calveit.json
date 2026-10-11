@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: Low Tier 2 Tempo Calveit",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 3
+  },
+  {
+   "id": 162301,
+   "name": "Daerlan Soldier",
+   "count": 3
+  },
+  {
+   "id": 162306,
+   "name": "Fire Scorpion",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162203,
+   "name": "Cynthia",
+   "count": 1
+  },
+  {
+   "id": 162204,
+   "name": "Peter Saar Gwynleve",
+   "count": 1
+  },
+  {
+   "id": 162207,
+   "name": "Vanhemar",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 200031,
+   "name": "Leo Bonhart",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150751/https://www.gwentdb.com/decks/53783-low-tier-2-tempo-calveit",
+ "credit": "Yuuki_Haru on GwentDB (0 up, 0 down)"
+}

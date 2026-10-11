@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Axemen (imperfect, no Ragh Nar Roog)",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200161,
+  "name": "Harald the Cripple"
+ },
+ "cards": [
+  {
+   "id": 112202,
+   "name": "Eskel",
+   "count": 1
+  },
+  {
+   "id": 112215,
+   "name": "Iris von Everec",
+   "count": 1
+  },
+  {
+   "id": 113203,
+   "name": "Skellige Storm",
+   "count": 1
+  },
+  {
+   "id": 152105,
+   "name": "Birna Bran",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152303,
+   "name": "An Craite Warrior",
+   "count": 1
+  },
+  {
+   "id": 152306,
+   "name": "Dimun Pirate Captain",
+   "count": 2
+  },
+  {
+   "id": 152312,
+   "name": "Tuirseach Axeman",
+   "count": 3
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 200105,
+   "name": "Dimun Warship",
+   "count": 3
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 3
+  },
+  {
+   "id": 200145,
+   "name": "Dimun Corsair",
+   "count": 3
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  },
+  {
+   "id": 200528,
+   "name": "Heymaey Spearmaiden",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-skellige-axemen.json (variant, seed 2018)",
+ "credit": "generated"
+}

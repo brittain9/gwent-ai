@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <ClientDir Condition="'$(ClientDir)' == ''">$(MSBuildProjectDirectory)/../../client</ClientDir>
+    <FrameworkPathOverride>$(ClientDir)/Gwent_Data/Managed</FrameworkPathOverride>
+    <EnableFrameworkPathOverride>true</EnableFrameworkPathOverride>
+    <NoStdLib>true</NoStdLib>
+    <!-- The client's assemblies are all referenced below and none is copied
+         beside the mod. -->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <LoaderDir Condition="'$(LoaderDir)' == ''">$(MSBuildProjectDirectory)/../.local/melonloader/MelonLoader</LoaderDir>
+    <OutputPath>../dist/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>true</Deterministic>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/*.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/MelonLoader.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/0Harmony.dll" />
+  </ItemGroup>
+  <!-- Practice reads the evaluator and the policy prior from the mod itself;
+       the prior's card columns are zeroed and filled from the client at load
+       time (PolicyModel). -->
+  <ItemGroup>
+    <EmbeddedResource Include="../data/eval/round.json" LogicalName="eval/round.json" />
+    <EmbeddedResource Include="../data/cards/roles.json" LogicalName="cards/roles.json" />
+    <EmbeddedResource Include="../data/model/pol2.pnet" LogicalName="eval/policy.pnet" />
+  </ItemGroup>
+
+  <!-- Numeric ability parameters: client data from the user's client. scripts/answer_kinds.py
+       writes one file per roles.json version (.local/cards/answer-params/<sha256 prefix>.json);
+       the build embeds the one for this checkout's roles.json, when it exists. -->
+  <Target Name="EmbedAnswerParams" BeforeTargets="PrepareForBuild">
+    <GetFileHash Files="$(MSBuildProjectDirectory)/../data/cards/roles.json" Algorithm="SHA256" HashEncoding="hex">
+      <Output TaskParameter="Hash" PropertyName="RolesHash" />
+    </GetFileHash>
+    <PropertyGroup>
+      <AnswerParamsFile>$(MSBuildProjectDirectory)/../.local/cards/answer-params/$(RolesHash.ToLowerInvariant().Substring(0, 16)).json</AnswerParamsFile>
+    </PropertyGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="$(AnswerParamsFile)" LogicalName="cards/answer-params.json" Condition="Exists('$(AnswerParamsFile)')" />
+    </ItemGroup>
+  </Target>
+</Project>

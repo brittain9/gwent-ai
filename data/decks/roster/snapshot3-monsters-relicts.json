@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Relicts",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 132103,
+   "name": "Woodland Spirit",
+   "count": 1
+  },
+  {
+   "id": 132106,
+   "name": "Caretaker",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132207,
+   "name": "Brewess",
+   "count": 1
+  },
+  {
+   "id": 132208,
+   "name": "Weavess",
+   "count": 1
+  },
+  {
+   "id": 132205,
+   "name": "Morvudd",
+   "count": 1
+  },
+  {
+   "id": 132206,
+   "name": "Whispess",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 112405,
+   "name": "Fiend",
+   "count": 3
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 2
+  },
+  {
+   "id": 132302,
+   "name": "Ancient Foglet",
+   "count": 2
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 2
+  },
+  {
+   "id": 132306,
+   "name": "Ghoul",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

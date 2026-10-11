@@ -1,0 +1,101 @@
+{
+ "name": "Reddit screenshot: My first deck to reach win rate of above 70%, was hoping I could get some feedback",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200163,
+  "name": "Morvran Voorhis"
+ },
+ "cards": [
+  {
+   "id": 162103,
+   "name": "Vattier de Rideaux",
+   "count": 1
+  },
+  {
+   "id": 162106,
+   "name": "Stefan Skellen",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 200227,
+   "name": "Henry var Attre",
+   "count": 1
+  },
+  {
+   "id": 162203,
+   "name": "Cynthia",
+   "count": 1
+  },
+  {
+   "id": 201664,
+   "name": "Vrygheff",
+   "count": 1
+  },
+  {
+   "id": 112201,
+   "name": "Dudu",
+   "count": 1
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 2
+  },
+  {
+   "id": 162309,
+   "name": "Nauzicaa Sergeant",
+   "count": 1
+  },
+  {
+   "id": 162317,
+   "name": "Mangonel",
+   "count": 3
+  },
+  {
+   "id": 162306,
+   "name": "Fire Scorpion",
+   "count": 3
+  },
+  {
+   "id": 162301,
+   "name": "Daerlan Soldier",
+   "count": 3
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 200518,
+   "name": "Venendal Elite",
+   "count": 1
+  },
+  {
+   "id": 113303,
+   "name": "First Light",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/9j5kr2/ (screenshot, transcribed)",
+ "credit": "u/Faustify on r/gwent"
+}

@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: Tier 1 Soldiers",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 3
+  },
+  {
+   "id": 201619,
+   "name": "Ointment",
+   "count": 3
+  },
+  {
+   "id": 201617,
+   "name": "Recruit",
+   "count": 3
+  },
+  {
+   "id": 201610,
+   "name": "Slave Infantry",
+   "count": 3
+  },
+  {
+   "id": 201661,
+   "name": "Sentry",
+   "count": 3
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162207,
+   "name": "Vanhemar",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 200032,
+   "name": "Rainfarn of Attre",
+   "count": 1
+  },
+  {
+   "id": 201601,
+   "name": "Yennefer: Enchantress",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150753/https://www.gwentdb.com/decks/53771-tier-1-soldiers",
+ "credit": "Yuuki_Haru on GwentDB (0 up, 0 down)"
+}
