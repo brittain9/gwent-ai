@@ -54,10 +54,10 @@ DXVK_MACOS_NAME=dxvk-macOS-async-v1.10.3-20230507-repack
 DXVK_MACOS_URL=https://github.com/Gcenx/DXVK-macOS/releases/download/v1.10.3-20230507-repack/$DXVK_MACOS_NAME.tar.gz
 DXVK_MACOS_SHA256=acd1520ad105d8ef124a09c8e11a259a5dc8bdc565ad18e0e52693f9807b2477
 # macOS: Mono (x86_64: the host needs x86_64 float semantics) and nginx are
-# prebuilt by platform/macos/build-mono.sh and build-nginx.sh and published
-# on this project's runtime-macos-1 release. uv is astral's release asset,
-# with the digest GitHub publishes for it.
-RUNTIME_MACOS=https://github.com/brittain9/gwent-ai/releases/download/runtime-macos-1
+# prebuilt by platform/macos/build-mono.sh and build-nginx.sh and attached
+# to this release. uv is astral's release asset, with the digest GitHub
+# publishes for it.
+RUNTIME_MACOS=https://github.com/brittain9/gwent-ai/releases/download/v0.1.0
 MONO_MACOS_URL=$RUNTIME_MACOS/mono-6.14.1-x86_64-macos.tar.xz
 MONO_MACOS_SHA256=f502dc49db0045c72ba3029e50700d73632a9d7a6ec6cdd0d85e53d2e4c0d49b
 NGINX_MACOS_URL=$RUNTIME_MACOS/nginx-1.30.5-arm64-macos.tar.xz
