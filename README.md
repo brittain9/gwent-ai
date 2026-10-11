@@ -110,6 +110,13 @@ game's own files. We read every report. Fixes to the
 install steps and the docs are welcome. Changes to how the AI plays are made
 after head-to-head measurement, so we do not take code for them.
 
+## Support the project
+
+The AI is free and stays free. If you enjoy playing against it and want to
+help me keep improving it, you can buy me a coffee:
+
+<a href="https://buymeacoffee.com/alexbrittaq"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="217"></a>
+
 ## Licence and credits
 
 Code and models: PolyForm Noncommercial 1.0.0. In plain words: run it,
