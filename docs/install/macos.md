@@ -46,14 +46,14 @@ The game uses the display's full pixel size. Options such as `--windowed`,
 `--stock-ai` and `--workers N` work as on [Linux](linux.md).
 To update, extract the next complete release and run setup again.
 
-## Known issue: card art
+## Turn premium cards off
 
-Some cards show their frame, numbers and effects, but not their art. The
-game's Direct3D 11 runs on Metal through DXVK and MoltenVK, and Metal has
-no transform feedback, which these cards need. The game log shows
-`Transform feedback not supported by device`. The cards still play
-correctly. Wine's own Direct3D and the game's OpenGL mode do not start the
-game, so DXVK is the only working renderer on macOS.
+On macOS, premium (animated) cards show their frame, numbers and effects,
+but not their art. In the game, open **Settings** and turn premium cards
+off: every card then shows its standard art. The cause is the Mac's
+graphics: the game's Direct3D 11 runs on Metal through DXVK and MoltenVK,
+and Metal has no transform feedback, which premium animations need. Cards
+play correctly either way.
 
 ## Build from source
 

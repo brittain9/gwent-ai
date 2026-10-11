@@ -59,7 +59,9 @@ See the [release notes](results/v0.1.0.md).
 2. Follow the guide for [Linux](docs/install/linux.md),
    [macOS](docs/install/macos.md), or [Windows](docs/install/windows.md)
    to install the prerequisites and connect the community server.
-3. Start the game and choose **Single-player, then Practice**.
+3. Start the game and choose **Single-player, then Practice**. On macOS,
+   turn premium cards off in the game's settings: their animations do not
+   render on a Mac, and the cards show no art.
 
 Quick start on Linux and macOS, from the extracted `gwent-ai` folder:
 
