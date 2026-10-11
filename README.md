@@ -52,9 +52,9 @@ well.
 
 [Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest).
 The ZIP includes the mod DLL, matching search workers, and deck roster.
-See the [release notes](results/v1.md).
+See the [release notes](results/v0.1.0.md).
 
-1. Extract `gwent-ai-v1.zip`. Put your own client 0.9.24.3.432 in a folder
+1. Extract `gwent-ai-v0.1.0.zip`. Put your own client 0.9.24.3.432 in a folder
    named `client` beside the extracted `gwent-ai` folder.
 2. Follow the guide for [Linux](docs/install/linux.md),
    [macOS](docs/install/macos.md), or [Windows](docs/install/windows.md)

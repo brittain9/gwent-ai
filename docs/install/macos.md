@@ -2,7 +2,7 @@
 
 Documented for Apple silicon with Wine and Rosetta 2. This release has not
 been retested on macOS; Intel Macs are untested. Download
-[gwent-ai-v1.zip](https://github.com/brittain9/gwent-ai/releases/download/v1/gwent-ai-v1.zip)
+[gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip)
 and extract it beside your [client](client.md), as `gwent-ai/` and `client/`.
 
 ## Prerequisites
@@ -44,7 +44,7 @@ scripts/run-local.sh
 
 Preparation installs the AI, roster and card data derived from your client.
 Choose **Single-player, then Practice**. Close the game to stop the session.
-Setup prints a card-table hash; compare it with the [release notes](../../results/v1.md).
+Setup prints a card-table hash; compare it with the [release notes](../../results/v0.1.0.md).
 
 The game uses the display's full pixel size. Options such as `--windowed`,
 `--stock-ai` and `--workers N` work as on [Linux](linux.md).

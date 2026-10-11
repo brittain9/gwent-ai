@@ -7,7 +7,7 @@ Windows, so it is weaker than the Linux and macOS setup with helper processes.
 ## Install
 
 1. Get the [client](client.md). Download and extract
-   [gwent-ai-v1.zip](https://github.com/brittain9/gwent-ai/releases/download/v1/gwent-ai-v1.zip).
+   [gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip).
 2. Install upstream's [Windows launcher and server](https://github.com/Somnia41205/Unofficial-Gwent-Beta-0.9.24.3.432-Private-Server/releases).
    Read its [player guide](../../server/docs/PLAYER_GUIDE.md) and
    [host guide](../../server/docs/HOST_GUIDE.md). It installs MelonLoader
@@ -30,7 +30,7 @@ Windows, so it is weaker than the Linux and macOS setup with helper processes.
 No .NET SDK is needed to use the downloaded DLL. Card data is generated
 locally under `UserData\GwentAI\cards` in your client; rerun the generator
 when updating the client or the AI. Its printed hash should match the
-[release notes](../../results/v1.md).
+[release notes](../../results/v0.1.0.md).
 
 ## Return to the stock AI
 
