@@ -8,10 +8,10 @@ The client is CD PROJEKT RED's software. It is **not included** in the
 project, and nothing here redistributes its files. The project is not
 affiliated with or endorsed by CD PROJEKT RED.
 
-## Download
+## Your copy
 
-The build is archived on the Internet Archive:
-[archive.org/details/gwent-0.9.24.3.432](https://archive.org/details/gwent-0.9.24.3.432).
+The project does not host or link the client. Use your own copy of this
+build:
 
 | | |
 | --- | --- |
@@ -20,8 +20,8 @@ The build is archived on the Internet Archive:
 | MD5 | `39b3782dcb592ac4012723a19bdc5b68` |
 | SHA-256 | `145cb314466fae0c8db0347875d2468f20d8281c3cee0fcdbe32758aee1235ff` |
 
-This archive is byte-identical to the copy the project was developed with.
-Check yours before you use it:
+These are the values of the copy the project was developed with. Check
+yours before you use it:
 
 ```sh
 sha256sum "Gwent 0.9.24.3.432.zip"
