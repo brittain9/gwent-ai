@@ -64,16 +64,14 @@ See the [release notes](results/v0.1.0.md).
 Quick start on Linux and macOS, from the extracted `gwent-ai` folder:
 
 ```sh
-scripts/setup.sh --play --prebuilt  # checks prerequisites and prepares your client data
-server/fetch-upstream.sh           # once: the community server's service files
-scripts/prepare-local.py           # installs the mod and decks into your client
-scripts/run-local.sh               # starts the server, game, and search workers
+scripts/setup.sh --play --prebuilt  # downloads what it needs and prepares your client
+scripts/run-local.sh                # starts the server, game, and search workers
 ```
 
-You need your own client, MelonLoader 0.5.7 (downloaded by setup), Mono 6,
-Python 3.10+ with uv, Wine, nginx, and OpenSSL. Linux also needs bubblewrap,
-unprivileged user namespaces, and a Vulkan driver. The platform guides
-cover the details. The download does not need the .NET SDK.
+You need your own client. On macOS (Apple silicon) you also need only
+Rosetta 2; setup downloads the rest. Linux needs Mono 6, Python 3.10+ with
+uv, Wine, nginx, OpenSSL, bubblewrap, unprivileged user namespaces, and a
+Vulkan driver. The platform guides cover the details.
 
 Prefer to build from source? Follow the [Linux build steps](docs/install/linux.md#build-from-source)
 or [macOS build steps](docs/install/macos.md#build-from-source).
@@ -81,8 +79,9 @@ or [macOS build steps](docs/install/macos.md#build-from-source).
 [Settings](docs/install/options.md) include the think time.
 [Architecture](docs/install/architecture.md) explains how the code is organised.
 
-Tested on Linux (Fedora, with Wine). macOS with Wine on Apple silicon is
-documented. Not tested on Windows yet.
+Release 0.1.0 is tested on macOS (Apple silicon). Linux (Fedora) ran
+during development and is not retested for this release. Not tested on
+Windows yet.
 
 ## What is in the project
 

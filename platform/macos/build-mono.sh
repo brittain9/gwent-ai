@@ -9,7 +9,10 @@
 # so the arm64 Mono that Homebrew ships plays different games.
 #
 # Needs the Xcode Command Line Tools and Rosetta 2. About 20 minutes on an
-# M2 Pro; scripts/setup.sh runs it once.
+# M2 Pro. It makes the prebuilt Mono that scripts/setup.sh downloads:
+#   platform/macos/build-mono.sh mono-6.14.1.tar.xz "$PWD/mono-x86_64"
+#   tar -cJf mono-6.14.1-x86_64-macos.tar.xz mono-x86_64
+# Mono finds its libraries next to its binary, so the tree can move.
 set -euo pipefail
 SOURCE=$1 PREFIX=$2
 SDK="$(xcrun --show-sdk-path)"
@@ -40,6 +43,8 @@ if ! { ./configure --prefix="$PREFIX" --build=x86_64-apple-darwin --host=x86_64-
   tail -20 "$LOG" >&2
   exit 1
 fi
+mkdir -p "$STAGE$PREFIX/licenses"
+cp LICENSE COPYING.LIB "$STAGE$PREFIX/licenses/"
 rm -rf "$PREFIX"
 mv "$STAGE$PREFIX" "$PREFIX"
 rm -f "$LOG"

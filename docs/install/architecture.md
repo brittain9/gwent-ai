@@ -53,8 +53,8 @@ alone.
 
 ## scripts/
 
-`setup.sh --play --prebuilt` prepares the downloaded release.
-`build-local.sh` builds the mod, the host
+`setup.sh --play --prebuilt` prepares the downloaded release and installs
+it into your client. `build-local.sh` builds the mod, the host
 and the helpers, `prepare-local.py` installs the mod into your client,
 `run-local.sh` starts the sandbox and `local_session.py` runs the server,
 the workers and the game inside it. `roster.py`, `client_decks.py`,

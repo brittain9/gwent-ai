@@ -12,12 +12,14 @@
 #    command for your system; it never installs system packages and
 #    never needs root.
 # 2. Downloads pinned third-party files into .local/ and checks SHA-256.
-#    On macOS it also builds Mono for the host (about 20 minutes, once).
+#    On macOS these include Mono, nginx, uv and Python.
 # 3. Builds the AI and the headless host (with --play: everything).
 # 4. Reads deck data from your client into .runtime/decks.
+# 5. With --play: fetches the server's service files and installs the mod
+#    and decks into your client (scripts/prepare-local.py).
 #
-# It writes only inside this checkout. Run it again at any time: finished
-# steps are skipped.
+# It writes only inside this checkout and, with --play, adds files to the
+# client. Run it again at any time: finished steps are skipped.
 set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 CLIENT="$(dirname "$ROOT")/client"
@@ -45,15 +47,23 @@ DXVK_URL=https://github.com/doitsujin/dxvk/releases/download/v$DXVK_VERSION/dxvk
 DXVK_SHA256=d85ce7c79f57ecd765aaa1b9e7007cb875e6fde9f6d331df799bce73d513ce87
 # macOS: Gcenx's Wine build (x86_64, under Rosetta 2) and his DXVK port to
 # MoltenVK, which that Wine bundles. GitHub publishes no digest for the DXVK
-# asset; its hash is the one first downloaded. Mono is built from source
-# (platform/macos/build-mono.sh): the host needs x86_64 float semantics.
+# asset; its hash is the one first downloaded.
 WINE_MACOS_URL=https://github.com/Gcenx/macOS_Wine_builds/releases/download/11.0_1/wine-stable-11.0_1-osx64.tar.xz
 WINE_MACOS_SHA256=b50dc50ec7f41d58b115a6b685d4d1315ba3c797bd3aa0f49213f2703cb82388
 DXVK_MACOS_NAME=dxvk-macOS-async-v1.10.3-20230507-repack
 DXVK_MACOS_URL=https://github.com/Gcenx/DXVK-macOS/releases/download/v1.10.3-20230507-repack/$DXVK_MACOS_NAME.tar.gz
 DXVK_MACOS_SHA256=acd1520ad105d8ef124a09c8e11a259a5dc8bdc565ad18e0e52693f9807b2477
-MONO_URL=https://dl.winehq.org/mono/sources/mono/mono-6.14.1.tar.xz
-MONO_SHA256=3024c97c0bc8cbcd611c401d5f994528704108ceb31f31b28dea4783004d0820
+# macOS: Mono (x86_64: the host needs x86_64 float semantics) and nginx are
+# prebuilt by platform/macos/build-mono.sh and build-nginx.sh and published
+# on this project's runtime-macos-1 release. uv is astral's release asset,
+# with the digest GitHub publishes for it.
+RUNTIME_MACOS=https://github.com/brittain9/gwent-ai/releases/download/runtime-macos-1
+MONO_MACOS_URL=$RUNTIME_MACOS/mono-6.14.1-x86_64-macos.tar.xz
+MONO_MACOS_SHA256=f502dc49db0045c72ba3029e50700d73632a9d7a6ec6cdd0d85e53d2e4c0d49b
+NGINX_MACOS_URL=$RUNTIME_MACOS/nginx-1.30.5-arm64-macos.tar.xz
+NGINX_MACOS_SHA256=363178b062a74d9125b0206abec44e47bc2ba9ebdf1a6ec709c6b13360bcc2ac
+UV_MACOS_URL=https://github.com/astral-sh/uv/releases/download/0.10.9/uv-aarch64-apple-darwin.tar.gz
+UV_MACOS_SHA256=a92f61e9ac9b0f29668c15f56152e4a60143fca148ff5bfadb86718472c3f376
 GWENT_EXE_SHA256=bacc0d9774640213f698ae0400023041f8df5aba753ea595fa3b449206198231
 # Read the client's deck definitions (scripts/client_decks.py).
 UNITYPY=(--with UnityPy==1.25.3 --with TypeTreeGeneratorAPI==0.0.10)
@@ -81,7 +91,9 @@ need() {  # need build|play TOOL DNF_PACKAGE APT_PACKAGE [BREW_PACKAGE]
   say "  missing ($kind): $tool"
   if [[ $kind == build ]]; then MISSING_BUILD+=("$package"); else MISSING_PLAY+=("$package"); fi
 }
-install_hint() {
+install_hint() {  # names in parentheses were printed with their own command
+  set -- $(printf '%s\n' "$@" | grep -v '^(' || true)
+  (($#)) || return 0
   case $PM in
     dnf) say "  sudo dnf install $*" ;;
     apt) say "  sudo apt install $*" ;;
@@ -100,8 +112,11 @@ fi
 
 step "Prerequisites"
 if ((!PREBUILT)); then need build dotnet dotnet-sdk-10.0 dotnet-sdk-10.0 dotnet-sdk; fi
-need build python3 python3 python3
-need build uv uv pipx
+# A downloaded release on macOS brings its own uv and Python (.local).
+if ((!MACOS || !PREBUILT)); then
+  need build python3 python3 python3
+  need build uv uv pipx
+fi
 need build curl curl curl
 need build unzip unzip unzip
 need build tar tar tar
@@ -110,15 +125,12 @@ if ((!PREBUILT)) && command -v dotnet >/dev/null && [[ -z "$(dotnet --list-sdks 
   MISSING_BUILD+=(dotnet-sdk-10.0)
 fi
 if ((MACOS)); then
-  # Mono for the host is built from source into .local (see the pins above).
-  if [[ ! -x "$LOCAL/mono-x86_64/bin/mono" ]]; then
-    if ! xcode-select -p >/dev/null 2>&1; then
-      say "  missing: the Xcode Command Line Tools (run: xcode-select --install)"
-      MISSING_BUILD+=("(Command Line Tools)")
-    fi
+  if ((!PREBUILT)) && ! xcode-select -p >/dev/null 2>&1; then
+    say "  missing: the Xcode Command Line Tools (run: xcode-select --install)"
+    MISSING_BUILD+=("(Command Line Tools)")
   fi
   if ! arch -x86_64 /usr/bin/true 2>/dev/null; then
-    say "  missing: Rosetta 2 (run: softwareupdate --install-rosetta)"
+    say "  missing: Rosetta 2 (run: softwareupdate --install-rosetta --agree-to-license)"
     MISSING_BUILD+=("(Rosetta 2)")
   fi
 else
@@ -127,17 +139,18 @@ else
     say "  warning: $(mono --version | head -1); the host is tested with Mono 6.14"
   fi
 fi
-if command -v python3 >/dev/null && ! python3 -c 'import sys; sys.exit(sys.version_info < (3, 10))'; then
+if ((!MACOS || !PREBUILT)) && command -v python3 >/dev/null \
+   && ! python3 -c 'import sys; sys.exit(sys.version_info < (3, 10))'; then
   say "  missing: Python 3.10 or later"
   MISSING_BUILD+=(python3)
 fi
 if ((MACOS)); then
-  # Wine and DXVK are pinned downloads; the session's sandbox is the
+  # Wine, DXVK and nginx are pinned downloads; the session's sandbox is the
   # system's sandbox-exec (platform/macos/session.sb).
-  need play nginx - - nginx
-  if ((!PREBUILT)); then need play x86_64-w64-mingw32-gcc - - mingw-w64; fi
-  need play clang - - "(Command Line Tools)"
-  need play openssl - - openssl
+  if ((!PREBUILT)); then
+    need play x86_64-w64-mingw32-gcc - - mingw-w64
+    need play clang - - "(Command Line Tools)"
+  fi
 else
   # The Play path can use tools prepared in .local instead of distribution packages.
   [[ -x "$LOCAL/wine-fedora/usr/bin/wine64" ]] || need play wine wine "wine wine64"
@@ -192,8 +205,9 @@ if ((PREBUILT)); then
   step "Downloaded release"
   required=(GwentAI.dll host/GwentAI.dll host/GwentHost.exe host/GwentHost.exe.config)
   if ((PLAY)); then required+=(GwentBetaRestorationMod.dll GalaxyCommunication.exe netprobe.exe); fi
+  if ((PLAY && MACOS)); then required+=(session_net.dylib); fi
   for file in "${required[@]}"; do
-    [[ -f "$ROOT/dist/$file" ]] || die "dist/$file is missing; extract the complete gwent-ai-v1.zip release."
+    [[ -f "$ROOT/dist/$file" ]] || die "dist/$file is missing; extract the complete release again."
   done
   [[ "$(sha256 "$ROOT/dist/GwentAI.dll")" == "$(sha256 "$ROOT/dist/host/GwentAI.dll")" ]] \
     || die "the AI and its search workers differ; extract the complete release again."
@@ -209,12 +223,33 @@ if [[ ! -f "$LOCAL/melonloader/MelonLoader/0Harmony.dll" ]]; then
   mv "$LOCAL/melonloader.part" "$LOCAL/melonloader"
   say "  extracted MelonLoader to .local/melonloader"
 fi
-if ((MACOS)) && [[ ! -x "$LOCAL/mono-x86_64/bin/mono" ]]; then
-  fetch "$MONO_URL" "$LOCAL/downloads/mono-6.14.1.tar.xz" "$MONO_SHA256"
-  "$ROOT/platform/macos/build-mono.sh" "$LOCAL/downloads/mono-6.14.1.tar.xz" "$LOCAL/mono-x86_64"
-  say "  built Mono into .local/mono-x86_64"
+extract() {  # extract URL SHA256 DIR: a tarball whose top directory is DIR, into .local/DIR
+  local file="$LOCAL/downloads/${1##*/}"
+  if [[ -e "$LOCAL/$3" ]]; then say "  have .local/$3"; return; fi
+  fetch "$1" "$file" "$2"
+  rm -rf "$LOCAL/$3.part"
+  mkdir -p "$LOCAL/$3.part"
+  tar -xf "$file" -C "$LOCAL/$3.part"
+  mv "$LOCAL/$3.part/$3" "$LOCAL/$3"
+  rm -rf "$LOCAL/$3.part"
+  say "  extracted .local/$3"
+}
+UV=uv
+if ((MACOS)); then
+  extract "$MONO_MACOS_URL" "$MONO_MACOS_SHA256" mono-x86_64
+  # uv and the Python it installs stay in .local, and uv never runs the
+  # Mac's /usr/bin/python3, which asks to install the Command Line Tools.
+  if [[ ! -x "$LOCAL/uv/uv" ]]; then
+    fetch "$UV_MACOS_URL" "$LOCAL/downloads/uv-aarch64-apple-darwin.tar.gz" "$UV_MACOS_SHA256"
+    mkdir -p "$LOCAL/uv"
+    tar -xzf "$LOCAL/downloads/uv-aarch64-apple-darwin.tar.gz" -C "$LOCAL/uv" --strip-components=1
+    say "  extracted .local/uv"
+  fi
+  UV="$LOCAL/uv/uv"
+  export UV_PYTHON_PREFERENCE=only-managed UV_PYTHON_INSTALL_DIR="$LOCAL/python" UV_CACHE_DIR="$LOCAL/uv-cache"
 fi
 if ((PLAY && MACOS)); then
+  extract "$NGINX_MACOS_URL" "$NGINX_MACOS_SHA256" nginx
   if [[ ! -x "$LOCAL/wine-macos/bin/wine" ]]; then
     fetch "$WINE_MACOS_URL" "$LOCAL/downloads/wine-stable-11.0_1-osx64.tar.xz" "$WINE_MACOS_SHA256"
     rm -rf "$LOCAL/wine-macos.part"
@@ -255,28 +290,26 @@ elif ((PLAY)); then
     say "  have .local/dxvk"
   fi
 fi
-if ((PLAY)); then
+if ((PLAY || (MACOS && PREBUILT))); then
   step "Python environment for the backend (.venv)"
   if ((MACOS)); then
     # A pinned version, which uv downloads if this Mac lacks it.
-    [[ -x "$ROOT/.venv/bin/python" ]] || uv venv --quiet --python 3.12 "$ROOT/.venv"
+    [[ -x "$ROOT/.venv/bin/python" ]] || "$UV" venv --quiet --python 3.12 "$ROOT/.venv"
   # The Linux sandbox (run-local.sh) hides /home, /opt and /tmp, so the
   # backend's interpreter must be the system one under /usr.
   elif [[ "$(readlink -f "$ROOT/.venv/bin/python" 2>/dev/null)" != /usr/* ]]; then
     rm -rf "$ROOT/.venv"
     uv venv --quiet --python /usr/bin/python3 "$ROOT/.venv"
   fi
-  uv pip install --quiet --python "$ROOT/.venv/bin/python" -r "$ROOT/server/requirements.txt"
+  "$UV" pip install --quiet --python "$ROOT/.venv/bin/python" -r "$ROOT/server/requirements.txt"
   say "  .venv: $(cd "$ROOT" && .venv/bin/python -c 'import websockets; print("websockets", websockets.__version__)')"
 fi
 
+PY=python3
+[[ -x "$ROOT/.venv/bin/python" ]] && PY="$ROOT/.venv/bin/python"
 if ((PREBUILT)); then
   step "Card data from your client"
-  python3 "$ROOT/scripts/install-card-data.py" --client "$CLIENT" --out "$LOCAL/runtime-cards"
-  if ((PLAY && MACOS)); then
-    clang -arch x86_64 -O2 -Wall -Wextra -dynamiclib "$ROOT/platform/macos/session_net.c" \
-      -o "$ROOT/dist/session_net.dylib"
-  fi
+  "$PY" "$ROOT/scripts/install-card-data.py" --client "$CLIENT" --out "$LOCAL/runtime-cards"
 else
   step "Build"
   if ((PLAY)); then "$ROOT/scripts/build-local.sh"; else "$ROOT/scripts/build-local.sh" host; fi
@@ -289,13 +322,19 @@ if compgen -G "$ROOT/.runtime/decks/practice/*.json" >/dev/null \
    && [[ $(ls "$ROOT/.runtime/decks/practice"/*.json | wc -l) -eq 7 ]]; then
   say "  have the 7 Practice decks"
 else
-  (cd "$ROOT" && uv run --quiet --no-project "${UNITYPY[@]}" python scripts/client_decks.py)
-  "$ROOT/scripts/roster.py" import-client
+  (cd "$ROOT" && "$UV" run --quiet --no-project --python "$PY" "${UNITYPY[@]}" python scripts/client_decks.py)
+  "$PY" "$ROOT/scripts/roster.py" import-client
+fi
+
+if ((PLAY)); then
+  step "Server files and your client"
+  "$ROOT/server/fetch-upstream.sh"
+  "$PY" "$ROOT/scripts/prepare-local.py"
 fi
 
 step "Done"
 if ((PLAY)); then
-  say "Play:     scripts/prepare-local.py, then scripts/run-local.sh (see the install guide)"
+  say "Play:     scripts/run-local.sh (see the install guide)"
 else
   say "Play:     scripts/setup.sh --play"
 fi

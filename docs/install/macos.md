@@ -1,35 +1,31 @@
 # macOS
 
-Documented for Apple silicon with Wine and Rosetta 2. This release has not
-been retested on macOS; Intel Macs are untested. Download
+Tested on Apple silicon (macOS 26) for release 0.1.0. Intel Macs are
+untested. Download
 [gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip)
 and extract it beside your [client](client.md), as `gwent-ai/` and `client/`.
 
 ## Prerequisites
 
-| Needs | Install |
-| --- | --- |
-| Xcode Command Line Tools | `xcode-select --install` |
-| Rosetta 2 | `softwareupdate --install-rosetta` |
-| Python 3.10+ | `brew install python` |
-| uv | `brew install uv` |
-| nginx | `brew install nginx` |
-| openssl | `brew install openssl` |
+Only Rosetta 2, which runs Wine and the game:
 
-The download includes the AI and matching Mono workers. The .NET SDK and
-MinGW compiler are needed only when building the AI from source.
+```sh
+softwareupdate --install-rosetta --agree-to-license
+```
 
-Setup downloads pinned files and verifies their SHA-256 hashes:
+Setup downloads everything else into `.local/` and checks each file's
+SHA-256. It installs no system packages and never asks for root:
 
-- Mono 6.14.1, built as x86_64 under `.local/mono-x86_64` (about 20 minutes,
-  once). The workers require the same floating-point arithmetic as the
-  client; native arm64 Mono cannot run them correctly.
+- Mono 6.14.1 for the search workers, prebuilt as x86_64. The workers must
+  do floating-point arithmetic exactly as the client does, and native arm64
+  Mono cannot. Built by `platform/macos/build-mono.sh`.
+- nginx 1.30.5 with OpenSSL and PCRE2 linked in. Built by
+  `platform/macos/build-nginx.sh`.
+- uv, and the Python 3.12 it installs.
 - Wine 11.0 from [Gcenx's macOS builds](https://github.com/Gcenx/macOS_Wine_builds),
-  with MoltenVK. Rosetta 2 runs it.
-- [DXVK for macOS](https://github.com/Gcenx/DXVK-macOS), for Direct3D 11.
-
-Setup also compiles the small macOS network helper with Xcode's compiler.
-It never installs system packages or asks for root.
+  with MoltenVK, and [DXVK for macOS](https://github.com/Gcenx/DXVK-macOS)
+  for Direct3D 11.
+- MelonLoader 0.5.7.
 
 ## Install and play
 
@@ -37,24 +33,33 @@ From the extracted `gwent-ai` folder:
 
 ```sh
 scripts/setup.sh --play --prebuilt
-server/fetch-upstream.sh
-scripts/prepare-local.py
 scripts/run-local.sh
 ```
 
-Preparation installs the AI, roster and card data derived from your client.
-Choose **Single-player, then Practice**. Close the game to stop the session.
-Setup prints a card-table hash; compare it with the [release notes](../../results/v0.1.0.md).
+Setup takes about a minute plus the downloads (about 350 MB). It derives
+the card data from your client and installs the AI, roster and card data
+into it. Choose **Single-player, then Practice**. Close the game to stop
+the session. Setup prints a card-table hash; compare it with the
+[release notes](../../results/v0.1.0.md).
 
 The game uses the display's full pixel size. Options such as `--windowed`,
 `--stock-ai` and `--workers N` work as on [Linux](linux.md).
-To update, extract the next complete release and repeat setup and preparation.
+To update, extract the next complete release and run setup again.
+
+## Known issue: card art
+
+Some cards show their frame, numbers and effects, but not their art. The
+game's Direct3D 11 runs on Metal through DXVK and MoltenVK, and Metal has
+no transform feedback, which these cards need. The game log shows
+`Transform feedback not supported by device`. The cards still play
+correctly. Wine's own Direct3D and the game's OpenGL mode do not start the
+game, so DXVK is the only working renderer on macOS.
 
 ## Build from source
 
-Also install `brew install --cask dotnet-sdk` and `brew install mingw-w64`.
-Run `scripts/setup.sh --play` without `--prebuilt`, then the fetch,
-preparation and run commands above. After changing source, run
+Install the Xcode Command Line Tools (`xcode-select --install`), Python
+3.10+ and uv, and `brew install --cask dotnet-sdk` and `brew install mingw-w64`.
+Run `scripts/setup.sh --play` without `--prebuilt`, then `scripts/run-local.sh`. After changing source, run
 `scripts/build-local.sh` and `scripts/prepare-local.py` again.
 
 ## Isolation

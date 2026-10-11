@@ -31,14 +31,12 @@ From the extracted `gwent-ai` folder:
 
 ```sh
 scripts/setup.sh --play --prebuilt
-server/fetch-upstream.sh
-scripts/prepare-local.py
 scripts/run-local.sh
 ```
 
 Setup downloads the pinned MelonLoader and DXVK files, checks their hashes,
-and derives the card data from your client. Preparation installs the AI,
-roster and card data into the client. Choose **Single-player, then Practice**.
+derives the card data from your client, and installs the AI, roster and
+card data into the client. Choose **Single-player, then Practice**.
 Close the game to stop the session.
 
 - Setup prints `card table: sha256 ...`; compare it with the value in the
@@ -49,7 +47,7 @@ Close the game to stop the session.
 - `scripts/run-local.sh --windowed` uses a 1280×720 window.
   `--stock-ai` plays against the game's own AI.
 - To update, extract the next complete release beside your client and run
-  its setup and preparation steps. Keep the AI and workers from the same release.
+  its setup. Keep the AI and workers from the same release.
 
 **Ubuntu 24.04 and later** restrict unprivileged user namespaces through
 AppArmor. Setup reports this. Options (untested here): allow them for the
@@ -62,7 +60,7 @@ To build instead, also install .NET SDK 10 and MinGW-w64 GCC
 (`dotnet-sdk-10.0 mingw64-gcc` on Fedora;
 `dotnet-sdk-10.0 gcc-mingw-w64-x86-64` on Debian/Ubuntu, using Microsoft's
 SDK feed if needed). Run `scripts/setup.sh --play` without `--prebuilt`,
-then the same fetch, preparation and run commands above. After changing
+then `scripts/run-local.sh`. After changing
 source, run `scripts/build-local.sh` and `scripts/prepare-local.py` again.
 
 ## Isolation

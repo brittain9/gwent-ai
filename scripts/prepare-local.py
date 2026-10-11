@@ -4,6 +4,7 @@ import ast
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import zipfile
 
 root = Path(__file__).resolve().parents[1]
@@ -30,7 +31,7 @@ cards.mkdir(parents=True, exist_ok=True)
 for name in ['roles.json', 'answer-params.json', 'manifest.json']:
     shutil.copy2(root / '.local/runtime-cards' / name, cards / name)
 # Practice opponents and the AI's deck knowledge (scripts/roster.py).
-subprocess.run([str(root / 'scripts/roster.py'), 'install'], check=True)
+subprocess.run([sys.executable, str(root / 'scripts/roster.py'), 'install'], check=True)
 for filename in ['config.json', 'Launch.cfg']:
     shutil.copy2(root / 'server/settings' / filename, client / 'Gwent_Data/StreamingAssets/Settings' / filename)
 for directory in ['home', 'logs', 'certs']:

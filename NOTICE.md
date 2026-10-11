@@ -39,7 +39,12 @@ own copy of the game.
   comet (https://github.com/imLinguin/comet), an implementation of GOG
   Galaxy's communication service, under the Apache License 2.0.
 - MelonLoader (Apache-2.0) and Harmony (MIT) are not included; the install
-  steps download them from their official sources.
+  steps download them from their official sources, as they do Wine (LGPL),
+  DXVK (zlib) and uv (MIT or Apache-2.0).
+- For macOS, the project publishes builds of Mono (MIT; parts LGPL) and of
+  nginx (BSD-2-Clause) with OpenSSL (Apache-2.0) and PCRE2 (BSD-3-Clause),
+  made from the unmodified upstream sources by `platform/macos/build-mono.sh`
+  and `build-nginx.sh`. Each carries its licences in `licenses/`.
 - Community deck lists are credited to their authors where the project uses
   them. An author who wants a list removed can open an issue, and it will be
   removed.
