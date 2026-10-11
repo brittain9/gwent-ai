@@ -10,7 +10,7 @@ Set these environment variables before `scripts/run-local.sh` (for example
 | `GWENT_AI_THINK_MS` | The AI's think-time budget per decision, in ms (default 20000 from `run-local.sh`). Clear decisions stop at half of it; open ones may run on to 1.5 times it. 13333 gives about 6.7 s for most plays and 20 s at most. |
 | `GWENT_AI_ITERATIONS` | The most simulated games per decision (default 50000). The time budget usually stops the search first. |
 | `GWENT_PRACTICE_WORKERS` | The number of search worker processes (default `min(6, cores − 2)`; `--workers N` does the same). `0` searches in the game process only, which makes the AI weaker. |
-| `GWENT_WORKER_RUNTIME` | `coreclr` (default from `run-local.sh`): the workers run on .NET 10, about 12% faster per simulation. `mono`: they run on Mono. Both play the same moves. |
+| `GWENT_WORKER_RUNTIME` | `auto` (default): uses matching .NET 10 workers when available, otherwise Mono. The download uses Mono. `coreclr` requires a matching .NET build; `mono` selects Mono. Both play the same moves. |
 | `GWENT_PRACTICE_DECKS` | `practice`: the AI plays the client's seven Practice decks instead of the deck roster. |
 | `GWENT_WORKER_MEMORY_MB` | A worker exits above this memory (RSS, default 2048) and the session starts it again. |
 | `GWENT_WORKER_GC_PARAMS` | Mono's garbage-collector settings for the workers (default `soft-heap-limit=819m,nursery-size=256m`). |

@@ -6,9 +6,9 @@ ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 # (PracticeAI ThinkExtend), so a 20 s budget gives about 10 s for most plays and at
 # most 30 s. Override per run (13333: about 6.7 s, at most 20 s).
 export GWENT_AI_THINK_MS="${GWENT_AI_THINK_MS:-20000}"
-# Practice's search workers on .NET: traces identical to Mono and about 12% less
-# time per simulation, so more simulations fit the same think time. GWENT_WORKER_RUNTIME=mono to go back.
-export GWENT_WORKER_RUNTIME="${GWENT_WORKER_RUNTIME:-coreclr}"
+# Use matching .NET workers when available; downloaded releases use Mono.
+# An explicit runtime selection remains strict.
+export GWENT_WORKER_RUNTIME="${GWENT_WORKER_RUNTIME:-auto}"
 
 # Practice games are recorded in data/human-games; the sandbox needs the directory.
 mkdir -p "$ROOT/data/human-games"

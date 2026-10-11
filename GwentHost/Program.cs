@@ -173,6 +173,7 @@ namespace GwentHost
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static GameSharedData Engine(string client, out HarmonyLib.Harmony harmony, out RedLogger.IRedLogger logger)
         {
+            GwentAI.Search.CardRoles.Initialize(client);
             harmony = new HarmonyLib.Harmony("gwent-host");
             GwentAI.Sim.UshortSafeIndexOf.Install(harmony);
             UnitySort.Install(harmony);

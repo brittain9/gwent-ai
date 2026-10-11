@@ -136,6 +136,9 @@ namespace GwentAI.Practice
                 return;
             }
             s_Log = log;
+            // Every installer, including a configured seat, needs a complete
+            // local card table before any game hooks are applied.
+            _ = CardRoles.Loaded;
             Assembly assembly = typeof(PracticeAI).Assembly;
             s_ThinkMs = ThinkMs();
             s_Settings = s_Options.Settings ?? DefaultSettings(assembly);

@@ -5,8 +5,14 @@ using Xunit;
 namespace GwentAI.Tests
 {
     // The economy tie-break's rule (SearchSettings.EconomyTieBreak) on synthetic root statistics.
+    [Collection("Card data")]
     public class EconomyOrderTests
     {
+        public EconomyOrderTests(CardDataFixture files)
+        {
+            CardRoles.Initialize(files.Client, files.Directory);
+        }
+
         private static TieCandidate Step(EconomyStep step, int visits, double mean)
         {
             return new TieCandidate { Step = step, Visits = visits, Mean = mean };

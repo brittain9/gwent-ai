@@ -1,68 +1,38 @@
 # Windows
 
-**Not tested on Windows yet.** These notes say how it should work, from how
-the parts work on Linux and from upstream's documentation. Expect to fix
-things. If you get it working, please open an issue and say what you did.
+**Not tested on Windows yet.** These steps use upstream's Windows launcher
+and the downloaded AI mod. The AI searches inside the game process on
+Windows, so it is weaker than the Linux and macOS setup with helper processes.
 
-The client is a Windows program, so no Wine is needed. `scripts/run-local.sh`
-(the Linux and macOS runner: namespaces, bubblewrap, the search workers)
-does not exist on Windows.
+## Install
 
-## The plain route: upstream's launcher plus the AI mod
-
-Upstream publishes Windows builds of its launcher and server host
-([releases](https://github.com/Somnia41205/Unofficial-Gwent-Beta-0.9.24.3.432-Private-Server/releases)).
-They install MelonLoader 0.5.7 and the restoration mod into the client, run
-the server on your PC, and redirect the GOG hostnames. They need
-administrator rights: they change DNS settings, install a certificate and
-register a Windows service. Read upstream's
-[PLAYER_GUIDE](../../server/docs/PLAYER_GUIDE.md) and
-[HOST_GUIDE](../../server/docs/HOST_GUIDE.md) first.
-
-Note: these releases contain prebuilt binaries (`nginx.exe`,
-`GalaxyCommunication.exe`, the restoration DLL) that the project's copy of
-the server does not carry; the project builds them from source on Linux and
-macOS. We have not audited upstream's builds.
-
-Prerequisites: the .NET SDK, Mono 6 for Windows (mono-project.com), Python
-3.10 or newer, uv.
-
-1. Extract the client ([client.md](client.md)).
-2. Start upstream's server host on this PC, then the launcher with "I'm
-   hosting the server on this PC". Check that Practice works with the stock
-   AI.
-3. Close the game. Build the AI mod against the client and the MelonLoader
-   the launcher installed. `scripts/build-local.sh` does this: it derives the
-   card tables from your client (Python), then runs `dotnet build`. It is a
-   shell script and has not been run on Windows; from a Unix-style shell
-   (Git Bash or WSL) with the project beside the client, it should work as on
-   Linux. The `dotnet build` step by hand, with the paths of your client and
-   its MelonLoader folder:
+1. Get the [client](client.md). Download and extract
+   [gwent-ai-v1.zip](https://github.com/brittain9/gwent-ai/releases/download/v1/gwent-ai-v1.zip).
+2. Install upstream's [Windows launcher and server](https://github.com/Somnia41205/Unofficial-Gwent-Beta-0.9.24.3.432-Private-Server/releases).
+   Read its [player guide](../../server/docs/PLAYER_GUIDE.md) and
+   [host guide](../../server/docs/HOST_GUIDE.md). It installs MelonLoader
+   0.5.7 and the restoration mod. It needs administrator rights for DNS,
+   certificates and a Windows service. We have not audited its prebuilt files.
+3. Run upstream's server and launcher with "I'm hosting the server on this PC".
+   Check that Practice works, then close the game.
+4. Install Python 3.10 or later. From the extracted `gwent-ai` folder,
+   generate the card data and install the roster, replacing the client path:
 
    ```powershell
-   dotnet build -c Release --ignore-failed-sources -p:ClientDir=C:\path\to\client `
-       -p:LoaderDir=C:\path\to\client\MelonLoader GwentAI\GwentAI.csproj
+   python scripts/install-card-data.py --client C:\path\to\client
+   python scripts/roster.py install --to C:\path\to\client\Mods
+   Copy-Item dist\GwentAI.dll C:\path\to\client\Mods\GwentAI.dll
    ```
 
-   The build prints a `card table: sha256 ...` line. The value should match
-   the one in the release notes (the `results/` file for your release).
+5. Start the game from upstream's launcher and choose **Single-player, then Practice**.
+   `MelonLoader\Latest.log` in the client folder shows whether `GwentAI` loaded.
 
-4. Copy the build into the client's `Mods` folder: `dist\GwentAI.dll`, and
-   the deck roster, which `python scripts\roster.py install --to
-   C:\path\to\client\Mods` writes there as the folder `GwentAI-roster` and
-   the file `GwentAI-layers.json`. The mod loads the roster from the folder
-   it sits in.
-5. Start the game from the launcher and choose **Single-player**, then
-   **Practice**. `MelonLoader\Latest.log` in the client folder shows whether
-   `GwentAI` loaded.
+No .NET SDK is needed to use the downloaded DLL. Card data is generated
+locally under `UserData\GwentAI\cards` in your client; rerun the generator
+when updating the client or the AI. Its printed hash should match the
+[release notes](../../results/v1.md).
 
-To go back to the stock AI, delete `Mods\GwentAI.dll`, `Mods\GwentAI-roster`
-and `Mods\GwentAI-layers.json`.
+## Return to the stock AI
 
-## Strength on Windows
-
-On Linux and macOS, `scripts/run-local.sh` starts the search workers: helper
-processes that run the AI's search on several cores. Nothing starts them on
-Windows, so there the AI runs its search inside the game process until
-someone writes the Windows runner. It plays the same way but weaker: fewer
-imagined games fit the same thinking time.
+Remove `Mods\GwentAI.dll`, `Mods\GwentAI-roster` and
+`Mods\GwentAI-layers.json` from the client.

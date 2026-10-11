@@ -53,9 +53,13 @@ alone.
 
 ## scripts/
 
-`setup.sh` installs the tools, `build-local.sh` builds the mod, the host
+`setup.sh --play --prebuilt` prepares the downloaded release.
+`build-local.sh` builds the mod, the host
 and the helpers, `prepare-local.py` installs the mod into your client,
 `run-local.sh` starts the sandbox and `local_session.py` runs the server,
 the workers and the game inside it. `roster.py`, `client_decks.py`,
 `card_roles.py` and `answer_kinds.py` read deck and card data from your
-client. Settings: [options.md](options.md).
+client. `install-card-data.py` generates the matching card table, numeric
+parameters and client fingerprint; preparation installs them under
+`UserData/GwentAI/cards` in the client. The mod and workers validate and
+load these files at startup. Settings: [options.md](options.md).
