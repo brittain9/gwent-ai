@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: Point Knight",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200162,
+  "name": "Emhyr var Emreis"
+ },
+ "cards": [
+  {
+   "id": 153301,
+   "name": "Lacerate",
+   "count": 3
+  },
+  {
+   "id": 162314,
+   "name": "Emissary",
+   "count": 3
+  },
+  {
+   "id": 162315,
+   "name": "Ambassador",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 201617,
+   "name": "Recruit",
+   "count": 3
+  },
+  {
+   "id": 112203,
+   "name": "Vesemir",
+   "count": 1
+  },
+  {
+   "id": 112204,
+   "name": "Lambert",
+   "count": 1
+  },
+  {
+   "id": 112202,
+   "name": "Eskel",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 162213,
+   "name": "Ceallach Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 113101,
+   "name": "Ragh Nar Roog",
+   "count": 1
+  },
+  {
+   "id": 112111,
+   "name": "Geralt: Aard",
+   "count": 1
+  },
+  {
+   "id": 200078,
+   "name": "Trial of the Grasses",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150651/https://www.gwentdb.com/decks/53800-point-knight",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

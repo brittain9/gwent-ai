@@ -1,0 +1,91 @@
+{
+ "name": "Reddit: [Guide] Roach Handbuff Meme Deck",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200165,
+  "name": "Francesca Findabair"
+ },
+ "cards": [
+  {
+   "id": 200209,
+   "name": "Saskia",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 142203,
+   "name": "Yaevinn",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 112208,
+   "name": "Operator",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 200022,
+   "name": "Summoning Circle",
+   "count": 1
+  },
+  {
+   "id": 142401,
+   "name": "Vrihedd Neophyte",
+   "count": 3
+  },
+  {
+   "id": 142205,
+   "name": "Vrihedd Dragoon",
+   "count": 3
+  },
+  {
+   "id": 142312,
+   "name": "Hawker Support",
+   "count": 3
+  },
+  {
+   "id": 142308,
+   "name": "Elven Mercenary",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/8u6ffl/",
+ "credit": "u/NuggetHighwind on r/gwent"
+}

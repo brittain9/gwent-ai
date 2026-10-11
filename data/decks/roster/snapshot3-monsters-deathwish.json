@@ -1,0 +1,101 @@
+{
+ "name": "Snapshot: Deathwish",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 132103,
+   "name": "Woodland Spirit",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 200221,
+   "name": "Brewess: Ritual",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132205,
+   "name": "Morvudd",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 132406,
+   "name": "Maerolorn",
+   "count": 1
+  },
+  {
+   "id": 200534,
+   "name": "She-Troll of Vergen",
+   "count": 1
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 2
+  },
+  {
+   "id": 132312,
+   "name": "Griffin",
+   "count": 3
+  },
+  {
+   "id": 200295,
+   "name": "Rotfiend",
+   "count": 1
+  },
+  {
+   "id": 200038,
+   "name": "Archespore",
+   "count": 3
+  },
+  {
+   "id": 132213,
+   "name": "D'ao",
+   "count": 2
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 200539,
+   "name": "Slyzard",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "High Tier 2",
+ "weight": 3.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Dwarfs (imperfect, no Agla\u00efs)",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200166,
+  "name": "Eithn\u00e9"
+ },
+ "cards": [
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 1
+  },
+  {
+   "id": 113312,
+   "name": "Torrential Rain",
+   "count": 3
+  },
+  {
+   "id": 142108,
+   "name": "Schirr\u00fa",
+   "count": 1
+  },
+  {
+   "id": 142203,
+   "name": "Yaevinn",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 142302,
+   "name": "Vrihedd Brigade",
+   "count": 1
+  },
+  {
+   "id": 142305,
+   "name": "Dwarven Skirmisher",
+   "count": 3
+  },
+  {
+   "id": 142311,
+   "name": "Dwarven Mercenary",
+   "count": 2
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200293,
+   "name": "Dwarven Agitator",
+   "count": 3
+  },
+  {
+   "id": 200520,
+   "name": "\u00c9ibhear Hattori",
+   "count": 1
+  },
+  {
+   "id": 201615,
+   "name": "Isengrim: Outlaw",
+   "count": 1
+  },
+  {
+   "id": 201647,
+   "name": "Rock Barrage",
+   "count": 3
+  },
+  {
+   "id": 201696,
+   "name": "Paulie Dahlberg",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-scoiatael-dwarfs.json (variant, seed 2018)",
+ "credit": "generated"
+}

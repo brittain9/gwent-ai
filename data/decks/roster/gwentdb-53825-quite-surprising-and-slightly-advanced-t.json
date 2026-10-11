@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: quite surprising and slightly advanced Tempo/CA deck",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200163,
+  "name": "Morvran Voorhis"
+ },
+ "cards": [
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 113102,
+   "name": "The Last Wish",
+   "count": 1
+  },
+  {
+   "id": 112201,
+   "name": "Dudu",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200053,
+   "name": "Artefact Compression",
+   "count": 1
+  },
+  {
+   "id": 112104,
+   "name": "Regis",
+   "count": 1
+  },
+  {
+   "id": 162101,
+   "name": "Letho of Gulet",
+   "count": 1
+  },
+  {
+   "id": 201601,
+   "name": "Yennefer: Enchantress",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150652/https://www.gwentdb.com/decks/53825-quite-surprising-and-slightly-advanced-tempo-ca",
+ "credit": "user-100005761 on GwentDB (0 up, 0 down)"
+}

@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Veterans (ladder variant)",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152304,
+   "name": "Tuirseach Hunter",
+   "count": 3
+  },
+  {
+   "id": 152309,
+   "name": "Dimun Light Longship",
+   "count": 1
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 3
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200046,
+   "name": "Tuirseach Veteran",
+   "count": 3
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 3
+  },
+  {
+   "id": 200528,
+   "name": "Heymaey Spearmaiden",
+   "count": 2
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-skellige-veterans.json (variant, seed 2018)",
+ "credit": "generated"
+}

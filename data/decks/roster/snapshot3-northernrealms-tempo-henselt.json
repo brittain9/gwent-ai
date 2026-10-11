@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Tempo Henselt",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200170,
+  "name": "King Henselt"
+ },
+ "cards": [
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  },
+  {
+   "id": 122108,
+   "name": "Keira Metz",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 122205,
+   "name": "S\u00edle de Tansarville",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 201622,
+   "name": "Kaedweni Knight",
+   "count": 3
+  },
+  {
+   "id": 122315,
+   "name": "Reinforced Trebuchet",
+   "count": 3
+  },
+  {
+   "id": 123301,
+   "name": "Redanian Knight-Elect",
+   "count": 3
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 113311,
+   "name": "Thunderbolt",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

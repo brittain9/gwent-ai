@@ -1,0 +1,141 @@
+{
+ "name": "Snapshot: MO Shupe",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  },
+  {
+   "id": 132108,
+   "name": "Miruna",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 201627,
+   "name": "Shupe's Day Off",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132207,
+   "name": "Brewess",
+   "count": 1
+  },
+  {
+   "id": 132208,
+   "name": "Weavess",
+   "count": 1
+  },
+  {
+   "id": 132206,
+   "name": "Whispess",
+   "count": 1
+  },
+  {
+   "id": 132220,
+   "name": "Nekurat",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 1
+  },
+  {
+   "id": 112405,
+   "name": "Fiend",
+   "count": 1
+  },
+  {
+   "id": 132307,
+   "name": "Archgriffin",
+   "count": 1
+  },
+  {
+   "id": 200114,
+   "name": "Alpha Werewolf",
+   "count": 1
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 1
+  },
+  {
+   "id": 200038,
+   "name": "Archespore",
+   "count": 1
+  },
+  {
+   "id": 132314,
+   "name": "Drowner",
+   "count": 1
+  },
+  {
+   "id": 200233,
+   "name": "Cockatrice",
+   "count": 1
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 1
+  },
+  {
+   "id": 132306,
+   "name": "Ghoul",
+   "count": 1
+  },
+  {
+   "id": 132402,
+   "name": "Wild Hunt Hound",
+   "count": 1
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 1
+  },
+  {
+   "id": 200067,
+   "name": "Moonlight",
+   "count": 1
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

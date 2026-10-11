@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Moonlight (ladder variant)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 112203,
+   "name": "Vesemir",
+   "count": 1
+  },
+  {
+   "id": 113204,
+   "name": "Stammelford's Tremor",
+   "count": 3
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132108,
+   "name": "Miruna",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 3
+  },
+  {
+   "id": 200220,
+   "name": "Whispess: Tribute",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 3
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 201700,
+   "name": "Bridge Troll",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-moonlight.json (variant, seed 2018)",
+ "credit": "generated"
+}

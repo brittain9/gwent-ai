@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The headless host on .NET (CoreCLR) instead of Mono: the same host
+       sources and the same GwentAI.dll the Mono host runs, with the engine
+       loaded by EngineLoader. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>GwentHost.Core</AssemblyName>
+    <RootNamespace>GwentHost</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+    <ClientDir Condition="'$(ClientDir)' == ''">$(MSBuildProjectDirectory)/../../client</ClientDir>
+    <OutputPath>../dist/host-core/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- The engine targets .NET Framework 3.5: its references to mscorlib,
+         System and System.Core resolve to .NET's facades. -->
+    <NoWarn>$(NoWarn);MSB3277;CS1701;CS1702;SYSLIB0050</NoWarn>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- Tiered PGO lets the JIT inline a method's original body at a
+         guarded-devirtualized call site, bypassing its Harmony patch: the
+         same process then plays different games after a few matches
+         (measured). Without tiering nothing is
+         recompiled after the patches are in, and steady-state speed is the
+         same (measured). Both off here, so in runtimeconfig.json;
+         DOTNET_TieredPGO=1 would bring the bypass back. -->
+    <TieredCompilation>false</TieredCompilation>
+    <TieredPGO>false</TieredPGO>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../GwentHost/Program.cs;../GwentHost/HostPatches.cs;../GwentHost/EnginePatches.cs;../GwentHost/RngPatches.cs;../GwentHost/EnginePack.cs;../GwentHost/FilterMemo.cs;../GwentHost/EventPatches.cs;../GwentHost/EnginePackSelfTest.cs;../GwentHost/ClientAssets.cs;../GwentHost/DeckCheck.cs;../GwentHost/UnitySort.cs;../GwentHost/SelfTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- The engine compiles against the client's assemblies and loads from
+         the client at run time (EngineLoader). -->
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/Assembly-CSharp.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/RedTools.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/RedLogger.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/ConsoleLogger.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/ICSharpCode.SharpZipLib.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/Newtonsoft.Json.dll" />
+    <!-- The mod exactly as the Mono host runs it (net35, built by
+         GwentAI.csproj into dist/). -->
+    <ProjectReference Include="../GwentAI/GwentAI.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+    <Reference Include="$(MSBuildProjectDirectory)/../dist/GwentAI.dll" />
+    <!-- MelonLoader's Harmony is HarmonyX 2.9 for .NET Framework; GwentAI.dll
+         binds to its API (Harmony.Patch with six parameters), which HarmonyX
+         keeps. -->
+    <PackageReference Include="HarmonyX" Version="2.16.1" />
+    <!-- The client's Newtonsoft.Json checks ReflectionPermission (a no-op
+         on .NET) before it compiles its serializers. -->
+    <PackageReference Include="System.Security.Permissions" Version="10.0.0" />
+  </ItemGroup>
+</Project>

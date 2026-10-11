@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: kacper322's Scoia'tael - Gwent Open #7",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200167,
+  "name": "Brouver Hoog"
+ },
+ "cards": [
+  {
+   "id": 142316,
+   "name": "Blue Mountain Elite",
+   "count": 3
+  },
+  {
+   "id": 142308,
+   "name": "Elven Mercenary",
+   "count": 2
+  },
+  {
+   "id": 142303,
+   "name": "Vrihedd Officer",
+   "count": 3
+  },
+  {
+   "id": 142302,
+   "name": "Vrihedd Brigade",
+   "count": 1
+  },
+  {
+   "id": 201638,
+   "name": "Elven Scout",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  },
+  {
+   "id": 142203,
+   "name": "Yaevinn",
+   "count": 1
+  },
+  {
+   "id": 142212,
+   "name": "Sheldon Skaggs",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 142202,
+   "name": "Ida Emean aep Sivney",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 142214,
+   "name": "Ele'yas",
+   "count": 1
+  },
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 112103,
+   "name": "Geralt of Rivia",
+   "count": 1
+  },
+  {
+   "id": 200080,
+   "name": "Xavier Moran",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tournament",
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20181017062110/https://www.gwentdb.com/decks/53726-kacper322s-scoiatael-gwent-open-7",
+ "credit": "GwentDB on GwentDB (0 up, 0 down)"
+}

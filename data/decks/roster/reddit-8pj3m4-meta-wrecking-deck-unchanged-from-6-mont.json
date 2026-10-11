@@ -1,0 +1,96 @@
+{
+ "name": "Reddit screenshot: Meta wrecking deck, unchanged from 6 months ago...",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200161,
+  "name": "Harald the Cripple"
+ },
+ "cards": [
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 152105,
+   "name": "Birna Bran",
+   "count": 1
+  },
+  {
+   "id": 113101,
+   "name": "Ragh Nar Roog",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 201646,
+   "name": "Derran",
+   "count": 1
+  },
+  {
+   "id": 112208,
+   "name": "Operator",
+   "count": 1
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 113202,
+   "name": "Merigold's Hailstorm",
+   "count": 1
+  },
+  {
+   "id": 113203,
+   "name": "Skellige Storm",
+   "count": 1
+  },
+  {
+   "id": 200300,
+   "name": "An Craite Whaler",
+   "count": 3
+  },
+  {
+   "id": 152312,
+   "name": "Tuirseach Axeman",
+   "count": 3
+  },
+  {
+   "id": 200081,
+   "name": "Heymaey Herbalist",
+   "count": 2
+  },
+  {
+   "id": 200528,
+   "name": "Heymaey Spearmaiden",
+   "count": 2
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 2
+  },
+  {
+   "id": 153301,
+   "name": "Lacerate",
+   "count": 3
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/8pj3m4/ (screenshot, transcribed)",
+ "credit": "u/Ryan8Ross on r/gwent"
+}

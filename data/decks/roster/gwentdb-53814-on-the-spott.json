@@ -1,0 +1,101 @@
+{
+ "name": "GwentDB: On The Spott",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200163,
+  "name": "Morvran Voorhis"
+ },
+ "cards": [
+  {
+   "id": 113303,
+   "name": "First Light",
+   "count": 1
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 3
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 1
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 1
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 113102,
+   "name": "The Last Wish",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200053,
+   "name": "Artefact Compression",
+   "count": 1
+  },
+  {
+   "id": 113316,
+   "name": "Renew",
+   "count": 1
+  },
+  {
+   "id": 200236,
+   "name": "Eskel: Pathfinder",
+   "count": 1
+  },
+  {
+   "id": 201601,
+   "name": "Yennefer: Enchantress",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150652/https://www.gwentdb.com/decks/53814-on-the-spott",
+ "credit": "user-100006832 on GwentDB (0 up, 0 down)"
+}

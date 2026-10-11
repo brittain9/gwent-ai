@@ -1,0 +1,101 @@
+{
+ "name": "Snapshot: Cursed Cerys",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 200177,
+   "name": "Cerys an Craite",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 200226,
+   "name": "Wolfsbane",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 200043,
+   "name": "Harald Houndsnout",
+   "count": 1
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 152302,
+   "name": "Berserker Marauder",
+   "count": 3
+  },
+  {
+   "id": 200081,
+   "name": "Heymaey Herbalist",
+   "count": 1
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 1
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 3
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 3
+  },
+  {
+   "id": 201598,
+   "name": "Bone Talisman",
+   "count": 2
+  },
+  {
+   "id": 200021,
+   "name": "Bloodcurdling Roar",
+   "count": 2
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "meme",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

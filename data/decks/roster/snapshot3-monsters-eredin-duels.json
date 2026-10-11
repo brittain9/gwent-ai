@@ -1,0 +1,96 @@
+{
+ "name": "Snapshot: Eredin Duels",
+ "faction": "Monsters",
+ "leader": {
+  "id": 131101,
+  "name": "Eredin Br\u00e9acc Glas"
+ },
+ "cards": [
+  {
+   "id": 200220,
+   "name": "Whispess: Tribute",
+   "count": 1
+  },
+  {
+   "id": 201781,
+   "name": "Imlerith: Sabbath",
+   "count": 1
+  },
+  {
+   "id": 132108,
+   "name": "Miruna",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 201657,
+   "name": "Parasite",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 113102,
+   "name": "The Last Wish",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 132314,
+   "name": "Drowner",
+   "count": 3
+  },
+  {
+   "id": 200502,
+   "name": "Ice Troll",
+   "count": 3
+  },
+  {
+   "id": 132402,
+   "name": "Wild Hunt Hound",
+   "count": 3
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 113307,
+   "name": "Adrenaline Rush",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

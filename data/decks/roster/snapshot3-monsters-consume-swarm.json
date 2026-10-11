@@ -1,0 +1,91 @@
+{
+ "name": "Snapshot: Consume Swarm",
+ "faction": "Monsters",
+ "leader": {
+  "id": 201743,
+  "name": "Arachas Queen"
+ },
+ "cards": [
+  {
+   "id": 132101,
+   "name": "Draug",
+   "count": 1
+  },
+  {
+   "id": 112108,
+   "name": "Yennefer",
+   "count": 1
+  },
+  {
+   "id": 132107,
+   "name": "Kayran",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 200523,
+   "name": "Germain Piquant",
+   "count": 1
+  },
+  {
+   "id": 201660,
+   "name": "Ruehin",
+   "count": 1
+  },
+  {
+   "id": 132216,
+   "name": "Toad Prince",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 201606,
+   "name": "Forktail",
+   "count": 3
+  },
+  {
+   "id": 132201,
+   "name": "Arachas Behemoth",
+   "count": 3
+  },
+  {
+   "id": 132217,
+   "name": "Celaeno Harpy",
+   "count": 3
+  },
+  {
+   "id": 132315,
+   "name": "Harpy",
+   "count": 3
+  },
+  {
+   "id": 132304,
+   "name": "Arachas Drone",
+   "count": 3
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

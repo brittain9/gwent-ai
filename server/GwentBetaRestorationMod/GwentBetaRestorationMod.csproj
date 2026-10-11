@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <ClientDir Condition="'$(ClientDir)' == ''">$(MSBuildProjectDirectory)/../../../client</ClientDir>
+    <FrameworkPathOverride>$(ClientDir)/Gwent_Data/Managed</FrameworkPathOverride>
+    <EnableFrameworkPathOverride>true</EnableFrameworkPathOverride>
+    <NoStdLib>true</NoStdLib>
+    <LoaderDir Condition="'$(LoaderDir)' == ''">$(MSBuildProjectDirectory)/../../.local/melonloader/MelonLoader</LoaderDir>
+    <OutputPath>../../dist/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/*.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/MelonLoader.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/0Harmony.dll" />
+  </ItemGroup>
+</Project>

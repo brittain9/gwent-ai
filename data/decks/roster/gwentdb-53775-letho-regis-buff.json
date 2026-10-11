@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Letho Regis buff",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 113310,
+   "name": "Swallow",
+   "count": 3
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 1
+  },
+  {
+   "id": 200044,
+   "name": "Magne Division",
+   "count": 3
+  },
+  {
+   "id": 201617,
+   "name": "Recruit",
+   "count": 2
+  },
+  {
+   "id": 112201,
+   "name": "Dudu",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 162205,
+   "name": "Fringilla Vigo",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 163201,
+   "name": "Treason",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 112104,
+   "name": "Regis",
+   "count": 1
+  },
+  {
+   "id": 162101,
+   "name": "Letho of Gulet",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150753/https://www.gwentdb.com/decks/53775-letho-regis-buff",
+ "credit": "user-30883453 on GwentDB (0 up, 0 down)"
+}

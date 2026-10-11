@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Temerian Foltest (imperfect, no Vernon Roche)",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 113301,
+   "name": "Alzur's Thunder",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 122304,
+   "name": "Siege Tower",
+   "count": 2
+  },
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 1
+  },
+  {
+   "id": 122309,
+   "name": "Siege Support",
+   "count": 3
+  },
+  {
+   "id": 122310,
+   "name": "Blue Stripe Scout",
+   "count": 3
+  },
+  {
+   "id": 122316,
+   "name": "Temerian Infantry",
+   "count": 3
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200022,
+   "name": "Summoning Circle",
+   "count": 1
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 3
+  },
+  {
+   "id": 200529,
+   "name": "Ronvid the Incessant",
+   "count": 1
+  },
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-northernrealms-temerian-foltest.json (variant, seed 2018)",
+ "credit": "generated"
+}

@@ -1,0 +1,106 @@
+{
+ "name": "GwentDB: Bran & Ciri's Shields'n'Spears",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 2
+  },
+  {
+   "id": 152303,
+   "name": "An Craite Warrior",
+   "count": 2
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 2
+  },
+  {
+   "id": 133301,
+   "name": "Wyvern Scale Shield",
+   "count": 2
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 2
+  },
+  {
+   "id": 201656,
+   "name": "Mastercrafted Spear",
+   "count": 2
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 152204,
+   "name": "Donar an Hindar",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152206,
+   "name": "Gremist",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 200225,
+   "name": "Muzzle",
+   "count": 1
+  },
+  {
+   "id": 201626,
+   "name": "Ciri: Nova",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20181008233243/https://www.gwentdb.com/decks/48907-bran-ciris-shieldsnspears",
+ "credit": "Padger on GwentDB (0 up, 0 down)"
+}

@@ -1,0 +1,141 @@
+{
+ "name": "GwentDB: Haiku's 4.4k Monster Shupe [Full guide]",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 1
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 1
+  },
+  {
+   "id": 132307,
+   "name": "Archgriffin",
+   "count": 1
+  },
+  {
+   "id": 132402,
+   "name": "Wild Hunt Hound",
+   "count": 1
+  },
+  {
+   "id": 112405,
+   "name": "Fiend",
+   "count": 1
+  },
+  {
+   "id": 132306,
+   "name": "Ghoul",
+   "count": 1
+  },
+  {
+   "id": 132314,
+   "name": "Drowner",
+   "count": 1
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 1
+  },
+  {
+   "id": 200038,
+   "name": "Archespore",
+   "count": 1
+  },
+  {
+   "id": 200233,
+   "name": "Cockatrice",
+   "count": 1
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 1
+  },
+  {
+   "id": 200114,
+   "name": "Alpha Werewolf",
+   "count": 1
+  },
+  {
+   "id": 200067,
+   "name": "Moonlight",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 1
+  },
+  {
+   "id": 132206,
+   "name": "Whispess",
+   "count": 1
+  },
+  {
+   "id": 132207,
+   "name": "Brewess",
+   "count": 1
+  },
+  {
+   "id": 132208,
+   "name": "Weavess",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132220,
+   "name": "Nekurat",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132108,
+   "name": "Miruna",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 201627,
+   "name": "Shupe's Day Off",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190717112344/https://www.gwentdb.com/decks/50663-haikus-4-4k-monster-shupe-full-guide",
+ "credit": "Haiku on GwentDB (1 up, 3 down)"
+}

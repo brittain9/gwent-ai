@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Moonlight (imperfect, no Whispess: Tribute)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 112105,
+   "name": "Regis: Higher Vampire",
+   "count": 1
+  },
+  {
+   "id": 113203,
+   "name": "Skellige Storm",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132220,
+   "name": "Nekurat",
+   "count": 1
+  },
+  {
+   "id": 133302,
+   "name": "Monster Nest",
+   "count": 1
+  },
+  {
+   "id": 200067,
+   "name": "Moonlight",
+   "count": 3
+  },
+  {
+   "id": 200112,
+   "name": "Siren",
+   "count": 3
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 3
+  },
+  {
+   "id": 201647,
+   "name": "Rock Barrage",
+   "count": 3
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  },
+  {
+   "id": 201700,
+   "name": "Bridge Troll",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 201753,
+   "name": "Peasant Militia",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-moonlight.json (variant, seed 2018)",
+ "credit": "generated"
+}

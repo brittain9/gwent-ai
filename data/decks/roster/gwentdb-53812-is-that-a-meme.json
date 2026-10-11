@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: is that a meme?",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 152307,
+   "name": "Drummond Queensguard",
+   "count": 3
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 2
+  },
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 3
+  },
+  {
+   "id": 152313,
+   "name": "Tuirseach Skirmisher",
+   "count": 1
+  },
+  {
+   "id": 152314,
+   "name": "An Craite Longship",
+   "count": 3
+  },
+  {
+   "id": 200036,
+   "name": "Drummond Warmonger",
+   "count": 3
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 112208,
+   "name": "Operator",
+   "count": 1
+  },
+  {
+   "id": 152205,
+   "name": "Draig Bon-Dhu",
+   "count": 1
+  },
+  {
+   "id": 152206,
+   "name": "Gremist",
+   "count": 1
+  },
+  {
+   "id": 152207,
+   "name": "Holger Blackhand",
+   "count": 1
+  },
+  {
+   "id": 152213,
+   "name": "Svanrige Tuirseach",
+   "count": 1
+  },
+  {
+   "id": 152101,
+   "name": "Hjalmar an Craite",
+   "count": 1
+  },
+  {
+   "id": 152103,
+   "name": "Ermion",
+   "count": 1
+  },
+  {
+   "id": 152104,
+   "name": "Kambi",
+   "count": 1
+  },
+  {
+   "id": 200177,
+   "name": "Cerys an Craite",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150652/https://www.gwentdb.com/decks/53812-is-that-a-meme",
+ "credit": "user-100016024 on GwentDB (0 up, 0 down)"
+}

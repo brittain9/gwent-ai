@@ -1,0 +1,101 @@
+{
+ "name": "GwentDB: Dampfschiff",
+ "faction": "Monsters",
+ "leader": {
+  "id": 131101,
+  "name": "Eredin Br\u00e9acc Glas"
+ },
+ "cards": [
+  {
+   "id": 113303,
+   "name": "First Light",
+   "count": 1
+  },
+  {
+   "id": 112405,
+   "name": "Fiend",
+   "count": 1
+  },
+  {
+   "id": 132211,
+   "name": "Nekker Warrior",
+   "count": 3
+  },
+  {
+   "id": 200026,
+   "name": "Wild Hunt Navigator",
+   "count": 3
+  },
+  {
+   "id": 200301,
+   "name": "Wild Hunt Drakkar",
+   "count": 3
+  },
+  {
+   "id": 200539,
+   "name": "Slyzard",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 132206,
+   "name": "Whispess",
+   "count": 1
+  },
+  {
+   "id": 132207,
+   "name": "Brewess",
+   "count": 1
+  },
+  {
+   "id": 132208,
+   "name": "Weavess",
+   "count": 1
+  },
+  {
+   "id": 112208,
+   "name": "Operator",
+   "count": 1
+  },
+  {
+   "id": 132216,
+   "name": "Toad Prince",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 201781,
+   "name": "Imlerith: Sabbath",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150652/https://www.gwentdb.com/decks/53809-dampfschiff",
+ "credit": "Ghinzin on GwentDB (0 up, 0 down)"
+}

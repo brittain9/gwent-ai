@@ -1,0 +1,141 @@
+{
+ "name": "Snapshot: NR Shupe",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200169,
+  "name": "King Radovid V"
+ },
+ "cards": [
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  },
+  {
+   "id": 122103,
+   "name": "John Natalis",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 201627,
+   "name": "Shupe's Day Off",
+   "count": 1
+  },
+  {
+   "id": 122203,
+   "name": "Thaler",
+   "count": 1
+  },
+  {
+   "id": 200529,
+   "name": "Ronvid the Incessant",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 123201,
+   "name": "Reinforcements",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 122214,
+   "name": "Kaedweni Sergeant",
+   "count": 1
+  },
+  {
+   "id": 122304,
+   "name": "Siege Tower",
+   "count": 1
+  },
+  {
+   "id": 201622,
+   "name": "Kaedweni Knight",
+   "count": 1
+  },
+  {
+   "id": 122315,
+   "name": "Reinforced Trebuchet",
+   "count": 1
+  },
+  {
+   "id": 122303,
+   "name": "Trebuchet",
+   "count": 1
+  },
+  {
+   "id": 123301,
+   "name": "Redanian Knight-Elect",
+   "count": 1
+  },
+  {
+   "id": 122302,
+   "name": "Reinforced Ballista",
+   "count": 1
+  },
+  {
+   "id": 122309,
+   "name": "Siege Support",
+   "count": 1
+  },
+  {
+   "id": 200049,
+   "name": "Battering Ram",
+   "count": 1
+  },
+  {
+   "id": 122318,
+   "name": "Siege Master",
+   "count": 1
+  },
+  {
+   "id": 122301,
+   "name": "Ballista",
+   "count": 1
+  },
+  {
+   "id": 201628,
+   "name": "Tormented Mage",
+   "count": 1
+  },
+  {
+   "id": 113301,
+   "name": "Alzur's Thunder",
+   "count": 1
+  },
+  {
+   "id": 201633,
+   "name": "Bloody Flail",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

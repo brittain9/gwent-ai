@@ -1,0 +1,14 @@
+.local/
+.runtime/
+.venv/
+dist/
+bin/
+obj/
+*.pdb
+__pycache__/
+data/cards/
+data/human-games/
+game-report-*.zip
+server/Nginx/html/
+server/deploy/static/
+server/deploy/rewards.json

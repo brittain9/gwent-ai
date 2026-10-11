@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Engine-free unit tests for GwentAI code that needs no client:
+       dotnet test GwentAI.Tests/GwentAI.Tests.csproj -m:2 -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="../GwentAI/Search/CardRoles.cs" />
+    <Compile Include="../GwentAI/Search/EconomyOrder.cs" />
+    <Compile Include="../GwentAI/Search/LowerBoundRule.cs" />
+    <Compile Include="../GwentAI/Search/MatchPoint.cs" />
+    <Compile Include="../GwentAI/Search/PassRules.cs" />
+    <Compile Include="../GwentAI/Search/RoundGate.cs" />
+    <Compile Include="../GwentAI/Search/SplitMix64.cs" />
+    <Compile Include="../GwentAI/Search/RootStat.cs" />
+    <Compile Include="../GwentAI/Search/WorkBudget.cs" />
+    <Compile Include="../GwentAI/Search/SecondLookChoice.cs" />
+    <EmbeddedResource Include="../data/cards/roles.json" LogicalName="cards/roles.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <!-- Numeric ability parameters: client data from the user's client. scripts/answer_kinds.py
+       writes one file per roles.json version (.local/cards/answer-params/<sha256 prefix>.json);
+       the build embeds the one for this checkout's roles.json, when it exists. -->
+  <Target Name="EmbedAnswerParams" BeforeTargets="PrepareForBuild">
+    <GetFileHash Files="$(MSBuildProjectDirectory)/../data/cards/roles.json" Algorithm="SHA256" HashEncoding="hex">
+      <Output TaskParameter="Hash" PropertyName="RolesHash" />
+    </GetFileHash>
+    <PropertyGroup>
+      <AnswerParamsFile>$(MSBuildProjectDirectory)/../.local/cards/answer-params/$(RolesHash.ToLowerInvariant().Substring(0, 16)).json</AnswerParamsFile>
+    </PropertyGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="$(AnswerParamsFile)" LogicalName="cards/answer-params.json" Condition="Exists('$(AnswerParamsFile)')" />
+    </ItemGroup>
+  </Target>
+</Project>

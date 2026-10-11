@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Alchemy (ladder variant)",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113310,
+   "name": "Swallow",
+   "count": 3
+  },
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 3
+  },
+  {
+   "id": 132105,
+   "name": "Avallac'h",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200091,
+   "name": "Stregobor",
+   "count": 1
+  },
+  {
+   "id": 200124,
+   "name": "Viper Witcher",
+   "count": 3
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 200519,
+   "name": "Mahakam Ale",
+   "count": 3
+  },
+  {
+   "id": 201619,
+   "name": "Ointment",
+   "count": 3
+  },
+  {
+   "id": 201697,
+   "name": "Black Blood",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-nilfgaard-alchemy.json (variant, seed 2018)",
+ "credit": "generated"
+}

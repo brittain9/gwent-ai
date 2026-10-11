@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Greatswords (imperfect, no Hym)",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 112203,
+   "name": "Vesemir",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 152203,
+   "name": "Djenge Frett",
+   "count": 1
+  },
+  {
+   "id": 152210,
+   "name": "Savage Bear",
+   "count": 1
+  },
+  {
+   "id": 152301,
+   "name": "Raging Berserker",
+   "count": 2
+  },
+  {
+   "id": 152309,
+   "name": "Dimun Light Longship",
+   "count": 3
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 3
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200040,
+   "name": "An Craite Greatsword",
+   "count": 3
+  },
+  {
+   "id": 200043,
+   "name": "Harald Houndsnout",
+   "count": 1
+  },
+  {
+   "id": 200103,
+   "name": "Olaf",
+   "count": 1
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 1
+  },
+  {
+   "id": 200145,
+   "name": "Dimun Corsair",
+   "count": 3
+  },
+  {
+   "id": 200212,
+   "name": "Skjall",
+   "count": 1
+  },
+  {
+   "id": 201639,
+   "name": "Garrison",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-skellige-greatswords.json (variant, seed 2018)",
+ "credit": "generated"
+}

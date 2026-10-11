@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Alchemy (imperfect, no Triss: Telekinesis)",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 3
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200009,
+   "name": "Shrike",
+   "count": 1
+  },
+  {
+   "id": 200018,
+   "name": "Korathi Heatwave",
+   "count": 1
+  },
+  {
+   "id": 200124,
+   "name": "Viper Witcher",
+   "count": 3
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 200294,
+   "name": "Standard Bearer",
+   "count": 3
+  },
+  {
+   "id": 200519,
+   "name": "Mahakam Ale",
+   "count": 3
+  },
+  {
+   "id": 201619,
+   "name": "Ointment",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-nilfgaard-alchemy.json (variant, seed 2018)",
+ "credit": "generated"
+}

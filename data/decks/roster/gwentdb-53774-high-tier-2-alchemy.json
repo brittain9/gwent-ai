@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: High Tier 2 Alchemy",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 113310,
+   "name": "Swallow",
+   "count": 3
+  },
+  {
+   "id": 122403,
+   "name": "Vicovaro Novice",
+   "count": 3
+  },
+  {
+   "id": 200519,
+   "name": "Mahakam Ale",
+   "count": 3
+  },
+  {
+   "id": 200124,
+   "name": "Viper Witcher",
+   "count": 3
+  },
+  {
+   "id": 201619,
+   "name": "Ointment",
+   "count": 3
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 200530,
+   "name": "Expired Ale",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 200032,
+   "name": "Rainfarn of Attre",
+   "count": 1
+  },
+  {
+   "id": 200237,
+   "name": "Vesemir: Mentor",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150751/https://www.gwentdb.com/decks/53774-high-tier-2-alchemy",
+ "credit": "Yuuki_Haru on GwentDB (0 up, 0 down)"
+}

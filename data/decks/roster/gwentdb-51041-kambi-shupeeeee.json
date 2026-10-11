@@ -1,0 +1,141 @@
+{
+ "name": "GwentDB: Kambi SHUPEEEEE",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 113312,
+   "name": "Torrential Rain",
+   "count": 1
+  },
+  {
+   "id": 113303,
+   "name": "First Light",
+   "count": 1
+  },
+  {
+   "id": 152210,
+   "name": "Savage Bear",
+   "count": 1
+  },
+  {
+   "id": 152311,
+   "name": "An Craite Blacksmith",
+   "count": 1
+  },
+  {
+   "id": 152306,
+   "name": "Dimun Pirate Captain",
+   "count": 1
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 1
+  },
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 1
+  },
+  {
+   "id": 152309,
+   "name": "Dimun Light Longship",
+   "count": 1
+  },
+  {
+   "id": 113311,
+   "name": "Thunderbolt",
+   "count": 1
+  },
+  {
+   "id": 113319,
+   "name": "Dimeritium Shackles",
+   "count": 1
+  },
+  {
+   "id": 200081,
+   "name": "Heymaey Herbalist",
+   "count": 1
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 1
+  },
+  {
+   "id": 200145,
+   "name": "Dimun Corsair",
+   "count": 1
+  },
+  {
+   "id": 200105,
+   "name": "Dimun Warship",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 113309,
+   "name": "Scorch",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 112203,
+   "name": "Vesemir",
+   "count": 1
+  },
+  {
+   "id": 112204,
+   "name": "Lambert",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 112202,
+   "name": "Eskel",
+   "count": 1
+  },
+  {
+   "id": 152103,
+   "name": "Ermion",
+   "count": 1
+  },
+  {
+   "id": 152104,
+   "name": "Kambi",
+   "count": 1
+  },
+  {
+   "id": 200226,
+   "name": "Wolfsbane",
+   "count": 1
+  },
+  {
+   "id": 201627,
+   "name": "Shupe's Day Off",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190818130347/https://www.gwentdb.com/decks/51041-kambi-shupeeeee",
+ "credit": "user-100021099 on GwentDB (5 up, 1 down)"
+}

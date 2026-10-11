@@ -1,0 +1,106 @@
+{
+ "name": "Snapshot: Frost Nova",
+ "faction": "Monsters",
+ "leader": {
+  "id": 131101,
+  "name": "Eredin Br\u00e9acc Glas"
+ },
+ "cards": [
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  },
+  {
+   "id": 132106,
+   "name": "Caretaker",
+   "count": 1
+  },
+  {
+   "id": 201626,
+   "name": "Ciri: Nova",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 200052,
+   "name": "Golyat",
+   "count": 1
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 112215,
+   "name": "Iris von Everec",
+   "count": 1
+  },
+  {
+   "id": 113209,
+   "name": "Alzur's Double\u2013Cross",
+   "count": 1
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 2
+  },
+  {
+   "id": 132310,
+   "name": "Wild Hunt Rider",
+   "count": 2
+  },
+  {
+   "id": 132314,
+   "name": "Drowner",
+   "count": 2
+  },
+  {
+   "id": 132306,
+   "name": "Ghoul",
+   "count": 2
+  },
+  {
+   "id": 132402,
+   "name": "Wild Hunt Hound",
+   "count": 2
+  },
+  {
+   "id": 153301,
+   "name": "Lacerate",
+   "count": 2
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "meta",
+ "tier": "Tier 3",
+ "weight": 1.0,
+ "source": "http://web.archive.org/web/20180820172642/http://teamaretuza.com/meta-snapshot/",
+ "credit": "Team Aretuza / Team Nova, Meta Snapshot #3 (27 July 2018, patch 0.9.24.3.432)"
+}

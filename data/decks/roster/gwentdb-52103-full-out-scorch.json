@@ -1,0 +1,91 @@
+{
+ "name": "GwentDB: Full out scorch",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200166,
+  "name": "Eithn\u00e9"
+ },
+ "cards": [
+  {
+   "id": 142308,
+   "name": "Elven Mercenary",
+   "count": 3
+  },
+  {
+   "id": 142305,
+   "name": "Dwarven Skirmisher",
+   "count": 3
+  },
+  {
+   "id": 142310,
+   "name": "Dol Blathanna Archer",
+   "count": 3
+  },
+  {
+   "id": 200519,
+   "name": "Mahakam Ale",
+   "count": 3
+  },
+  {
+   "id": 201631,
+   "name": "Doppler",
+   "count": 3
+  },
+  {
+   "id": 113309,
+   "name": "Scorch",
+   "count": 1
+  },
+  {
+   "id": 112205,
+   "name": "Myrgtabrakke",
+   "count": 1
+  },
+  {
+   "id": 142203,
+   "name": "Yaevinn",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 200520,
+   "name": "\u00c9ibhear Hattori",
+   "count": 1
+  },
+  {
+   "id": 112102,
+   "name": "Geralt: Igni",
+   "count": 1
+  },
+  {
+   "id": 112107,
+   "name": "Villentretenmerth",
+   "count": 1
+  },
+  {
+   "id": 142106,
+   "name": "Agla\u00efs",
+   "count": 1
+  },
+  {
+   "id": 142108,
+   "name": "Schirr\u00fa",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "meme",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190825102023/https://www.gwentdb.com/decks/52103-full-out-scorch",
+ "credit": "pearpain on GwentDB (1 up, 2 down)"
+}

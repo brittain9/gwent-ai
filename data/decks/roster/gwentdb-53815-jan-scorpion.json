@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Jan Scorpion",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 3
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 1
+  },
+  {
+   "id": 162306,
+   "name": "Fire Scorpion",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 201616,
+   "name": "Master of Disguise",
+   "count": 2
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 113102,
+   "name": "The Last Wish",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 200053,
+   "name": "Artefact Compression",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 201601,
+   "name": "Yennefer: Enchantress",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150651/https://www.gwentdb.com/decks/53815-jan-scorpion",
+ "credit": "user-100006832 on GwentDB (0 up, 0 down)"
+}

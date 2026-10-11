@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Elf Swarm (imperfect, no Agla\u00efs)",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200166,
+  "name": "Eithn\u00e9"
+ },
+ "cards": [
+  {
+   "id": 113310,
+   "name": "Swallow",
+   "count": 2
+  },
+  {
+   "id": 122216,
+   "name": "Cleaver",
+   "count": 1
+  },
+  {
+   "id": 142102,
+   "name": "Isengrim Faoiltiarna",
+   "count": 1
+  },
+  {
+   "id": 142103,
+   "name": "Iorveth",
+   "count": 1
+  },
+  {
+   "id": 142202,
+   "name": "Ida Emean aep Sivney",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 142303,
+   "name": "Vrihedd Officer",
+   "count": 3
+  },
+  {
+   "id": 142307,
+   "name": "Vrihedd Sappers",
+   "count": 2
+  },
+  {
+   "id": 142309,
+   "name": "Vrihedd Vanguard",
+   "count": 3
+  },
+  {
+   "id": 142316,
+   "name": "Blue Mountain Elite",
+   "count": 3
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 200053,
+   "name": "Artefact Compression",
+   "count": 1
+  },
+  {
+   "id": 200058,
+   "name": "Uma's Curse",
+   "count": 1
+  },
+  {
+   "id": 201638,
+   "name": "Elven Scout",
+   "count": 2
+  },
+  {
+   "id": 201656,
+   "name": "Mastercrafted Spear",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-scoiatael-elf-swarm.json (variant, seed 2018)",
+ "credit": "generated"
+}

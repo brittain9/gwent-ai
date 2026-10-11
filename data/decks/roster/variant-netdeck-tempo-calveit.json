@@ -1,0 +1,96 @@
+{
+ "name": "Variant: Tempo Calveit (ladder variant)",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 3
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 162202,
+   "name": "Assire var Anahid",
+   "count": 1
+  },
+  {
+   "id": 162203,
+   "name": "Cynthia",
+   "count": 1
+  },
+  {
+   "id": 162208,
+   "name": "Auckes",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162301,
+   "name": "Daerlan Soldier",
+   "count": 3
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 1
+  },
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 3
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 3
+  },
+  {
+   "id": 162401,
+   "name": "The Guardian",
+   "count": 1
+  },
+  {
+   "id": 200031,
+   "name": "Leo Bonhart",
+   "count": 1
+  },
+  {
+   "id": 201610,
+   "name": "Slave Infantry",
+   "count": 2
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-nilfgaard-tempo-calveit.json (variant, seed 2018)",
+ "credit": "generated"
+}

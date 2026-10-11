@@ -1,0 +1,106 @@
+{
+ "name": "GwentDB: NOVA MIX 3500",
+ "faction": "Nilfgaard",
+ "leader": {
+  "id": 200164,
+  "name": "Jan Calveit"
+ },
+ "cards": [
+  {
+   "id": 162316,
+   "name": "Alchemist",
+   "count": 2
+  },
+  {
+   "id": 162301,
+   "name": "Daerlan Soldier",
+   "count": 2
+  },
+  {
+   "id": 162303,
+   "name": "Spotter",
+   "count": 2
+  },
+  {
+   "id": 162304,
+   "name": "Vicovaro Medic",
+   "count": 2
+  },
+  {
+   "id": 162318,
+   "name": "Nilfgaardian Knight",
+   "count": 2
+  },
+  {
+   "id": 132407,
+   "name": "Imperial Golem",
+   "count": 2
+  },
+  {
+   "id": 201612,
+   "name": "Slave Driver",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 162203,
+   "name": "Cynthia",
+   "count": 1
+  },
+  {
+   "id": 162204,
+   "name": "Peter Saar Gwynleve",
+   "count": 1
+  },
+  {
+   "id": 162210,
+   "name": "Cantarella",
+   "count": 1
+  },
+  {
+   "id": 162211,
+   "name": "Joachim de Wett",
+   "count": 1
+  },
+  {
+   "id": 162104,
+   "name": "Cahir Dyffryn",
+   "count": 1
+  },
+  {
+   "id": 162105,
+   "name": "Vilgefortz",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 201626,
+   "name": "Ciri: Nova",
+   "count": 1
+  }
+ ],
+ "personality": "p_Nilfgaard_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150713/https://www.gwentdb.com/decks/53693-nova-mix-3500",
+ "credit": "user-100010805 on GwentDB (0 up, 0 down)"
+}

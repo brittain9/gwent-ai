@@ -1,0 +1,141 @@
+{
+ "name": "GwentDB: [Top 50 at Season End] Bran Shupe",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200159,
+  "name": "Bran Tuirseach"
+ },
+ "cards": [
+  {
+   "id": 152317,
+   "name": "An Craite Armorsmith",
+   "count": 1
+  },
+  {
+   "id": 152311,
+   "name": "An Craite Blacksmith",
+   "count": 1
+  },
+  {
+   "id": 152306,
+   "name": "Dimun Pirate Captain",
+   "count": 1
+  },
+  {
+   "id": 152310,
+   "name": "Priestess of Freya",
+   "count": 1
+  },
+  {
+   "id": 152305,
+   "name": "Dimun Pirate",
+   "count": 1
+  },
+  {
+   "id": 152316,
+   "name": "An Craite Raider",
+   "count": 1
+  },
+  {
+   "id": 152304,
+   "name": "Tuirseach Hunter",
+   "count": 1
+  },
+  {
+   "id": 152315,
+   "name": "Tuirseach Archer",
+   "count": 1
+  },
+  {
+   "id": 200300,
+   "name": "An Craite Whaler",
+   "count": 1
+  },
+  {
+   "id": 200147,
+   "name": "Heymaey Flaminica",
+   "count": 1
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 1
+  },
+  {
+   "id": 200145,
+   "name": "Dimun Corsair",
+   "count": 1
+  },
+  {
+   "id": 200105,
+   "name": "Dimun Warship",
+   "count": 1
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 201578,
+   "name": "An Craite Marauder",
+   "count": 1
+  },
+  {
+   "id": 152211,
+   "name": "Sigrdrifa",
+   "count": 1
+  },
+  {
+   "id": 152209,
+   "name": "Morkvarg",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 152202,
+   "name": "Champion of Hov",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200226,
+   "name": "Wolfsbane",
+   "count": 1
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 201627,
+   "name": "Shupe's Day Off",
+   "count": 1
+  },
+  {
+   "id": 201776,
+   "name": "Dandelion: Poet",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190818125750/https://www.gwentdb.com/decks/53558-top-50-at-season-end-bran-shupe",
+ "credit": "trynet123 on GwentDB (7 up, 1 down)"
+}

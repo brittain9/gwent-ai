@@ -1,0 +1,26 @@
+; Sandbox for a Play session on macOS (scripts/run-local.sh), the counterpart
+; of the network namespace and read-only mounts on Linux. The kernel enforces
+; it on the backend, nginx and Wine alike, and every child inherits it.
+;
+; Network: loopback only. The system resolver's socket is denied too, so a
+; name that session_net.c does not route fails instead of being looked up.
+; Files: writes only to the session's data, the client, the recorded
+; Practice games (data/human-games) and temporary storage.
+(version 1)
+(allow default)
+
+(deny network*)
+(allow network-bind network-inbound (local ip "localhost:*"))
+(allow network-outbound (remote ip "localhost:*"))
+(allow network-bind network-inbound (local unix-socket))
+(allow network-outbound (remote unix-socket))
+(deny network-outbound (literal "/private/var/run/mDNSResponder"))
+
+(deny file-write*)
+(allow file-write*
+  (subpath (param "RUNTIME"))
+  (subpath (param "CLIENT"))
+  (subpath (param "GAMES"))
+  (subpath "/private/tmp")
+  (subpath "/private/var/folders")
+  (subpath "/dev"))

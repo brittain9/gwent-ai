@@ -1,0 +1,101 @@
+{
+ "name": "Variant: Deathwish (imperfect, no Woodland Spirit)",
+ "faction": "Monsters",
+ "leader": {
+  "id": 200158,
+  "name": "Dagon"
+ },
+ "cards": [
+  {
+   "id": 112215,
+   "name": "Iris von Everec",
+   "count": 1
+  },
+  {
+   "id": 131102,
+   "name": "Ge'els",
+   "count": 1
+  },
+  {
+   "id": 132204,
+   "name": "Frightener",
+   "count": 1
+  },
+  {
+   "id": 132205,
+   "name": "Morvudd",
+   "count": 1
+  },
+  {
+   "id": 132213,
+   "name": "D'ao",
+   "count": 2
+  },
+  {
+   "id": 132301,
+   "name": "Foglet",
+   "count": 3
+  },
+  {
+   "id": 132308,
+   "name": "Vran Warrior",
+   "count": 1
+  },
+  {
+   "id": 132312,
+   "name": "Griffin",
+   "count": 3
+  },
+  {
+   "id": 200037,
+   "name": "Cyclops",
+   "count": 2
+  },
+  {
+   "id": 200038,
+   "name": "Archespore",
+   "count": 3
+  },
+  {
+   "id": 200221,
+   "name": "Brewess: Ritual",
+   "count": 1
+  },
+  {
+   "id": 200222,
+   "name": "Weavess: Incantation",
+   "count": 1
+  },
+  {
+   "id": 200295,
+   "name": "Rotfiend",
+   "count": 1
+  },
+  {
+   "id": 200534,
+   "name": "She-Troll of Vergen",
+   "count": 1
+  },
+  {
+   "id": 201600,
+   "name": "Werewolf",
+   "count": 1
+  },
+  {
+   "id": 201697,
+   "name": "Black Blood",
+   "count": 1
+  },
+  {
+   "id": 201698,
+   "name": "Ozzrel",
+   "count": 1
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 0.5,
+ "source": "generated from snapshot3-monsters-deathwish.json (variant, seed 2018)",
+ "credit": "generated"
+}

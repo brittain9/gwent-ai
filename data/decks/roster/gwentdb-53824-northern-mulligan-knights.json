@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Northern Mulligan Knights",
+ "faction": "NorthernRealms",
+ "leader": {
+  "id": 200168,
+  "name": "King Foltest"
+ },
+ "cards": [
+  {
+   "id": 122307,
+   "name": "Reaver Scout",
+   "count": 1
+  },
+  {
+   "id": 123301,
+   "name": "Redanian Knight-Elect",
+   "count": 3
+  },
+  {
+   "id": 113311,
+   "name": "Thunderbolt",
+   "count": 3
+  },
+  {
+   "id": 201628,
+   "name": "Tormented Mage",
+   "count": 3
+  },
+  {
+   "id": 201622,
+   "name": "Kaedweni Knight",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 2
+  },
+  {
+   "id": 112210,
+   "name": "Roach",
+   "count": 1
+  },
+  {
+   "id": 122204,
+   "name": "Ves",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 122208,
+   "name": "Prince Stennis",
+   "count": 1
+  },
+  {
+   "id": 122211,
+   "name": "Margarita of Aretuza",
+   "count": 1
+  },
+  {
+   "id": 122207,
+   "name": "Dethmold",
+   "count": 1
+  },
+  {
+   "id": 122105,
+   "name": "Sigismund Dijkstra",
+   "count": 1
+  },
+  {
+   "id": 122106,
+   "name": "Shani",
+   "count": 1
+  },
+  {
+   "id": 122103,
+   "name": "John Natalis",
+   "count": 1
+  },
+  {
+   "id": 201618,
+   "name": "Seltkirk of Gulet",
+   "count": 1
+  }
+ ],
+ "personality": "p_NorthernRealms_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150654/https://www.gwentdb.com/decks/53824-northern-mulligan-knights",
+ "credit": "user-100020445 on GwentDB (0 up, 0 down)"
+}

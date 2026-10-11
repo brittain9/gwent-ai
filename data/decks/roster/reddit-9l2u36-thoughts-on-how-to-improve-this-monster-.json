@@ -1,0 +1,86 @@
+{
+ "name": "Reddit screenshot: Thoughts on how to improve this monster deck ?",
+ "faction": "Monsters",
+ "leader": {
+  "id": 131101,
+  "name": "Eredin Br\u00e9acc Glas"
+ },
+ "cards": [
+  {
+   "id": 132102,
+   "name": "Imlerith",
+   "count": 1
+  },
+  {
+   "id": 132104,
+   "name": "Caranthir Ar-Feiniel",
+   "count": 1
+  },
+  {
+   "id": 200154,
+   "name": "Royal Decree",
+   "count": 1
+  },
+  {
+   "id": 132214,
+   "name": "Nithral",
+   "count": 1
+  },
+  {
+   "id": 200218,
+   "name": "Jotunn",
+   "count": 1
+  },
+  {
+   "id": 113206,
+   "name": "White Frost",
+   "count": 1
+  },
+  {
+   "id": 132310,
+   "name": "Wild Hunt Rider",
+   "count": 3
+  },
+  {
+   "id": 132309,
+   "name": "Wild Hunt Warrior",
+   "count": 1
+  },
+  {
+   "id": 132314,
+   "name": "Drowner",
+   "count": 3
+  },
+  {
+   "id": 200301,
+   "name": "Wild Hunt Drakkar",
+   "count": 2
+  },
+  {
+   "id": 132212,
+   "name": "Ice Giant",
+   "count": 2
+  },
+  {
+   "id": 132402,
+   "name": "Wild Hunt Hound",
+   "count": 3
+  },
+  {
+   "id": 200026,
+   "name": "Wild Hunt Navigator",
+   "count": 2
+  },
+  {
+   "id": 113302,
+   "name": "Biting Frost",
+   "count": 3
+  }
+ ],
+ "personality": "p_Monsters_Practice_Easy",
+ "kind": "low",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://www.reddit.com/r/gwent/comments/9l2u36/ (screenshot, transcribed)",
+ "credit": "u/Xkillv9 on r/gwent"
+}

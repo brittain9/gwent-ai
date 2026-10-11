@@ -1,0 +1,101 @@
+{
+ "name": "GwentDB: Something Contrololol",
+ "faction": "Skellige",
+ "leader": {
+  "id": 200160,
+  "name": "Crach an Craite"
+ },
+ "cards": [
+  {
+   "id": 113303,
+   "name": "First Light",
+   "count": 1
+  },
+  {
+   "id": 113310,
+   "name": "Swallow",
+   "count": 3
+  },
+  {
+   "id": 152304,
+   "name": "Tuirseach Hunter",
+   "count": 3
+  },
+  {
+   "id": 201598,
+   "name": "Bone Talisman",
+   "count": 1
+  },
+  {
+   "id": 200144,
+   "name": "Tuirseach Bearmaster",
+   "count": 3
+  },
+  {
+   "id": 200149,
+   "name": "Heymaey Protector",
+   "count": 3
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 1
+  },
+  {
+   "id": 113201,
+   "name": "Decoy",
+   "count": 1
+  },
+  {
+   "id": 152214,
+   "name": "Udalryk",
+   "count": 1
+  },
+  {
+   "id": 113208,
+   "name": "Vaedermakar",
+   "count": 1
+  },
+  {
+   "id": 152202,
+   "name": "Champion of Hov",
+   "count": 1
+  },
+  {
+   "id": 153201,
+   "name": "Restore",
+   "count": 1
+  },
+  {
+   "id": 200223,
+   "name": "Mandrake",
+   "count": 1
+  },
+  {
+   "id": 152107,
+   "name": "Coral",
+   "count": 1
+  },
+  {
+   "id": 200236,
+   "name": "Eskel: Pathfinder",
+   "count": 1
+  },
+  {
+   "id": 200102,
+   "name": "Hym",
+   "count": 1
+  },
+  {
+   "id": 201773,
+   "name": "Triss: Telekinesis",
+   "count": 1
+  }
+ ],
+ "personality": "p_Skellige_Practice",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150652/https://www.gwentdb.com/decks/53821-something-contrololol",
+ "credit": "user-100006832 on GwentDB (0 up, 0 down)"
+}

@@ -1,0 +1,96 @@
+{
+ "name": "GwentDB: Ambush",
+ "faction": "Scoiatael",
+ "leader": {
+  "id": 200167,
+  "name": "Brouver Hoog"
+ },
+ "cards": [
+  {
+   "id": 142316,
+   "name": "Blue Mountain Elite",
+   "count": 3
+  },
+  {
+   "id": 142308,
+   "name": "Elven Mercenary",
+   "count": 2
+  },
+  {
+   "id": 142303,
+   "name": "Vrihedd Officer",
+   "count": 3
+  },
+  {
+   "id": 142307,
+   "name": "Vrihedd Sappers",
+   "count": 2
+  },
+  {
+   "id": 201636,
+   "name": "Half-Elf Hunter",
+   "count": 2
+  },
+  {
+   "id": 201704,
+   "name": "Reconnaissance",
+   "count": 3
+  },
+  {
+   "id": 142212,
+   "name": "Sheldon Skaggs",
+   "count": 1
+  },
+  {
+   "id": 142207,
+   "name": "Barclay Els",
+   "count": 1
+  },
+  {
+   "id": 142202,
+   "name": "Ida Emean aep Sivney",
+   "count": 1
+  },
+  {
+   "id": 142204,
+   "name": "Toruviel",
+   "count": 1
+  },
+  {
+   "id": 142211,
+   "name": "Aelirenn",
+   "count": 1
+  },
+  {
+   "id": 200019,
+   "name": "Marching Orders",
+   "count": 1
+  },
+  {
+   "id": 142106,
+   "name": "Agla\u00efs",
+   "count": 1
+  },
+  {
+   "id": 142108,
+   "name": "Schirr\u00fa",
+   "count": 1
+  },
+  {
+   "id": 142102,
+   "name": "Isengrim Faoiltiarna",
+   "count": 1
+  },
+  {
+   "id": 142103,
+   "name": "Iorveth",
+   "count": 1
+  }
+ ],
+ "personality": "p_Scoia'tael_Practice_Easy",
+ "kind": "netdeck",
+ "tier": null,
+ "weight": 1.0,
+ "source": "https://web.archive.org/web/20190113150655/https://www.gwentdb.com/decks/53828-ambush",
+ "credit": "SheerWind on GwentDB (0 up, 0 down)"
+}
