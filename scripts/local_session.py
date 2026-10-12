@@ -22,6 +22,8 @@ RUNTIME = ROOT / '.runtime'
 # The vendored upstream server (server/UPSTREAM.md) and its database.
 SERVER = ROOT / 'server'
 SERVER_DATA = RUNTIME / 'server-data'
+# nginx's static responses (server/host_nginx.conf `root html`).
+STATIC = RUNTIME / 'nginx-html'
 CLIENT = ROOT.parent / 'client'
 PROCESSES = []
 LOGS = []
@@ -176,7 +178,7 @@ def start_workers(count, env, log_dir):
                     raise RuntimeError(f'Search worker {worker.index} did not start; see {log_dir}/worker-{worker.index}.log')
                 time.sleep(.2)
     endpoints = ','.join(f'127.0.0.1:{worker.port}' for worker in WORKERS)
-    print(f'{count} search workers ready ({endpoints})', flush=True)
+    print(f'{count} search worker{"s" if count != 1 else ""} ready ({endpoints})', flush=True)
     return endpoints
 
 
@@ -221,6 +223,55 @@ def request(path, body=None, method=None, host='auth.gog.com'):
     with urllib.request.urlopen(req, context=context, timeout=10) as response:
         payload = response.read()
         return json.loads(payload) if payload else None
+
+
+def default_username():
+    """Your login name, the name of the first local profile."""
+    try:
+        return getpass.getuser().strip() or 'Player'
+    except Exception:
+        return 'Player'
+
+
+def session_profile(runtime, requested=None, say=print):
+    """The local profile a session plays as. The first session makes one,
+    named by --username or else your login name, and keeps it in
+    runtime/profile.json; later sessions play as it. --username NAME with
+    another name switches to NAME: the profile this install made under that
+    name, or a new one. Every profile made here is listed in
+    runtime/profiles.json, so switching back keeps its collection and decks."""
+    current_file, known_file = runtime / 'profile.json', runtime / 'profiles.json'
+    current = json.loads(current_file.read_text(encoding='utf-8')) if current_file.exists() else None
+    known = json.loads(known_file.read_text(encoding='utf-8')) if known_file.exists() else []
+    if current and not any(entry['id'] == current['id'] for entry in known):
+        known.append({'id': current['id'], 'username': current['username']})
+    name = (requested or '').strip() or (current['username'] if current else default_username())
+    profile = next((entry for entry in known if entry['username'].lower() == name.lower()), None)
+    if profile:
+        try:
+            request('/login', {'username': profile['username'], 'id': profile['id']})
+        except urllib.error.HTTPError as error:
+            if error.code != 404:
+                raise
+            # The server's data was made anew since: make the profile again.
+            known.remove(profile)
+            profile = None
+    if profile is None:
+        try:
+            profile = request('/register', {'username': name, 'full_collection': True})
+        except urllib.error.HTTPError as error:
+            if error.code == 409:
+                sys.exit(f'The local server has a profile named {name} that this folder has no record of; '
+                         'choose another name with --username NAME.')
+            raise
+        known.append({'id': profile['id'], 'username': profile['username']})
+        say(f'Made the local profile {profile["username"]} with the full card collection '
+            '(--username NAME plays as another profile).')
+    for path, value in ((current_file, profile), (known_file, known)):
+        path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8')
+        if os.name != 'nt':
+            path.chmod(0o600)
+    return profile
 
 
 def smoke():
@@ -313,8 +364,9 @@ def main(session=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--smoke', action='store_true',
                         help='check the local server, the network isolation and Wine, then exit without the game')
-    parser.add_argument('--username', default=getpass.getuser(),
-                        help='profile name for a new local profile (default: your login name)')
+    parser.add_argument('--username',
+                        help='the local profile to play as, made when new (default: the last one; '
+                             'the first session names it after your login name)')
     parser.add_argument('--windowed', action='store_true')
     parser.add_argument('--stock-ai', action='store_true',
                         help="Practice against the built-in AI instead of the fair search")
@@ -342,12 +394,15 @@ def main(session=None):
     nginx_root = RUNTIME / ('nginx-smoke' if args.smoke else 'nginx')
     for directory in ['logs', 'temp', 'conf']:
         (nginx_root / directory).mkdir(parents=True, exist_ok=True)
-    # Replace the link when the server tree has moved (a dangling link is not .exists()).
+    # The static responses, made from the client (scripts/server_static.py).
+    import server_static
+    server_static.write(CLIENT, STATIC)
+    # Replace the link when it points elsewhere (a dangling link is not .exists()).
     html = nginx_root / 'html'
-    if html.is_symlink() and html.resolve() != (SERVER / 'Nginx/html').resolve():
+    if html.is_symlink() and html.resolve() != STATIC.resolve():
         html.unlink()
     if not html.exists():
-        html.symlink_to(SERVER / 'Nginx/html', target_is_directory=True)
+        html.symlink_to(STATIC, target_is_directory=True)
     for filename in ['fake.crt', 'fake.key']:
         shutil.copy2(RUNTIME / 'certs' / filename, nginx_root / 'conf' / filename)
     conf = (SERVER / 'host_nginx.conf').read_text().replace('listen 443 ssl;', f'listen 127.0.0.1:{HTTPS_PORT} ssl;')
@@ -379,14 +434,8 @@ def main(session=None):
                 pass
             print('PASS: blocked external networking for the backend', flush=True)
         else:
-            profile_file = RUNTIME / 'profile.json'
-            if profile_file.exists():
-                profile = json.loads(profile_file.read_text())
-                request('/login', {'username': profile['username'], 'id': profile['id']})
-            else:
-                profile = request('/register', {'username': args.username, 'full_collection': True})
-                profile_file.write_text(json.dumps(profile, indent=2) + '\n')
-                profile_file.chmod(0o600)
+            profile = session_profile(RUNTIME, args.username)
+            args.username = profile['username']
             users_file = RUNTIME / 'users.json'
             users_file.write_text(json.dumps([{'id': profile['id'], 'username': profile['username']}]))
             users_file.chmod(0o600)

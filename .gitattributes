@@ -2,3 +2,4 @@
 *.sh text eol=lf
 *.py text eol=lf
 *.sha256 text eol=lf
+*.cmd text eol=crlf

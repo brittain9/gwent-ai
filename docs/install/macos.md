@@ -1,8 +1,7 @@
 # macOS
 
 Tested on Apple silicon (macOS 26) for release 0.1.0. Intel Macs are
-untested. Download
-[gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip)
+untested. [Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest)
 and extract it beside your [client](client.md), as `gwent-ai/` and `client/`.
 
 ## Prerequisites
@@ -39,8 +38,8 @@ scripts/run-local.sh
 Setup takes about a minute plus the downloads (about 350 MB). It derives
 the card data from your client and installs the AI, roster and card data
 into it. Choose **Single-player, then Practice**. Close the game to stop
-the session. Setup prints a card-table hash; compare it with the
-[release notes](../../results/v0.1.0.md).
+the session. Setup prints `card table: sha256 db0dbb0424c3e29b`; the same
+value means your client matches the one the AI was measured with.
 
 The game uses the display's full pixel size. Options such as `--windowed`,
 `--stock-ai` and `--workers N` work as on [Linux](linux.md).

@@ -10,8 +10,8 @@ every simulated game, so the AI plays by the real rules.
 | `GwentHost/`, `GwentHost.Core/` | The headless host: the same engine without the game window, on Mono and on .NET |
 | `GwentAI.Tests/` | Unit tests of the rules the search uses (`dotnet test`) |
 | `scripts/` | Setup, build, the local session and helper tools |
-| `server/` | The local server for the client's online services (Somnia41205's community server) |
-| `platform/` | Network checks and the macOS sandbox |
+| `server/` | The local server for the client's online services (it began as Somnia41205's community server) |
+| `platform/` | Network checks, the macOS sandbox, and the Windows in-game routing (`platform/windows`) |
 | `data/` | The deck roster, the deck population, the round evaluator and the policy network |
 
 ## GwentAI/

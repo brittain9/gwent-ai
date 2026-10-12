@@ -1,7 +1,7 @@
 # Linux
 
 Tested on Fedora 44, x86-64. Debian and Ubuntu package names are provided
-but untested. Download [gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip)
+but untested. [Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest)
 and extract it beside your [client](client.md): the folders should be
 `gwent-ai/` and `client/`.
 
@@ -39,8 +39,8 @@ derives the card data from your client, and installs the AI, roster and
 card data into the client. Choose **Single-player, then Practice**.
 Close the game to stop the session.
 
-- Setup prints `card table: sha256 ...`; compare it with the value in the
-  [release notes](../../results/v0.1.0.md).
+- Setup prints `card table: sha256 db0dbb0424c3e29b`; the same value means
+  your client matches the one the AI was measured with.
 - The AI uses up to six helper processes on Mono. Set `--workers N` or
   `GWENT_PRACTICE_WORKERS=N` to change this. `0` makes the AI search in the
   game process, which is weaker. Other settings: [options.md](options.md).

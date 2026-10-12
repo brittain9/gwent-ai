@@ -86,26 +86,30 @@ def extract(zip_path, out_dir):
     return extracted, localization
 
 
-def run_extraction(client_arg, out_dir):
+def run_extraction(client_arg, out_dir, quiet=False):
+    """quiet: one summary line instead of the step-by-step report."""
+    say = (lambda msg: None) if quiet else print
     client = find_client(client_arg)
     if not client:
         sys.exit(
             "ERROR: could not auto-detect a Gwent 0.9.24.3 install.\n"
-            "       Pass the path explicitly, e.g.:\n"
-            '           --setup "C:\\path\\to\\Gwent The Witcher Card Game"\n'
+            "       Pass the client folder explicitly, e.g.:\n"
+            '           python extract_data_definitions.py "C:\\path\\to\\Gwent The Witcher Card Game"\n'
             "       You must supply your own legally-obtained copy of the game.")
-    print("[+] Client:      " + client)
+    say("[+] Client:      " + client)
     zpath = definitions_zip(client)
-    print("[+] Definitions: " + zpath)
-    print("[+] Output:      " + out_dir)
+    say("[+] Definitions: " + zpath)
+    say("[+] Output:      " + out_dir)
     xmls, loc = extract(zpath, out_dir)
     if "Templates.xml" not in xmls:
         sys.exit("ERROR: Templates.xml was not found inside data_definitions - "
                  "extraction incomplete. Is this the 0.9.24.3 client?")
-    print("[+] Extracted %d definition XML(s): %s" % (len(xmls), ", ".join(sorted(xmls))))
+    say("[+] Extracted %d definition XML(s): %s" % (len(xmls), ", ".join(sorted(xmls))))
     if loc:
-        print("[+] Extracted %d localization file(s)." % loc)
-    print("[+] Done. The server can now load card definitions.")
+        say("[+] Extracted %d localization file(s)." % loc)
+    say("[+] Done. The server can now load card definitions.")
+    if quiet:
+        print("  extracted the card definitions from your client (%d files)" % (len(xmls) + loc))
     return True
 
 

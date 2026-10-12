@@ -16,6 +16,7 @@ original licenses, included alongside them.
   `communication_wine.c` and the meson build (Apache-2.0 sec. 4(b)).
 
 ## Game data (CD PROJEKT RED)
-- `rewards.json` and related game content are property of CD PROJEKT RED and are NOT covered by this project's
-  license. Not included: `server/fetch-upstream.sh` fetches them from upstream's repository at a pinned commit,
-  so the restoration server can function.
+- Game content is property of CD PROJEKT RED and is NOT covered by this project's license, and none of it is
+  included. The server's responses that depend on the client (the game version and data secret, the card
+  definitions) are made on the player's PC from the player's own client at setup (`scripts/server_static.py`,
+  `deploy/setup_local_server.py`); see `UPSTREAM.md`.

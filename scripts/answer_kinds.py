@@ -871,7 +871,7 @@ def load_params(roles=ROLES, directory=PARAMS_DIR):
     path = params_path(sha, directory)
     if not path.is_file():
         return {}
-    params = json.loads(path.read_text())
+    params = json.loads(path.read_text(encoding="utf-8"))
     if params.get("roles_sha256") != sha:
         raise SystemExit(f"{path} does not match its roles.json; run scripts/answer_kinds.py")
     return params

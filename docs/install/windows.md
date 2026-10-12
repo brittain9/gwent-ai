@@ -1,38 +1,114 @@
 # Windows
 
-**Not tested on Windows yet.** These steps use upstream's Windows launcher
-and the downloaded AI mod. The AI searches inside the game process on
-Windows, so it is weaker than the Linux and macOS setup with helper processes.
+Tested on Windows 11 (x86-64) for release 0.2.0. The game is a Windows
+program, so Windows needs no Wine and no sandbox, and it plays the same AI
+with the same search workers as Linux and macOS.
+
+## What you need
+
+- The [client](client.md), extracted to a folder named `client`.
+- Python 3.10 or later, and the .NET 10 runtime for the AI's search workers.
+  In PowerShell:
+
+  ```powershell
+  winget install Python.Python.3.12
+  winget install Microsoft.DotNet.Runtime.10
+  ```
+
+  Open a new window afterwards so `python` and `dotnet` are found.
 
 ## Install
 
-1. Get the [client](client.md). Download and extract
-   [gwent-ai-v0.1.0.zip](https://github.com/brittain9/gwent-ai/releases/download/v0.1.0/gwent-ai-v0.1.0.zip).
-2. Install upstream's [Windows launcher and server](https://github.com/Somnia41205/Unofficial-Gwent-Beta-0.9.24.3.432-Private-Server/releases).
-   Read its [player guide](../../server/docs/PLAYER_GUIDE.md) and
-   [host guide](../../server/docs/HOST_GUIDE.md). It installs MelonLoader
-   0.5.7 and the restoration mod. It needs administrator rights for DNS,
-   certificates and a Windows service. We have not audited its prebuilt files.
-3. Run upstream's server and launcher with "I'm hosting the server on this PC".
-   Check that Practice works, then close the game.
-4. Install Python 3.10 or later. From the extracted `gwent-ai` folder,
-   generate the card data and install the roster, replacing the client path:
+1. [Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest)
+   and extract it next to the `client` folder:
 
-   ```powershell
-   python scripts/install-card-data.py --client C:\path\to\client
-   python scripts/roster.py install --to C:\path\to\client\Mods
-   Copy-Item dist\GwentAI.dll C:\path\to\client\Mods\GwentAI.dll
+   ```text
+   Games\Gwent\
+   ├── client\     Gwent.exe, Gwent_Data\, ...
+   └── gwent-ai\   this project
    ```
 
-5. Start the game from upstream's launcher and choose **Single-player, then Practice**.
-   `MelonLoader\Latest.log` in the client folder shows whether `GwentAI` loaded.
+2. Open PowerShell or Command Prompt in `gwent-ai` and run, once:
 
-No .NET SDK is needed to use the downloaded DLL. Card data is generated
-locally under `UserData\GwentAI\cards` in your client; rerun the generator
-when updating the client or the AI. Its printed hash should match the
-[release notes](../../results/v0.1.0.md).
+   ```powershell
+   scripts\setup.cmd
+   ```
 
-## Return to the stock AI
+   If your client is somewhere else: `scripts\setup.cmd --client D:\path\to\client`.
+   Setup needs no administrator rights. It downloads what it needs, checks
+   each file's SHA-256, reads the card data from your client and installs the
+   AI into it. It prints `card table: sha256 db0dbb0424c3e29b`; the same value
+   means your client matches the one the AI was measured with.
 
-Remove `Mods\GwentAI.dll`, `Mods\GwentAI-roster` and
-`Mods\GwentAI-layers.json` from the client.
+## Play
+
+```powershell
+scripts\run-local.cmd
+```
+
+The game starts and signs you in to a server on your own PC. Choose
+**Single-player**, then **Practice**. Close the game to end the session; the
+server and the AI's helper processes stop with it.
+
+The AI thinks for about 10 seconds on a clear move and up to 30 on a hard
+one. It uses the time, not a fixed amount of search, so a faster processor
+with more cores lets it look further ahead in the same time.
+
+Options: `--windowed`, `--workers N` (helper processes; `0` searches inside
+the game, which is weaker), `--stock-ai` (the game's own AI). See
+[options.md](options.md). `scripts\run-local.cmd --smoke` checks the server
+and a search worker without starting the game.
+
+## What it changes on your PC
+
+Nothing outside two folders, and no administrator rights:
+
+- **The `gwent-ai` folder:** the downloads (MelonLoader 0.5.7, nginx from
+  nginx.org, the search workers' libraries from nuget.org, each checked by
+  SHA-256), a Python environment for the server, and the server's data, logs
+  and this install's certificate in `.runtime`.
+- **The `client` folder:** MelonLoader, the restoration mod and the AI in
+  `Mods\`, the `GwentSessionNet` plugin in `Plugins\`, the AI's card data in
+  `UserData\`, and two settings files in `Gwent_Data\StreamingAssets\Settings\`
+  (setup keeps copies of the originals).
+
+The game expects GOG's servers, which are gone. Setup makes a certificate for
+the local server on your PC, with its own private key that never leaves the
+`gwent-ai` folder. While the game runs, the `GwentSessionNet` plugin sends
+the game's GOG connections to the server on 127.0.0.1 and lets the game
+accept that one certificate, inside the game only. Setup does not edit the
+hosts file, change DNS, network or firewall settings, install a Windows
+service, or add anything to Windows' trusted certificates.
+
+The first time the game starts, Windows Firewall may ask whether Gwent.exe
+may use public and private networks. Choose **Cancel**: the game only talks
+to the server on your own PC.
+
+If the game still cannot sign in, a fallback is
+`scripts\setup.cmd --trust-cert`: it adds this install's certificate to your
+Windows user's trusted certificates (Windows asks you to confirm). It is
+valid only for the game's GOG server names, it cannot vouch for any other
+certificate, and its key stays on your PC.
+`scripts\setup.cmd --untrust-cert` removes it.
+
+## Uninstall
+
+```powershell
+scripts\setup.cmd --uninstall
+```
+
+removes what setup added to the client (MelonLoader too, unless the client
+had it before), puts back the client's own settings files, and removes the
+trusted certificate if you added one. Then delete the `gwent-ai` folder.
+
+## If something goes wrong
+
+- **Setup says .NET 10 is missing:** run the `winget` line above, then open
+  a new window.
+- **"Ports in use":** another program holds a port the server needs. GOG
+  Galaxy holds 9977, so quit it; a local web server or VPN client may hold
+  443.
+- **The game cannot sign in:** see the fallback above.
+- **The AI does not move, or the stock AI plays:** `client\MelonLoader\Latest.log`
+  shows whether `GwentAI` and `GwentSessionNet` loaded.
+- **Session logs** are in `gwent-ai\.runtime\logs`. Include them in an issue.
