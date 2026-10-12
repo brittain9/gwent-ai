@@ -3,8 +3,11 @@
 #   scripts/build-local.sh        everything: the AI and headless host, the
 #                                 restoration mod, the Galaxy helper, nginx
 #   scripts/build-local.sh host   the AI and headless host only
-# Where .NET 10 is installed (Linux), both also build the host on .NET
-# (GwentHost.Core, dist/host-core): GWENT_WORKER_RUNTIME=coreclr runs workers on it.
+# Where .NET 10 is installed (Linux, or Windows under Git Bash), both also
+# build the host on .NET (GwentHost.Core, dist/host-core):
+# GWENT_WORKER_RUNTIME=coreclr runs workers on it, and on Windows it is the
+# only worker host (GwentHost.exe refuses .NET Framework's float rounding:
+# GwentHost/Program.cs). Not on macOS (x86_64 float semantics under Mono).
 # Tools: distribution packages, or copies you placed in .local
 # (MinGW in .local/tools, nginx source in .local/nginx-*).
 set -euo pipefail
@@ -40,7 +43,7 @@ if git rev-parse HEAD >/dev/null 2>&1; then
   printf '{"commit": "%s", "dirty": %s, "built": "%s"}\n' "$(git rev-parse HEAD)" "$dirty" "$(date -Iseconds)" \
     > dist/host/build.json
 fi
-if [[ "$(uname -s)" == Linux ]] && dotnet --list-runtimes | grep -q '^Microsoft.NETCore.App 10\.'; then
+if [[ "$(uname -s)" =~ ^(Linux|MINGW|MSYS|CYGWIN) ]] && dotnet --list-runtimes | grep -q '^Microsoft.NETCore.App 10\.'; then
   # The first build restores HarmonyX and System.Security.Permissions from
   # NuGet (network once). Same GwentAI.dll and stamp as dist/host. Without
   # it the workers run on Mono (local_session.py compares the GwentAI.dll).
@@ -85,10 +88,17 @@ fi
 "${CC[@]}" -O2 -Wall -Wextra server/comet-main/dummy-service/communication_wine.c \
   -o dist/GalaxyCommunication.exe -ladvapi32 -mwindows -Wl,--no-insert-timestamp
 "${CC[@]}" -O2 -Wall -Wextra platform/netprobe.c -o dist/netprobe.exe -lws2_32 -Wl,--no-insert-timestamp
+# Windows: name routing inside the client's process and the plugin that loads it.
+"${CC[@]}" -O2 -Wall -Wextra -shared platform/windows/session_net.c -o dist/session_net.dll \
+  -lws2_32 -lpsapi -lcrypt32 -s -Wl,--no-insert-timestamp
+dotnet build platform/windows/SessionNet/GwentSessionNet.csproj -c Release --ignore-failed-sources
 if [[ "$(uname -s)" == Darwin ]]; then
   # Wine on macOS is an x86_64 program (Rosetta 2 on Apple silicon).
+  # The install name is the bare file name, not the build folder: the
+  # session loads it by path (DYLD_INSERT_LIBRARIES), and a released binary
+  # carries no machine path.
   clang -arch x86_64 -O2 -Wall -Wextra -dynamiclib platform/macos/session_net.c \
-    -o dist/session_net.dylib
+    -install_name session_net.dylib -o dist/session_net.dylib
 fi
 
 # A distribution nginx needs no build (scripts/local_session.py finds it).

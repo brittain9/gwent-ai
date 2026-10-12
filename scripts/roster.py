@@ -18,8 +18,9 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 
-from clientdata import BRONZE, CLIENT, FACTIONS, ROOT, STOCK_PERSONALITY, card_pool, host_command
+from clientdata import BRONZE, CLIENT, FACTIONS, HOST_CORE, ROOT, STOCK_PERSONALITY, card_pool, host_command
 
 ROSTER = ROOT / "data" / "decks" / "roster"
 LOCAL_ROSTER = ROOT / ".runtime" / "decks" / "roster"
@@ -60,7 +61,7 @@ def personalities():
 def roster_decks():
     for directory in (ROSTER, LOCAL_ROSTER):
         for path in sorted(directory.glob("*.json")):
-            yield path, json.loads(path.read_text())
+            yield path, json.loads(path.read_text(encoding="utf-8"))
 
 
 def write_practice(decks, pool):
@@ -88,7 +89,11 @@ def drop_invalid(paths):
     rejected = []
     if not paths:
         return rejected
-    result = subprocess.run([*host_command(), "--validate-decks", *map(str, paths)], capture_output=True, text=True)
+    # Windows has no Mono: the engine runs on .NET there (GwentHost.Core).
+    host = host_command(HOST_CORE, "coreclr") if sys.platform == "win32" else host_command()
+    if sys.platform == "win32" and not shutil.which("dotnet"):
+        raise SystemExit("The deck check runs on the .NET 10 runtime: winget install Microsoft.DotNet.Runtime.10")
+    result = subprocess.run([*host, "--validate-decks", *map(str, paths)], capture_output=True, text=True)
     for line in result.stdout.splitlines():
         if line.startswith("INVALID"):
             path = Path(line.split("\t")[-1])
@@ -101,24 +106,27 @@ def import_client(args=None):
     """The client's decks (scripts/client_decks.py output): its seven Practice
     decks, and the low-level layer of the local roster. A roster deck over a
     copy limit is cut to the limit (the only unambiguous repair); decks the
-    engine still rejects are dropped."""
+    engine still rejects are dropped. Prints a summary; with --verbose
+    (args.verbose) also each repair and each dropped deck."""
+    verbose = bool(getattr(args, "verbose", False))
+    details = []
     source = SOURCES / "client-decks.json"
     if not source.exists():
         raise SystemExit(f"{source} missing; run scripts/setup.sh (it runs scripts/client_decks.py, then this)")
     pool = card_pool()
-    write_practice(json.loads(source.read_text()), pool)
+    write_practice(json.loads(source.read_text(encoding="utf-8")), pool)
     personality = personalities()
     LOCAL_ROSTER.mkdir(parents=True, exist_ok=True)
     for old in LOCAL_ROSTER.glob("client-*.json"):
         old.unlink()
     written, repaired = [], []
-    for deck in json.loads(source.read_text()):
+    for deck in json.loads(source.read_text(encoding="utf-8")):
         if not CLIENT_DECK.match(deck["asset"]):
             continue
         unowned = [card["id"] for card in deck["cards"] + [{"id": deck["leader"]}] if card["id"] not in pool]
         if unowned:
             # Challenge decks may hold cards no player could own.
-            print(f'dropped {deck["asset"]}: cards outside the collectible set {unowned}')
+            details.append(f'dropped {deck["asset"]}: cards outside the collectible set {unowned}')
             continue
         leader = pool[deck["leader"]]
         faction = FACTIONS[leader[1]]
@@ -142,11 +150,12 @@ def import_client(args=None):
         path.write_text(json.dumps(spec, indent=1) + "\n")
         written.append(path)
     rejected = drop_invalid(written)
-    for line in repaired:
-        print("repaired " + line)
-    for line in rejected:
-        print("dropped " + line)
-    print(f"{len(written) - len(rejected)} client decks kept, {len(rejected)} dropped, {len(repaired)} copy repairs")
+    details += ["repaired " + line for line in repaired] + ["dropped " + line for line in rejected]
+    if verbose:
+        for line in details:
+            print(line)
+    print(f"{len(written) - len(rejected)} client decks kept, {len(rejected)} dropped, {len(repaired)} copy repairs"
+          + ("" if verbose or not details else " (scripts/roster.py import-client --verbose lists them)"))
 
 
 def install(to, layers=None):
@@ -172,7 +181,9 @@ def install(to, layers=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
-    sub.add_parser("import-client").set_defaults(func=import_client)
+    import_parser = sub.add_parser("import-client")
+    import_parser.add_argument("--verbose", action="store_true", help="list each repaired and dropped deck")
+    import_parser.set_defaults(func=import_client)
     install_parser = sub.add_parser("install")
     install_parser.add_argument("--to", type=Path, default=CLIENT / "Mods",
                                 help="the folder holding GwentAI.dll (default: the client's Mods)")

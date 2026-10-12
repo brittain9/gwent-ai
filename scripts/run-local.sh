@@ -2,6 +2,14 @@
 set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 [[ -x "$ROOT/.venv/bin/python" ]] || { echo 'run-local: no .venv; run scripts/setup.sh --play' >&2; exit 1; }
+# A playtest's env file (.runtime/playtest/env, from scripts/playtest.py) names
+# the agent (GWENT_AI_AGENT) and think time Practice plays, over the same
+# variables in the calling shell. Only the plain Practice session reads it; a
+# session with its own program (GWENT_SESSION_PROGRAM) does not.
+if [[ -z "${GWENT_SESSION_PROGRAM:-}" && -f "$ROOT/.runtime/playtest/env" ]]; then
+    echo "run-local: playtest on ($ROOT/.runtime/playtest/env); scripts/playtest.py status, off" >&2
+    source "$ROOT/.runtime/playtest/env"
+fi
 # Practice think time: up to 30 s is fine (the game's own turn limit). Settled decisions stop at half the budget and open ones extend to 1.5x it
 # (PracticeAI ThinkExtend), so a 20 s budget gives about 10 s for most plays and at
 # most 30 s. Override per run (13333: about 6.7 s, at most 20 s).
@@ -86,13 +94,28 @@ exec unshare --user --map-root-user --net bash -c '
         # Practice games are recorded in data/human-games.
         mounts+=(--bind "$GWENT_PROJECT_ROOT/data/human-games" "$GWENT_PROJECT_ROOT/data/human-games")
     fi
+    # In a Toolbox or Distrobox container the root of the host is mounted at
+    # /run/host, so the real home folder stays readable there (also through
+    # /run/host/sysroot on an ostree host). Hide the whole mount like /home.
+    # /etc/hosts and /etc/resolv.conf link into it, so their binds go to the
+    # first path of each chain inside it (bind-target.sh). The other links into
+    # it (/etc/localtime, /etc/host.conf) dangle in the sandbox: UTC, defaults.
+    # On a host with toolbox installed /run/host is a symlink to /, not a mount.
+    source "$GWENT_PROJECT_ROOT/scripts/lib/bind-target.sh"
+    host=''
+    hide_host=()
+    if [[ -d /run/host && ! -L /run/host ]]; then
+        host=/run/host
+        hide_host=(--tmpfs "$host")
+    fi
     exec bwrap --ro-bind / / --dev-bind /dev /dev --tmpfs "$(readlink -f /home)" --tmpfs /opt --tmpfs /tmp \
+      "${hide_host[@]}" \
       --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
       --ro-bind "$(dirname "$client")" "$(dirname "$client")" \
       "${mounts[@]}" \
       --ro-bind "$GWENT_WINE_ROOT" /opt/gwent-wine \
-      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/hosts" "$(readlink -f /etc/hosts)" \
-      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/resolv.conf" "$(readlink -f /etc/resolv.conf)" \
+      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/hosts" "$(bind_target /etc/hosts "$host")" \
+      --ro-bind "$GWENT_PROJECT_ROOT/.runtime/resolv.conf" "$(bind_target /etc/resolv.conf "$host")" \
       --unshare-pid --proc /proc --cap-add CAP_NET_BIND_SERVICE --die-with-parent \
       --setenv HOME "$GWENT_PROJECT_ROOT/.runtime/home" \
       --setenv WINEPREFIX "$GWENT_PROJECT_ROOT/.runtime/wine" \

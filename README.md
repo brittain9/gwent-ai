@@ -60,19 +60,26 @@ well.
 ## Play against it
 
 [Download the latest release](https://github.com/brittain9/gwent-ai/releases/latest).
-The ZIP includes the mod DLL, matching search workers, and deck roster.
-See the [release notes](results/v0.1.0.md).
+The ZIP includes the mod DLL, matching search workers, the deck roster and
+the local server. What changed in each release: [CHANGELOG.md](CHANGELOG.md).
 
-1. Extract `gwent-ai-v0.1.0.zip`. Put your own client 0.9.24.3.432 in a folder
-   named `client` beside the extracted `gwent-ai` folder.
-2. Follow the guide for [Linux](docs/install/linux.md),
-   [macOS](docs/install/macos.md), or [Windows](docs/install/windows.md)
-   to install the prerequisites and connect the community server.
+1. Extract the ZIP. Put your own client 0.9.24.3.432 in a folder named
+   `client` beside the extracted `gwent-ai` folder.
+2. Follow the guide for [Windows](docs/install/windows.md),
+   [macOS](docs/install/macos.md) or [Linux](docs/install/linux.md).
 3. Start the game and choose **Single-player, then Practice**. On macOS,
    turn premium cards off in the game's settings: their animations do not
    render on a Mac, and the cards show no art.
 
-Quick start on Linux and macOS, from the extracted `gwent-ai` folder:
+Quick start on Windows, from the extracted `gwent-ai` folder (needs Python
+3.10+ and the .NET 10 runtime):
+
+```powershell
+scripts\setup.cmd       # once: downloads what it needs and prepares your client
+scripts\run-local.cmd   # starts the server, the game and the search workers
+```
+
+On Linux and macOS:
 
 ```sh
 scripts/setup.sh --play --prebuilt  # downloads what it needs and prepares your client
@@ -82,7 +89,9 @@ scripts/run-local.sh                # starts the server, game, and search worker
 You need your own client. On macOS (Apple silicon) you also need only
 Rosetta 2; setup downloads the rest. Linux needs Mono 6, Python 3.10+ with
 uv, Wine, nginx, OpenSSL, bubblewrap, unprivileged user namespaces, and a
-Vulkan driver. The platform guides cover the details.
+Vulkan driver. The platform guides cover the details. Setup never needs
+administrator rights and changes nothing outside the project and client
+folders.
 
 Prefer to build from source? Follow the [Linux build steps](docs/install/linux.md#build-from-source)
 or [macOS build steps](docs/install/macos.md#build-from-source).
@@ -90,16 +99,15 @@ or [macOS build steps](docs/install/macos.md#build-from-source).
 [Settings](docs/install/options.md) include the think time.
 [Architecture](docs/install/architecture.md) explains how the code is organised.
 
-Release 0.1.0 is tested on macOS (Apple silicon). Linux (Fedora) ran
-during development and is not retested for this release. Not tested on
-Windows yet.
+Release 0.2.0 is tested on Windows 11. macOS (Apple silicon) was tested
+for 0.1.0; Linux (Fedora) is where the AI is developed.
 
 ## What is in the project
 
 | Part | What it is |
 |---|---|
 | Source code and model files | The AI: the search, the guesses about hidden cards, the learned move suggestions, the helper processes |
-| Community server | Our copy of Somnia41205's unofficial server for the beta (MIT), with its restoration mod, built from source |
+| Local server | The server that stands in for the game's online services on your PC, with its restoration mod, built from source; it began as Somnia41205's unofficial server for the beta (MIT) |
 | Deck roster | The 2018 ladder decks the AI plays and guesses from, credited to their authors |
 | Results | The measured numbers of each release, with sample sizes and dates |
 | Install steps | How to run the AI against your own copy of the game |
@@ -127,6 +135,7 @@ notice; do not sell it or use it commercially. Documents: CC BY-NC-ND 4.0.
 Share your games, screenshots and videos freely, with a link. Details and
 third-party notices: [LICENSE](LICENSE), [NOTICE.md](NOTICE.md).
 
-The community server is by Somnia41205 (MIT). Community deck lists are
+The local server began as Somnia41205's community server (MIT); thank
+you for making the 2018 client playable again. Community deck lists are
 credited to their authors where used. The mod loader is MelonLoader
 (Apache-2.0), not included.

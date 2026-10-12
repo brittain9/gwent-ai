@@ -3140,7 +3140,8 @@ server = ThreadedHTTPServer((BIND_HOST, 8443), GwentHandler)
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 _cert_dir = os.environ.get(
     "GWENT_CERT_DIR",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "Nginx", "conf"),
+    # The per-install certificate in the project's .runtime/certs.
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".runtime", "certs"),
 )
 context.load_cert_chain(
     os.path.join(_cert_dir, "fake.crt"),

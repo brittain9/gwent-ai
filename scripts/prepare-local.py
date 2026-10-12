@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Install the build into your client and prepare the local runtime data."""
-import ast
 from pathlib import Path
+import runpy
 import shutil
 import subprocess
 import sys
@@ -36,11 +36,7 @@ for filename in ['config.json', 'Launch.cfg']:
     shutil.copy2(root / 'server/settings' / filename, client / 'Gwent_Data/StreamingAssets/Settings' / filename)
 for directory in ['home', 'logs', 'certs']:
     (runtime / directory).mkdir(parents=True, exist_ok=True)
-# Use the existing source's authoritative host list without executing its launcher.
-tree = ast.parse((root / 'server/linux_launcher.py').read_text())
-hosts = next(ast.literal_eval(node.value) for node in tree.body
-             if isinstance(node, ast.Assign)
-             and any(isinstance(target, ast.Name) and target.id == 'GOG_HOSTS' for target in node.targets))
+hosts = runpy.run_path(str(root / 'server/gog_hosts.py'))['GOG_HOSTS']
 (runtime / 'hosts').write_text('127.0.0.1 localhost ' + ' '.join(hosts) + '\n::1 localhost\n')
 (runtime / 'resolv.conf').write_text('nameserver 127.0.0.1\noptions timeout:1 attempts:1\n')
 if not (runtime / 'certs/fake.key').exists():
@@ -50,5 +46,9 @@ if not (runtime / 'certs/fake.key').exists():
                     'subjectAltName=DNS:*.gog.com,DNS:localhost,IP:127.0.0.1'], check=True)
 (runtime / 'certs/fake.key').chmod(0o600)
 subprocess.run([str(root / '.venv/bin/python'), str(root / 'server/deploy/setup_local_server.py'),
-                str(client), '--data-dir', str(runtime / 'server-data')], check=True)
+                str(client), '--data-dir', str(runtime / 'server-data'), '--managed'], check=True)
+# nginx's static responses, made from the client (scripts/local_session.py
+# refreshes them at every session).
+subprocess.run([sys.executable, str(root / 'scripts/server_static.py'), '--client', str(client),
+                '--out', str(runtime / 'nginx-html')], check=True)
 print('Local client and runtime prepared. Run scripts/run-local.sh.')

@@ -15,8 +15,8 @@
 #    On macOS these include Mono, nginx, uv and Python.
 # 3. Builds the AI and the headless host (with --play: everything).
 # 4. Reads deck data from your client into .runtime/decks.
-# 5. With --play: fetches the server's service files and installs the mod
-#    and decks into your client (scripts/prepare-local.py).
+# 5. With --play: installs the mod and decks into your client and makes the
+#    server's files from it (scripts/prepare-local.py).
 #
 # It writes only inside this checkout and, with --play, adds files to the
 # client. Run it again at any time: finished steps are skipped.
@@ -327,8 +327,7 @@ else
 fi
 
 if ((PLAY)); then
-  step "Server files and your client"
-  "$ROOT/server/fetch-upstream.sh"
+  step "Your client"
   "$PY" "$ROOT/scripts/prepare-local.py"
 fi
 

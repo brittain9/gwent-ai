@@ -1549,7 +1549,7 @@ def roster_context(client, directory=ROSTER):
     templates, graphs, _ = client
     decks = {}
     for path in sorted(directory.glob("*.json")):
-        deck = json.loads(path.read_text())
+        deck = json.loads(path.read_text(encoding="utf-8"))
         counts = Counter({deck["leader"]["id"]: 1})
         for c in deck["cards"]:
             counts[c["id"]] += c.get("count", 1)
@@ -1602,7 +1602,7 @@ def roster_copies(directory=ROSTER):
     copies = Counter()
     names = {}
     for path in sorted(directory.glob("*.json")):
-        deck = json.loads(path.read_text())
+        deck = json.loads(path.read_text(encoding="utf-8"))
         copies[deck["leader"]["id"]] += 1
         names[deck["leader"]["id"]] = deck["leader"]["name"]
         for c in deck["cards"]:
@@ -1700,7 +1700,7 @@ def build(client, roster_only=False, human_path=HUMAN):
             t for t, tpl in templates.items() if tpl.availability == clientdata.BASE_SET
         ]
     cards = derive(templates, graphs, token_graphs, pool)
-    human = json.loads(human_path.read_text()) if human_path.exists() else {}
+    human = json.loads(human_path.read_text(encoding="utf-8")) if human_path.exists() else {}
     data = {
         "schema": SCHEMA,
         "scope": "roster" if roster_only else "collectible",
@@ -1773,7 +1773,7 @@ def update_review(data, path, templates, extra=()):
     kept as they are."""
     extra = dict(extra)
     if path.exists():
-        before, header, rows, after = parse_review(path.read_text())
+        before, header, rows, after = parse_review(path.read_text(encoding="utf-8"))
     else:
         before = ["# Card roles: review sheet", ""]
         header, rows, after = REVIEW_COLUMNS, [], [""]
@@ -1813,8 +1813,8 @@ def import_review(path, human_path):
     """The label sheet's overrides into roles-human.json.
     `ok` keeps the derived set; any other label set replaces the derived roles
     and flags (a flag not named is switched off); `none` means no role."""
-    _, _, rows, _ = parse_review(path.read_text())
-    human = json.loads(human_path.read_text()) if human_path.exists() else {}
+    _, _, rows, _ = parse_review(path.read_text(encoding="utf-8"))
+    human = json.loads(human_path.read_text(encoding="utf-8")) if human_path.exists() else {}
     imported = 0
     for row in rows:
         cell = row.get("Human label", "").replace("`", "").strip()
@@ -1892,7 +1892,7 @@ def main(argv=None):
     for key, n in sorted(coverage(data).items()):
         print(f"{key:28} {n}")
     if args.check:
-        counts, per_role, verdicts = evaluate(data, json.loads(args.check.read_text())["cards"])
+        counts, per_role, verdicts = evaluate(data, json.loads(args.check.read_text(encoding="utf-8"))["cards"])
         print("sample:", dict(counts))
         for role, c in sorted(per_role.items()):
             print(f"  {role:12} tp {c['tp']:2} fp {c['fp']:2} fn {c['fn']:2}")

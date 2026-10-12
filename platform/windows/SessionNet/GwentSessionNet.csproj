@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The MelonLoader plugin that loads dist/session_net.dll into the client on
+       Windows (platform/windows/session_net.c). Same build setup as
+       server/GwentBetaRestorationMod. -->
+  <PropertyGroup>
+    <DebugType>none</DebugType>
+    <TargetFramework>net35</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <ClientDir Condition="'$(ClientDir)' == ''">$(MSBuildProjectDirectory)/../../../../client</ClientDir>
+    <FrameworkPathOverride>$(ClientDir)/Gwent_Data/Managed</FrameworkPathOverride>
+    <EnableFrameworkPathOverride>true</EnableFrameworkPathOverride>
+    <NoStdLib>true</NoStdLib>
+    <LoaderDir Condition="'$(LoaderDir)' == ''">$(MSBuildProjectDirectory)/../../../.local/melonloader/MelonLoader</LoaderDir>
+    <OutputPath>../../../dist/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/mscorlib.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/System.dll" />
+    <Reference Private="false" Include="$(ClientDir)/Gwent_Data/Managed/System.Core.dll" />
+    <Reference Private="false" Include="$(LoaderDir)/MelonLoader.dll" />
+  </ItemGroup>
+</Project>

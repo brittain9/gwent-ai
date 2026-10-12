@@ -17,6 +17,7 @@ corrected before reading.
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 import UnityPy
@@ -24,7 +25,8 @@ from UnityPy.helpers.TypeTreeGenerator import TypeTreeGenerator
 from UnityPy.helpers.TypeTreeNode import TypeTreeNode
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT.parent / "client" / "Gwent_Data"
+# The client: ../client, or GWENT_CLIENT (scripts/clientdata.py).
+DATA = Path(os.environ.get("GWENT_CLIENT", ROOT.parent / "client")) / "Gwent_Data"
 DECK_TYPE = "GameplayVisuals.Battle.DeckDefinition"
 
 

@@ -26,7 +26,8 @@ def write_card_data(directory, data, params, engine, definitions):
     }
     for name, content in files.items():
         temporary = directory / (name + ".part")
-        temporary.write_text(content, encoding="utf-8")
+        # LF on every platform: roles_sha256 hashes these exact bytes.
+        temporary.write_text(content, encoding="utf-8", newline="\n")
         temporary.replace(directory / name)
     return digest
 

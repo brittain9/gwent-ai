@@ -1,0 +1,34 @@
+{
+  "HarmonyX/2.16.1": {
+    "lib/netstandard2.0/0Harmony.dll": "70e7647876b6c3d874ea99b56627a95d1dce2e1dd791981a002578a2febc9bbd"
+  },
+  "Mono.Cecil/0.11.6": {
+    "lib/netstandard2.0/Mono.Cecil.Mdb.dll": "28cb367972bdc1cd43e4006306af2fd96d37f4ed4b239ee90e1dc7237a93af7f",
+    "lib/netstandard2.0/Mono.Cecil.Pdb.dll": "a332332633fbcb20e8d50e49b4db7bd1557721417122cf0c5f4c42f2332391d0",
+    "lib/netstandard2.0/Mono.Cecil.Rocks.dll": "bf992f3dce364ebcc3200fa7832ef07e20b4e2dbc3a8a6213ce44e3d239db984",
+    "lib/netstandard2.0/Mono.Cecil.dll": "831dca77470d85cb6ffbea3072daa7a3df5b7c9fcfd9c3f43674a9be99d4bfcf"
+  },
+  "MonoMod.Backports/1.1.2": {
+    "lib/net8.0/MonoMod.Backports.dll": "ac3f32bfd44aab83abf71abdff6dde548d57b7c0f8a1fe6d8964e348b4eeafb1"
+  },
+  "MonoMod.Core/1.3.4": {
+    "lib/net10.0/MonoMod.Core.dll": "8f9e1e88e408e436027ac14a1d2ff00bfbbc2603a78959c34ce92af8f7875c65",
+    "lib/net10.0/MonoMod.Iced.dll": "e9016ceb961ea07d40f6c9ebdcfd08c88de70b9a0d561fc08689af430b16dfc7"
+  },
+  "MonoMod.ILHelpers/1.1.0": {
+    "lib/net8.0/MonoMod.ILHelpers.dll": "fdd0e3538340fd78b8f521e62b8cac1ebb7683ac1f27f6aaedfc1044b14bf4bb"
+  },
+  "MonoMod.RuntimeDetour/25.3.4": {
+    "lib/net10.0/MonoMod.RuntimeDetour.dll": "d386067b00a87db31d1fffc7486ff9b3773c8a56a5678d41b2ac65c3a2dc806b"
+  },
+  "MonoMod.Utils/25.0.12": {
+    "lib/net10.0/MonoMod.Utils.dll": "61d352e5fd3391bb059e64fe4b90aaaa6267f9b0dcfc875f4fc8aaf78f890888"
+  },
+  "System.Security.Permissions/10.0.0": {
+    "lib/net10.0/System.Security.Permissions.dll": "ed5da0f65bf1f2440e74abb1ee74f515fe566cd88673e51e2c8458cb3616edc8"
+  },
+  "System.Windows.Extensions/10.0.0": {
+    "lib/net10.0/System.Windows.Extensions.dll": "748fb38551526f08092916f54c268c89af61bfad5dd310d3388bd42e29e45017",
+    "runtimes/win/lib/net10.0/System.Windows.Extensions.dll": "00eb031b13010d8bedcab801859e2a79ed99f576a299c22525ce4211d4b92b3a"
+  }
+}
