@@ -12,6 +12,15 @@ This is a hobby project. It is not affiliated with CD PROJEKT RED. Gwent,
 its client, cards and art belong to CD PROJEKT RED, and none of them is in
 this project.
 
+https://github.com/user-attachments/assets/1965eb60-be3c-4b64-966a-d2e328a0172e
+
+## Support the project
+
+If it gave you a good game, buy me a coffee. It helps make the next version
+stronger.
+
+<a href="https://buymeacoffee.com/alexbrittaq"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="217"></a>
+
 ## Why
 
 The community has kept the 2018 public beta alive: players saved the
@@ -109,12 +118,6 @@ name you typed, no account and no path. Do not send anything from the
 game's own files. We read every report. Fixes to the
 install steps and the docs are welcome. Changes to how the AI plays are made
 after head-to-head measurement, so we do not take code for them.
-
-## Support the project
-
-If you enjoy the project, you can support it here:
-
-<a href="https://buymeacoffee.com/alexbrittaq"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="217"></a>
 
 ## Licence and credits
 
