@@ -12,7 +12,7 @@ every simulated game, so the AI plays by the real rules.
 | `scripts/` | Setup, build, the local session and helper tools |
 | `server/` | The local server for the client's online services (it began as Somnia41205's community server) |
 | `platform/` | Network checks, the macOS sandbox, and the Windows in-game routing (`platform/windows`) |
-| `data/` | The deck roster, the deck population, the round evaluator and the policy network |
+| `data/` | The deck roster, the deck population, the round evaluator, the value network and the policy network |
 
 ## GwentAI/
 

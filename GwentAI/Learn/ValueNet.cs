@@ -29,11 +29,15 @@ namespace GwentAI.Learn
     // and the scaled globals feed an MLP trunk (two ReLU layers) and the
     // heads. Weights are float32, sums are double; one instance is not
     // thread-safe (it reuses its buffers: no allocation per call).
+    //
+    // The file the AI embeds has the static columns of its template table
+    // (the client's card stats) zeroed; Complete fills them when the net is
+    // loaded for play.
     public sealed class ValueNet : IRoundEvaluator
     {
-        public const int Magic = 0x314E5647; // "GVN1"
-        public const int FileVersion = 1;
-        public const int FullStateVersion = 2;
+        public const int Magic = ValueModel.Magic; // "GVN1"
+        public const int FileVersion = ValueModel.FileVersion;
+        public const int FullStateVersion = ValueModel.FullStateVersion;
         // Dynamic features per card: power, base power, armour (in tens),
         // 13 ECardToken bits, position in the row (in tens).
         public const int DynamicCount = 17;
@@ -131,6 +135,25 @@ namespace GwentAI.Learn
 
         // The .vnet file this net was read from.
         public byte[] Bytes { get; private set; }
+
+        // A copy of a .vnet file's bytes with every template row's static
+        // columns written from the client's card table (ValueModel): the AI
+        // embeds the file with them zeroed, and the filled bytes equal the
+        // fitted file's. A file that has them already is returned unchanged
+        // (the same values are written over them). Throws when the file names
+        // a card the client does not have.
+        public static byte[] Complete(byte[] stripped, GameSharedData shared)
+        {
+            if (shared == null)
+            {
+                throw new ArgumentNullException(nameof(shared), "The value net's static columns come from the client's shared game data, which is not loaded yet");
+            }
+            return ValueModel.Complete(stripped, id =>
+            {
+                RuntimeCardTemplate runtime;
+                return shared.SharedRuntimeTemplates.TryGetValue(id, out runtime) ? PolicyModel.Columns(runtime.Template) : null;
+            });
+        }
 
         // P(seat wins the match) at a round start; in a finished game, the
         // result (as Evaluator).

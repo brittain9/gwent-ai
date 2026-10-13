@@ -173,6 +173,14 @@ namespace GwentAI.Search
                 TieBreak = result.TieBreak,
                 Work = result.Work,
             };
+            if (m_Settings.ClassBPolicy != null && result.Source != Ismcts.PassWinSource && Ismcts.ClassBRoot(game, seat, request, prefix))
+            {
+                // The decision searched on the class-B full-horizon settings
+                // (SearchSettings.ClassBPolicy), not a pass taken without a search;
+                // every other record is unchanged.
+                stat.Extra = stat.Extra ?? new Dictionary<string, object>();
+                stat.Extra["ClassB"] = true;
+            }
             if (m_CheckFairness)
             {
                 stat.Fair = CheckFairness(game, seat, request, prefix, seed, iterations, Describe(result), out List<string> unfairTop);

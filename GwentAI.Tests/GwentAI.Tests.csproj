@@ -10,16 +10,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="*.cs" />
+    <Compile Include="../GwentAI/Learn/TemplateColumns.cs" />
+    <Compile Include="../GwentAI/Learn/ValueModel.cs" />
     <Compile Include="../GwentAI/Search/CardRoles.cs" />
+    <Compile Include="../GwentAI/Search/ClassB.cs" />
     <Compile Include="../GwentAI/Search/EconomyOrder.cs" />
     <Compile Include="../GwentAI/Search/LowerBoundRule.cs" />
     <Compile Include="../GwentAI/Search/MatchPoint.cs" />
     <Compile Include="../GwentAI/Search/PassRules.cs" />
+    <Compile Include="../GwentAI/Search/PriorSample.cs" />
     <Compile Include="../GwentAI/Search/RoundGate.cs" />
     <Compile Include="../GwentAI/Search/SplitMix64.cs" />
     <Compile Include="../GwentAI/Search/RootStat.cs" />
     <Compile Include="../GwentAI/Search/WorkBudget.cs" />
     <Compile Include="../GwentAI/Search/SecondLookChoice.cs" />
+    <Content Include="class-b-states.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../data/model/fta.vnet" Link="model-fixtures/shipped-fta.vnet" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The fitted nets (with their static columns) are not part of the shipped
+         project; the tests that need them skip when they are absent. -->
+    <Content Include="../data/eval/fta.vnet" Link="model-fixtures/fta.vnet" CopyToOutputDirectory="PreserveNewest" Condition="Exists('../data/eval/fta.vnet')" />
+    <Content Include="../data/eval/fs2.vnet" Link="model-fixtures/fs2.vnet" CopyToOutputDirectory="PreserveNewest" Condition="Exists('../data/eval/fs2.vnet')" />
     <Content Include="../data/cards/roles.json" Link="card-fixtures/roles.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>

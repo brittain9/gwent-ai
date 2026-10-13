@@ -227,11 +227,13 @@ namespace GwentAI.Search
             return data;
         }
 
+        // Setup hashes LF text; a CRLF copy (a Windows editor, a git checkout)
+        // hashes the same, as scripts/answer_kinds.py's universal-newline read does.
         private static string Sha256(string text)
         {
             using (System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create())
             {
-                byte[] hash = sha.ComputeHash(new System.Text.UTF8Encoding(false).GetBytes(text));
+                byte[] hash = sha.ComputeHash(new System.Text.UTF8Encoding(false).GetBytes(text.Replace("\r\n", "\n")));
                 System.Text.StringBuilder hex = new System.Text.StringBuilder();
                 foreach (byte b in hash)
                 {

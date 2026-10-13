@@ -34,7 +34,8 @@ namespace GwentAI.Tests
             File.WriteAllText(Engine, "synthetic engine");
             File.WriteAllText(Definitions, "synthetic card definitions");
             string source = Path.Combine(AppContext.BaseDirectory, "card-fixtures");
-            string roles = File.ReadAllText(Path.Combine(source, "roles.json"));
+            // Setup writes and hashes LF text, whatever the checkout's line endings.
+            string roles = File.ReadAllText(Path.Combine(source, "roles.json")).Replace("\r\n", "\n");
             string numbers = Path.Combine(source, "answer-params.json");
             HasNumbers = File.Exists(numbers);
             Write(roles, HasNumbers ? File.ReadAllText(numbers) : new JObject { ["roles_sha256"] = Hash(roles) }.ToString());

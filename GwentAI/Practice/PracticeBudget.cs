@@ -46,7 +46,19 @@ namespace GwentAI.Practice
         // The embedded net's bytes as the mod carries them (card columns zeroed).
         public static byte[] DefaultPriorBytes()
         {
-            using (Stream stream = typeof(PracticeBudget).Assembly.GetManifestResourceStream("eval/policy.pnet"))
+            return EmbeddedBytes("eval/policy.pnet");
+        }
+
+        // The embedded value net's bytes as the mod carries them (static
+        // columns zeroed).
+        public static byte[] DefaultValueNetBytes()
+        {
+            return EmbeddedBytes("eval/value.vnet");
+        }
+
+        private static byte[] EmbeddedBytes(string name)
+        {
+            using (Stream stream = typeof(PracticeBudget).Assembly.GetManifestResourceStream(name))
             using (MemoryStream copy = new MemoryStream())
             {
                 byte[] buffer = new byte[81920];
@@ -57,6 +69,23 @@ namespace GwentAI.Practice
                 }
                 return copy.ToArray();
             }
+        }
+
+        // The evaluator with the embedded value net DefaultPlay.ValueNet (eval/value.vnet) from
+        // round DefaultPlay.NetFromRound on (0: at every cut) and `linear` before it. A fresh net
+        // per call: a net keeps scratch state, so a caller shares one only where it shares a
+        // seat. loaded: told of the net. The net's static columns are filled
+        // from the client's card table (ValueNet.Complete), so after the
+        // client's shared game data is loaded.
+        public static IRoundEvaluator WithDefaultValueNet(IRoundEvaluator linear, System.Action<ValueNet> loaded)
+        {
+            if (GameSharedData.Instance == null)
+            {
+                throw new InvalidOperationException("The default value net is read after the client's shared game data is loaded (GameSharedData.Instance)");
+            }
+            ValueNet net = ValueNet.FromBytes(ValueNet.Complete(DefaultValueNetBytes(), GameSharedData.Instance), DefaultPlay.ValueNet);
+            loaded(net);
+            return DefaultPlay.NetFromRound > 0 ? (IRoundEvaluator)new RoundGateEvaluator(linear, net, DefaultPlay.NetFromRound) : net;
         }
     }
 }

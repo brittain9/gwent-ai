@@ -15,16 +15,13 @@ namespace GwentAI.Learn
     // by id), then the [V][F] float32 table whose last CardColumns columns
     // per row are: tier == 1, 2, 4, 8; type == 2, 4, 8;
     // faction == 1, 2, 4, 8, 16, 32; power / 10; armour / 10; token bit 8;
-    // availability == 1; 0; 0. Row 0 has 1 in the next-to-last column, row
-    // 1 in the last. A change to those columns needs a new file version here
-    // and in PolicyNet.
+    // availability == 1; 0; 0 (TemplateColumns). Row 0 has 1 in the
+    // next-to-last column, row 1 in the last. A change to those columns
+    // needs a new file version here and in PolicyNet.
     public static class PolicyModel
     {
-        public const int CardColumns = 19;
+        public const int CardColumns = TemplateColumns.Count;
         private const int HeaderInts = 14;
-        private static readonly int[] Tiers = { 1, 2, 4, 8 };
-        private static readonly int[] Types = { 2, 4, 8 };
-        private static readonly int[] Factions = { 1, 2, 4, 8, 16, 32 };
 
         // A copy of the file's bytes with every row's card columns written
         // from the client's card table; every other byte is the input's.
@@ -39,13 +36,12 @@ namespace GwentAI.Learn
             int vocab, inputs, table;
             Layout(stripped, out vocab, out inputs, out table);
             byte[] full = (byte[])stripped.Clone();
-            float[] columns = new float[CardColumns];
             for (int v = 0; v < vocab; v++)
             {
-                Array.Clear(columns, 0, CardColumns);
+                float[] columns;
                 if (v < 2)
                 {
-                    columns[CardColumns - 2 + v] = 1f;
+                    columns = TemplateColumns.Marker(v);
                 }
                 else
                 {
@@ -57,7 +53,7 @@ namespace GwentAI.Learn
                                                        $"({shared.SharedRuntimeTemplates.Count} templates) does not have: the model was trained " +
                                                        $"on another card table ({vocab - 2} templates)");
                     }
-                    Fill(runtime.Template, columns);
+                    columns = Columns(runtime.Template);
                 }
                 int at = table + 4 * (v * inputs + inputs - CardColumns);
                 for (int c = 0; c < CardColumns; c++)
@@ -70,29 +66,12 @@ namespace GwentAI.Learn
             return full;
         }
 
-        // The card columns of one template, as the fitted file has them
-        // (doubles cast to float32).
-        private static void Fill(CardTemplate t, float[] columns)
+        // The card columns of one template, as the fitted files have them
+        // (doubles cast to float32); the value net's static columns are the
+        // same (ValueNet.Complete).
+        internal static float[] Columns(CardTemplate t)
         {
-            int c = 0;
-            foreach (int tier in Tiers)
-            {
-                columns[c++] = (int)t.Tier == tier ? 1f : 0f;
-            }
-            foreach (int type in Types)
-            {
-                columns[c++] = (int)t.Type == type ? 1f : 0f;
-            }
-            foreach (int faction in Factions)
-            {
-                columns[c++] = (int)t.FactionId == faction ? 1f : 0f;
-            }
-            columns[c++] = (float)(t.Power / 10.0);
-            columns[c++] = (float)(t.Armor / 10.0);
-            columns[c++] = ((int)t.Tokens & 8) != 0 ? 1f : 0f;
-            columns[c++] = (int)t.Availability == 1 ? 1f : 0f;
-            columns[c++] = 0f;
-            columns[c] = 0f;
+            return TemplateColumns.Of((int)t.Tier, (int)t.Type, (int)t.FactionId, t.Power, t.Armor, (int)t.Tokens, (int)t.Availability);
         }
 
         // V, F and the template-input table's byte offset, after the checks

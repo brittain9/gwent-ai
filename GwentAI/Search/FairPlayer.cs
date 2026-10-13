@@ -47,16 +47,23 @@ namespace GwentAI.Search
         }
 
         // Answers the open request, if any; true when it answered. Call
-        // between engine updates.
+        // between engine updates. A request that opened with actions still
+        // queued (Replay.Settled) waits for the next update: the workers
+        // replay the game with them applied.
         public bool Think()
         {
             ARequestAction request = m_Pending;
-            m_Pending = null;
             GameController live = CurrentGameController;
             if (request == null || request.Expired || !live.RequestManager.Requests.Contains(request))
             {
+                m_Pending = null;
                 return false;
             }
+            if (!Replay.Settled(live))
+            {
+                return false;
+            }
+            m_Pending = null;
             foreach (Move move in Agent.Respond(live, this, request, decision => FairAgent.Seed(m_MatchSeed, Id, decision)))
             {
                 move.Apply(this, request);
