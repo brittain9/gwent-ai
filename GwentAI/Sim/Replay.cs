@@ -126,6 +126,20 @@ namespace GwentAI.Sim
             }
         }
 
+        // Whether the engine has applied every action it queued. A request can
+        // open while some are still queued: the engine kills a unit that an
+        // ability has reduced to 0 power only when its queue is empty, and the
+        // pushes that do it can come after the request of a forced play is
+        // open (Seltkirk's duel, then Marching Orders' pick), where its update
+        // stops. A replica reads a position only once this holds
+        // (Replica.Reach), so a live seat decides only once it holds too: a
+        // copy taken earlier differs from every replay by those actions
+        // (Fingerprint's `pending`), and no worker could search it.
+        public static bool Settled(GameController game)
+        {
+            return !game.ActionManager.HasActions;
+        }
+
         // The request a player must answer, if one of a matching type is
         // open. The engine also files a mirror of each request for the other
         // player's client; only the copy targeted at the player is answered.

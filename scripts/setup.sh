@@ -57,7 +57,7 @@ DXVK_MACOS_SHA256=acd1520ad105d8ef124a09c8e11a259a5dc8bdc565ad18e0e52693f9807b24
 # prebuilt by platform/macos/build-mono.sh and build-nginx.sh and attached
 # to this release. uv is astral's release asset, with the digest GitHub
 # publishes for it.
-RUNTIME_MACOS=https://github.com/brittain9/gwent-ai/releases/download/v0.2.0
+RUNTIME_MACOS=https://github.com/brittain9/gwent-ai/releases/download/v0.3.0
 MONO_MACOS_URL=$RUNTIME_MACOS/mono-6.14.1-x86_64-macos.tar.xz
 MONO_MACOS_SHA256=f502dc49db0045c72ba3029e50700d73632a9d7a6ec6cdd0d85e53d2e4c0d49b
 NGINX_MACOS_URL=$RUNTIME_MACOS/nginx-1.30.5-arm64-macos.tar.xz

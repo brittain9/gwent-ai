@@ -13,6 +13,7 @@ Run it through scripts\\run-local.cmd (scripts/windows_play.py run).
 
 import json
 import os
+import shlex
 from pathlib import Path
 import shutil
 import socket
@@ -28,6 +29,27 @@ CREATE_NEW_PROCESS_GROUP = 0x00000200
 # The GwentSessionNet plugin's exit code when it cannot route the game
 # (platform/windows/SessionNet/SessionNetPlugin.cs, FailedExitCode).
 SESSION_NET_FAILED = 0x5E55
+
+
+# The variables the optional local override file .runtime/playtest/env sets for
+# Practice (run-local.sh sources the same file).
+PLAYTEST_VARIABLES = ("GWENT_AI_AGENT", "GWENT_AI_THINK_MS")
+
+
+def playtest_env(path=None):
+    """{name: value} of the override variables in .runtime/playtest/env (its
+    `export NAME=value` lines); empty without the file."""
+    path = Path(path or paths.RUNTIME / "playtest" / "env")
+    if not path.is_file():
+        return {}
+    values = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        words = shlex.split(line, comments=True)
+        if words[:1] == ["export"] and len(words) > 1 and "=" in words[1]:
+            name, _, value = words[1].partition("=")
+            if name in PLAYTEST_VARIABLES:
+                values[name] = value
+    return values
 
 
 def certificate_sha256(path):
@@ -241,6 +263,10 @@ def run(args, job=None, worker_job=None):
     env.update(GWENT_BIND_HOST="127.0.0.1", GWENT_SERVER_IP="127.0.0.1", GWENT_USE_SQLITE="1",
                GWENT_CERT_DIR=str(paths.CERTS), GWENT_DATA_DIR=str(paths.SERVER_DATA),
                PYTHONUNBUFFERED="1", PYTHONUTF8="1")
+    playtest = playtest_env()
+    env.update(playtest)
+    for name, value in playtest.items():
+        print(f"Local override (.runtime/playtest/env): {name}={value}", flush=True)
     env.setdefault("GWENT_AI_THINK_MS", "20000")
     test_data = None
     if args.smoke:

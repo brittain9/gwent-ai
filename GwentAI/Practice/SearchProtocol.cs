@@ -361,8 +361,9 @@ namespace GwentAI.Practice
     // replayed game can be checked against the live one before its search
     // counts: round, request, scores, hand and deck sizes, crowns, passes,
     // the seat's legal steps at this point of the response, and whether
-    // actions are queued but not yet applied (a move the other seat just
-    // made, which a replay of the applied moves cannot hold).
+    // actions are queued but not yet applied (which a replay of the applied
+    // moves cannot hold: a live seat decides only once none are,
+    // Replay.Settled, so a mismatch here is a real divergence).
     public static class Fingerprint
     {
         public static string Of(GameController game, EPlayerId observer, ARequestAction request, ICollection<string> prefix, bool groupPlays)

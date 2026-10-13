@@ -4,6 +4,25 @@ Notable changes to the project. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-13
+
+A trained value network judges positions from round 2 on. Wins 56% of the
+points (95% range 52% to 60%), +40 Elo (+12 to +68), against 0.2.0 over 490 games (245 seat-swapped pairs) at 6,000
+simulations a move, 13 October 2026; details in
+[results/v0.3.0.md](results/v0.3.0.md).
+
+### Added
+
+- A value network (`data/eval/fta.vnet`) that judges the positions where the
+  search stops looking ahead, from round 2 on. Round 1 keeps the simpler
+  scorer.
+
+### Fixed
+
+- The AI decides only after the game has applied the actions a card's effect
+  had pending, so its search workers see the position it decides from.
+- Card tables with Windows line endings are accepted.
+
 ## [0.2.0] - 2026-10-12
 
 The same AI as 0.1.0; this release is about installing and running it.

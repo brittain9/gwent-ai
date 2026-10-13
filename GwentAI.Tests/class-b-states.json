@@ -1,0 +1,18 @@
+{
+  "about": "Hand-built states that exercise the class-B rule; GwentAI.Tests/ClassBTests.cs checks GwentAI.Search.ClassB.Is against this list. Hands are cards in hand without the leader. Each case after the first flips one condition of the base state.",
+  "base": { "round": 2, "crownsMover": 1, "crownsOpponent": 0, "passedMover": false, "handMover": 4, "handOpponent": 5 },
+  "cases": [
+    { "name": "base: one card fewer", "flips": "none", "state": {}, "classB": true },
+    { "name": "three cards fewer", "flips": "hand", "state": { "handMover": 2, "handOpponent": 5 }, "classB": true },
+    { "name": "empty hand against a full one", "flips": "hand", "state": { "handMover": 0, "handOpponent": 6 }, "classB": true },
+    { "name": "equal hands", "flips": "hand", "state": { "handMover": 5, "handOpponent": 5 }, "classB": false },
+    { "name": "both hands empty", "flips": "hand", "state": { "handMover": 0, "handOpponent": 0 }, "classB": false },
+    { "name": "one card more", "flips": "hand", "state": { "handMover": 6, "handOpponent": 5 }, "classB": false },
+    { "name": "round 1", "flips": "round", "state": { "round": 1 }, "classB": false },
+    { "name": "round 3", "flips": "round", "state": { "round": 3 }, "classB": false },
+    { "name": "no crown for the mover", "flips": "crownsMover", "state": { "crownsMover": 0 }, "classB": false },
+    { "name": "two crowns for the mover", "flips": "crownsMover", "state": { "crownsMover": 2 }, "classB": false },
+    { "name": "a crown for the opponent", "flips": "crownsOpponent", "state": { "crownsOpponent": 1 }, "classB": false },
+    { "name": "the mover has passed", "flips": "passedMover", "state": { "passedMover": true }, "classB": false }
+  ]
+}

@@ -3,7 +3,7 @@ using GwentAI.Practice;
 using GwentGameplay;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(GwentAI.GwentAIMod), "GwentAI", "0.2.0", "gwent-local", null)]
+[assembly: MelonInfo(typeof(GwentAI.GwentAIMod), "GwentAI", "0.3.0", "gwent-local", null)]
 [assembly: MelonGame("CDProjektRED", "Gwent")]
 
 namespace GwentAI

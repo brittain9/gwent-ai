@@ -42,8 +42,10 @@ hand. This project replaces it.
   far. An opponent model, fitted on recorded games, makes the imagined
   opponent keep its gold cards and answer threats the way real players do.
 - **Learned parts.** A small policy network suggests which moves to try
-  first. A small logistic model, fitted on games, scores each position at
-  the end of the current round as a chance to win the match.
+  first. A small value network, trained on games, scores the positions where
+  the search stops looking ahead, once the game reaches round 2, as a chance
+  to win the match. In round 1 a small logistic model, fitted on games, does
+  that.
 - **Fair play.** It sees only what a human in its seat would see, and it
   uses the game's own rules engine, so every card works as it did in 2018.
 - **Decks and time.** It plays the decks of the 2018 ladder, a different one
@@ -56,6 +58,8 @@ This is still an early release. The AI won 30 out of 30 games against the
 built-in AI—a 100% win rate in that test. It can punish mistakes and
 experimental play, but you can still beat it with a strong deck you know
 well.
+Release 0.3.0 against the previous release, head to head:
+[results/v0.3.0.md](results/v0.3.0.md).
 
 ## Play against it
 
@@ -99,8 +103,8 @@ or [macOS build steps](docs/install/macos.md#build-from-source).
 [Settings](docs/install/options.md) include the think time.
 [Architecture](docs/install/architecture.md) explains how the code is organised.
 
-Release 0.2.0 is tested on Windows 11. macOS (Apple silicon) was tested
-for 0.1.0; Linux (Fedora) is where the AI is developed.
+Release 0.3.0 is tested on Linux (Fedora), where the AI is developed.
+Windows 11 was tested for 0.2.0 and macOS (Apple silicon) for 0.1.0.
 
 ## What is in the project
 

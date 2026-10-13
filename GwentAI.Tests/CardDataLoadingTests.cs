@@ -18,6 +18,20 @@ namespace GwentAI.Tests
             }
         }
 
+        // Windows tools and git checkouts can turn the setup's LF files into
+        // CRLF; the pair still matches, as it does for scripts/answer_kinds.py.
+        [Fact]
+        public void ACrlfCopyOfThePairStillLoads()
+        {
+            using (CardDataFixture files = new CardDataFixture())
+            {
+                string roles = "{\n \"cards\": {\n  \"1\": {\"id\": 1, \"roles\": [\"removal\"], \"answer_kinds\": [{\"kind\": \"damage_fixed\"}]}\n }\n}\n";
+                string numbers = "{\n \"roles_sha256\": \"" + CardDataFixture.Hash(roles) + "\",\n \"cards\": {\"1\": {\"answer_kinds\": [{\"amount\": 4}]}}\n}\n";
+                files.Write(roles.Replace("\n", "\r\n"), numbers.Replace("\n", "\r\n"));
+                Assert.Equal(4, CardRoles.LoadDirectory(files.Directory, files.Client).Answers[1][0].Amount);
+            }
+        }
+
         [Theory]
         [InlineData("roles.json")]
         [InlineData("answer-params.json")]

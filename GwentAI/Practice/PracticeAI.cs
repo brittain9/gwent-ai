@@ -116,6 +116,8 @@ namespace GwentAI.Practice
         private const double DryPass = DefaultPlay.DryPass;
         // The PUCT constant (SearchSettings.CPuct).
         private const double CPuct = DefaultPlay.CPuct;
+        // The embedded value net scores the leaf cuts from round DefaultPlay.NetFromRound on.
+        private const bool UseDefaultValueNet = true;
         public static bool Installed => s_Settings != null;
 
         // Replaces the defaults (DefaultSettings, DefaultBelief, the search's
@@ -218,6 +220,13 @@ namespace GwentAI.Practice
             return string.IsNullOrEmpty(iterations) ? DefaultIterations : int.Parse(iterations);
         }
 
+        // The round evaluator, with the embedded value net from the default round on unless
+        // UseDefaultValueNet is off. DefaultSettings calls it.
+        private static IRoundEvaluator Scoring(Evaluator round)
+        {
+            return UseDefaultValueNet ? PracticeBudget.WithDefaultValueNet(round, loaded => { }) : round;
+        }
+
         // The default search settings: Practice's own budget and the
         // defaults above.
         public static SearchSettings DefaultSettings(Assembly assembly)
@@ -245,7 +254,7 @@ namespace GwentAI.Practice
                 RolloutAim = RolloutAim,
                 DryPass = DryPass,
                 CPuct = CPuct,
-                Evaluator = Evaluator.Parse(Resource(assembly, "eval/round.json")),
+                Evaluator = Scoring(Evaluator.Parse(Resource(assembly, "eval/round.json"))),
                 Prior = PolicyPrior ? PracticeBudget.LoadDefaultPrior() : null,
             };
         }
@@ -495,6 +504,13 @@ namespace GwentAI.Practice
                 {
                     return;
                 }
+                // The request can open while the engine still holds queued
+                // actions (Replay.Settled). The workers replay the game with
+                // them applied, so decide from the same position.
+                if (!Replay.Settled(live))
+                {
+                    return;
+                }
                 Pending = null;
                 if (s_Workers != null)
                 {
@@ -722,6 +738,8 @@ namespace GwentAI.Practice
                     ["rollout_aim"] = m_Settings.RolloutAim,
                     ["opponent_exploration"] = m_Settings.OpponentExploration,
                     ["keep_premium"] = m_Settings.KeepPremium,
+                    ["opponent_policy"] = m_Settings.OpponentPolicy == null ? null : m_Settings.OpponentPolicy.Name,
+                    ["class_b_policy"] = m_Settings.ClassBPolicy == null ? null : m_Settings.ClassBPolicy.Name,
                     ["c_puct"] = m_Settings.CPuct,
                     ["dry_pass"] = m_Settings.DryPass,
                     ["margin"] = m_Settings.Margin,

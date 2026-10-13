@@ -14,11 +14,11 @@ The client asks for its configuration under its game version and data secret,
 which it holds in the Settings asset of Gwent_Data/resources.assets; they are
 read from there, so nothing derived from the game is kept in this project. The
 response bodies are those of Somnia41205's server (MIT, server/LICENSE),
-byte for byte (scripts/tests/test_windows_play.py checks their hashes).
+byte for byte.
 
 card_definitions/prices (crafting, milling and transmutation costs per
 rarity) is the one response the client cannot supply. It is copied from
-server/Nginx/html when that file is present (this research tree); otherwise
+server/Nginx/html when that file is present; otherwise
 the response holds no prices, {"base_prices": [], "price_overrides": []}.
 The client asks for it during login (state 1007, InitializeCardPrices) and
 sends the player back to the start of login when the request fails; it

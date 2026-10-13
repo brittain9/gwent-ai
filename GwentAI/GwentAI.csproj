@@ -23,11 +23,13 @@
     <Reference Private="false" Include="$(LoaderDir)/MelonLoader.dll" />
     <Reference Private="false" Include="$(LoaderDir)/0Harmony.dll" />
   </ItemGroup>
-  <!-- Practice reads the evaluator and the policy prior from the mod itself;
-       the prior's card columns are zeroed and filled from the client at load
-       time (PolicyModel). -->
+  <!-- Practice reads the evaluator, the value net and the policy prior from
+       the mod itself; the prior's card columns and the value net's static
+       columns are zeroed and filled from the client at load time
+       (PolicyModel, ValueNet.Complete). -->
   <ItemGroup>
     <EmbeddedResource Include="../data/eval/round.json" LogicalName="eval/round.json" />
+    <EmbeddedResource Include="../data/model/fta.vnet" LogicalName="eval/value.vnet" />
     <EmbeddedResource Include="../data/model/pol2.pnet" LogicalName="eval/policy.pnet" />
   </ItemGroup>
 

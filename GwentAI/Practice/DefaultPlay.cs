@@ -37,5 +37,10 @@ namespace GwentAI.Practice
         // 22.5 s at a 10 s play budget): a mulligan decided at a play's
         // budget is noisy (SearchSettings.MulliganScale).
         public const double ThinkMulliganScale = 1.5;
+        // The value net that scores the search's leaf cuts, embedded as eval/value.vnet
+        // (PracticeBudget.WithDefaultValueNet), and the round it scores from (0: at every
+        // cut; the round evaluator before it).
+        public const string ValueNet = "fta";
+        public const int NetFromRound = 2;
     }
 }

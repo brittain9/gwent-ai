@@ -73,7 +73,7 @@ namespace GwentAI.Practice
                 // Once the engine has applied the queued moves: a mulligan
                 // request stays open while its card is swapped, and the live
                 // seat decides again only after the swap.
-                if (m_Replay.Done && !Game.ActionManager.HasActions)
+                if (m_Replay.Done && Replay.Settled(Game))
                 {
                     ARequestAction request = Replay.OpenRequest(Game, seat, open => open == type);
                     if (request != null)

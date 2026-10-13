@@ -49,6 +49,16 @@ namespace GwentAI.Search
         // The constant at the opponent's nodes; negative: the same. Lower
         // models an opponent who explores less and so replies well sooner.
         public double OpponentExploration = -1;
+        // Opponent policy sample (A-MCTS-S of Wang et al. 2023, "Adversarial
+        // Policies Beat Superhuman Go AIs"): a net of its own, apart from
+        // Prior. At a node where the opponent of the searching seat moves,
+        // the step is drawn from this net's probabilities over the legal
+        // steps, scored from the opponent's view of the determinization (its
+        // sampled hand), instead of taken by PUCT or UCB. The tree then
+        // models an opponent who plays like the net, not one who answers the
+        // searching seat's choices best. The searching seat's own nodes are
+        // unchanged. Null: off.
+        public GwentAI.Learn.PolicyNet OpponentPolicy;
         // 0: one tree over a fresh determinization per iteration
         // (SO-ISMCTS). N > 0: N fixed worlds, one tree each, root visits
         // summed (PIMC / ensemble determinization).
@@ -218,6 +228,13 @@ namespace GwentAI.Search
         // (PolicyNet.FoldedScores): the same function, a few times
         // cheaper; a score may differ from the plain pass in the last bits.
         public bool RolloutFolded;
+        // Class-B full horizon (:fullb): at a class-B root (ClassB, read by
+        // Ismcts.ClassBRoot) the search plays every simulation to the end of the
+        // match, with this net as the rollout policy from round 3 on, scored
+        // through its folded first layer: the fair full-horizon player's
+        // settings (:full:p3pop1:fold) for that one decision. Every other root
+        // decision searches on the agent's own settings. Null: off.
+        public GwentAI.Learn.PolicyNet ClassBPolicy;
         // Second look (SecondLook): at a play decision
         // whose two most visited steps have mean values within this gap, a
         // second search restricted to those two steps, every simulation
@@ -256,6 +273,31 @@ namespace GwentAI.Search
         // rules and the rest are the agent's.
         public SearchSettings WholeMatch(int timeBudgetMs)
         {
+            SearchSettings settings = PlayedOut();
+            settings.TimeBudgetMs = timeBudgetMs;
+            settings.WorkBudgetMs = 0;
+            settings.Extend = 1;
+            return settings;
+        }
+
+        // The settings of a search at a class-B root (ClassBPolicy): every
+        // simulation played to the end of the match, as :full does, and the rollout
+        // policy ClassBPolicy from round 3 on through its folded first layer, as
+        // :p3NAME:fold does. The budget (iterations, clock or work, extension,
+        // trees) stays the agent's, so a class-B root takes the budget of any other.
+        public SearchSettings ClassBFullHorizon()
+        {
+            SearchSettings settings = PlayedOut();
+            settings.RolloutPolicy = ClassBPolicy;
+            settings.RolloutPolicyFromRound = 2;
+            settings.RolloutFolded = true;
+            return settings;
+        }
+
+        // Every simulation played to the end of the match: no evaluator, no
+        // cutoff, no two-round horizon.
+        private SearchSettings PlayedOut()
+        {
             SearchSettings settings = Clone();
             settings.Evaluator = null;
             settings.Cutoff = 0;
@@ -263,9 +305,6 @@ namespace GwentAI.Search
             settings.MidNet = null;
             settings.MidRound3Only = false;
             settings.TwoRoundHorizon = false;
-            settings.TimeBudgetMs = timeBudgetMs;
-            settings.WorkBudgetMs = 0;
-            settings.Extend = 1;
             return settings;
         }
     }
@@ -350,7 +389,11 @@ namespace GwentAI.Search
     // so its plan cannot depend on cards it cannot see.
     public class Ismcts : IDecider, ISearch, IWholeMatchSearch
     {
-        private readonly SearchSettings m_Settings;
+        // The agent's settings, and the settings of the search in progress:
+        // the same object, except at a class-B root of an agent with
+        // SearchSettings.ClassBPolicy (RootSettings).
+        private readonly SearchSettings m_AgentSettings;
+        private SearchSettings m_Settings;
         private readonly Belief m_Belief;
         private Random m_Random;
         private Rollout m_Rollout;
@@ -386,7 +429,7 @@ namespace GwentAI.Search
         private long m_Actions;
         private readonly List<ValueNet> m_ValueNets = new List<ValueNet>();
         private long[] m_ValueCalls, m_ValueTicks;
-        private long m_RolloutCalls, m_RolloutTicks, m_PriorTicks;
+        private long m_RolloutCalls, m_RolloutTicks, m_PriorTicks, m_OpponentCalls, m_OpponentTicks;
 
         // Per-iteration state.
         private Node m_Node;
@@ -430,7 +473,7 @@ namespace GwentAI.Search
 
         public Ismcts(SearchSettings settings, Belief belief)
         {
-            m_Settings = settings;
+            m_AgentSettings = m_Settings = settings;
             m_Belief = belief;
         }
 
@@ -442,11 +485,12 @@ namespace GwentAI.Search
         // (playout-cap randomization, FairAgent); 0 keeps the settings'.
         public SearchResult Search(GameController live, EPlayerId observer, ARequestAction request, List<GameAction> prefix, int seed, int iterations = 0)
         {
-            SearchResult passWin = RootPassWin(m_Settings, live, observer, request, prefix);
+            SearchResult passWin = RootPassWin(m_AgentSettings, live, observer, request, prefix);
             if (passWin != null)
             {
                 return passWin;
             }
+            m_Settings = RootSettings(m_AgentSettings, live, observer, request, prefix);
             SearchResult result = SearchTrees(live, observer, request, prefix, seed, iterations);
             PhaseClock.Mark(result.Iterations);
             return result;
@@ -464,13 +508,14 @@ namespace GwentAI.Search
             int[] treeSeeds = Enumerable.Range(0, trees).Select(_ => seeds.Next()).ToArray();
             if (m_Helpers == null || m_Helpers.Length != trees - 1)
             {
-                m_Helpers = Enumerable.Range(1, trees - 1).Select(_ => new Ismcts(m_Settings, m_Belief)).ToArray();
+                m_Helpers = Enumerable.Range(1, trees - 1).Select(_ => new Ismcts(m_AgentSettings, m_Belief)).ToArray();
             }
             SearchResult[] parts = new SearchResult[trees];
             Node[][] rootsByTree = new Node[trees][];
             for (int index = 0; index < trees; index++)
             {
                 Ismcts search = index == 0 ? this : m_Helpers[index - 1];
+                search.m_Settings = m_Settings;
                 search.Remembered = Remembered;
                 search.RootOnly = RootOnly;
                 parts[index] = search.Explore(live, observer, request, prefix, treeSeeds[index], iterations, out rootsByTree[index]);
@@ -501,8 +546,8 @@ namespace GwentAI.Search
                                              int iterations, int timeBudgetMs, ICollection<string> rootKeys, out string unavailable)
         {
             unavailable = null;
-            int trees = Math.Max(1, m_Settings.Trees);
-            SearchSettings settings = m_Settings.WholeMatch(timeBudgetMs);
+            int trees = Math.Max(1, m_AgentSettings.Trees);
+            SearchSettings settings = m_AgentSettings.WholeMatch(timeBudgetMs);
             settings.Iterations = (iterations + trees - 1) / trees;
             Ismcts look = new Ismcts(settings, m_Belief) { Remembered = Remembered, RootOnly = new HashSet<string>(rootKeys) };
             return look.Search(live, observer, request, prefix, seed);
@@ -532,6 +577,30 @@ namespace GwentAI.Search
                 Root = new List<RootStat> { new RootStat { Key = Actions.PassKey } },
                 Source = PassWinSource,
             };
+        }
+
+        // The settings a search from this root runs on: the agent's, or with
+        // SearchSettings.ClassBPolicy at a class-B root the full-horizon ones.
+        public static SearchSettings RootSettings(SearchSettings settings, GameController live, EPlayerId observer, ARequestAction request,
+                                                  List<GameAction> prefix)
+        {
+            return settings.ClassBPolicy != null && ClassBRoot(live, observer, request, prefix) ? settings.ClassBFullHorizon() : settings;
+        }
+
+        // Whether this is the class-B root decision (ClassB): a play request,
+        // the first step of the response, in the state ClassB.Is describes for the
+        // seat. It reads what the seat sees: the round, the crowns, the seat's pass
+        // and both hand sizes, without the leader (the leader is not in the hand).
+        public static bool ClassBRoot(GameController live, EPlayerId observer, ARequestAction request, List<GameAction> prefix)
+        {
+            if (!(request is RequestPlayCardAction) || prefix.Count > 0)
+            {
+                return false;
+            }
+            Player seat = live.PlayerManager.GetPlayer(observer);
+            Player opponent = seat.OpponentPlayer;
+            return ClassB.Is(live.RoundManager.CurrentRoundIndex, seat.Crowns, opponent.Crowns, seat.HasPassed,
+                             seat.GetCardsInLocation(ELocation.Hand).Count, opponent.GetCardsInLocation(ELocation.Hand).Count);
         }
 
         private Ismcts[] m_Helpers;
@@ -705,6 +774,8 @@ namespace GwentAI.Search
             m_ValueTicks = m_ValueNets.Select(net => net.Ticks).ToArray();
             m_RolloutCalls = m_Settings.RolloutPolicy?.Calls ?? 0;
             m_RolloutTicks = m_Settings.RolloutPolicy?.Ticks ?? 0;
+            m_OpponentCalls = m_Settings.OpponentPolicy?.Calls ?? 0;
+            m_OpponentTicks = m_Settings.OpponentPolicy?.Ticks ?? 0;
         }
 
         private void AddValueNets(IRoundEvaluator evaluator)
@@ -726,6 +797,12 @@ namespace GwentAI.Search
             }
         }
 
+        // The opponent policy's passes since BeginTally: counted with the prior's.
+        private long OpponentPasses()
+        {
+            return (m_Settings.OpponentPolicy?.Calls ?? 0) - m_OpponentCalls;
+        }
+
         // The search's work so far in units (WorkWeights).
         private long WorkUnits(SearchResult result)
         {
@@ -735,7 +812,7 @@ namespace GwentAI.Search
                 valuePasses += m_ValueNets[i].Calls - m_ValueCalls[i];
             }
             return WorkWeights.Units(result.Iterations, m_Actions, valuePasses, (m_Settings.RolloutPolicy?.Calls ?? 0) - m_RolloutCalls,
-                                     m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart);
+                                     (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses());
         }
 
         private WorkTally Tally(SearchResult result)
@@ -746,9 +823,9 @@ namespace GwentAI.Search
                 Simulations = result.Iterations,
                 Actions = m_Actions,
                 RolloutPasses = (m_Settings.RolloutPolicy?.Calls ?? 0) - m_RolloutCalls,
-                PriorPasses = m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart,
+                PriorPasses = (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses(),
                 RolloutMs = ((m_Settings.RolloutPolicy?.Ticks ?? 0) - m_RolloutTicks) * tick,
-                PriorMs = m_Settings.Prior == null ? 0 : (m_Settings.Prior.Ticks - m_PriorTicks) * tick,
+                PriorMs = ((m_Settings.Prior == null ? 0 : m_Settings.Prior.Ticks - m_PriorTicks) + (m_Settings.OpponentPolicy?.Ticks ?? 0) - m_OpponentTicks) * tick,
             };
             for (int i = 0; i < m_ValueNets.Count; i++)
             {
@@ -1054,6 +1131,10 @@ namespace GwentAI.Search
                 return TimedRollout(Phase.RolloutOther, player, request, taken, legal);
             }
             Node node = m_Node;
+            if (m_Settings.OpponentPolicy != null && player.Id != m_Observer)
+            {
+                return SelectSampled(node, player, request, taken, legal);
+            }
             if (m_Settings.Prior != null)
             {
                 return SelectPuct(node, player, request, taken, legal);
@@ -1084,6 +1165,39 @@ namespace GwentAI.Search
                 best = untried[m_Random.Next(untried.Count)];
                 bestChild = new Node { Mover = player.Id, Available = 1 };
                 node.Children.Add(best.Key, bestChild);
+                m_InTree = false;
+            }
+            m_Path.Add(bestChild);
+            m_Node = bestChild;
+            return best;
+        }
+
+        // The opponent's step by A-MCTS-S (SearchSettings.OpponentPolicy): drawn
+        // from the opponent policy's probabilities over the steps legal in this
+        // determinization, scored from the mover's own view of it (its sampled
+        // hand, so nothing remembered). Same bookkeeping as the other
+        // selections: the chosen step's child is made if new, counted
+        // available and appended to the path, and the descent leaves the tree
+        // at a child with no visits.
+        private GameAction SelectSampled(Node node, Player player, ARequestAction request, ICollection<string> taken, List<GameAction> legal)
+        {
+            PolicyNet policy = m_Settings.OpponentPolicy;
+            policy.Begin();
+            foreach (GameAction action in legal)
+            {
+                policy.Add(action, player.Id);
+            }
+            double[] scores = policy.Evaluate(player.CurrentGameController, player.Id, null, request, taken.Count);
+            double[] probabilities = policy.Probabilities(scores, m_Settings.PriorTemperature);
+            GameAction best = legal[PriorSample.Draw(probabilities, legal.Count, m_Random)];
+            if (!node.Children.TryGetValue(best.Key, out Node bestChild))
+            {
+                bestChild = new Node { Mover = player.Id };
+                node.Children.Add(best.Key, bestChild);
+            }
+            bestChild.Available++;
+            if (bestChild.Visits == 0)
+            {
                 m_InTree = false;
             }
             m_Path.Add(bestChild);

@@ -2,12 +2,12 @@
 set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 [[ -x "$ROOT/.venv/bin/python" ]] || { echo 'run-local: no .venv; run scripts/setup.sh --play' >&2; exit 1; }
-# A playtest's env file (.runtime/playtest/env, from scripts/playtest.py) names
-# the agent (GWENT_AI_AGENT) and think time Practice plays, over the same
-# variables in the calling shell. Only the plain Practice session reads it; a
-# session with its own program (GWENT_SESSION_PROGRAM) does not.
+# An optional local override file, .runtime/playtest/env, names the agent
+# (GWENT_AI_AGENT) and think time (GWENT_AI_THINK_MS) Practice plays, over the
+# same variables in the calling shell. Only the plain Practice session reads it;
+# a session with its own program (GWENT_SESSION_PROGRAM) does not.
 if [[ -z "${GWENT_SESSION_PROGRAM:-}" && -f "$ROOT/.runtime/playtest/env" ]]; then
-    echo "run-local: playtest on ($ROOT/.runtime/playtest/env); scripts/playtest.py status, off" >&2
+    echo "run-local: reading local overrides from $ROOT/.runtime/playtest/env" >&2
     source "$ROOT/.runtime/playtest/env"
 fi
 # Practice think time: up to 30 s is fine (the game's own turn limit). Settled decisions stop at half the budget and open ones extend to 1.5x it
