@@ -50,10 +50,17 @@ namespace GwentAI.Practice
         // never in the AI's prior when that profile plays.
         private static readonly string Human = Environment.GetEnvironmentVariable("GWENT_PLAYER") ?? "player";
         private static Belief s_Belief;
+        // With GWENT_AI_ARENA=1: the belief for a drafted opponent
+        // (Belief.ArenaDeck, no meta decks), and whether the current game is
+        // an arena game (ArenaMatch).
+        private static Belief s_ArenaBelief;
+        private static bool s_ArenaGame;
         private static Action<string> s_Log;
         private static string s_GamesDir;
         private static readonly System.Random s_Random = new System.Random();
         private static GameRecord s_Record;
+        // The current game's taunts (PracticeEmotes); null unless GWENT_AI_EMOTES=1.
+        private static PracticeEmotes s_Emotes;
         private static WorkerSearch s_Workers;
         private static PracticeOptions s_Options = new PracticeOptions();
         private static int s_ThinkMs = DefaultThinkMs;
@@ -118,6 +125,8 @@ namespace GwentAI.Practice
         private const double CPuct = DefaultPlay.CPuct;
         // The embedded value net scores the leaf cuts from round DefaultPlay.NetFromRound on.
         private const bool UseDefaultValueNet = true;
+        // The softmax temperature of the policy prior (SearchSettings.PriorTemperature).
+        private const double PriorTemperature = DefaultPlay.PriorTemperature;
         public static bool Installed => s_Settings != null;
 
         // Replaces the defaults (DefaultSettings, DefaultBelief, the search's
@@ -164,6 +173,22 @@ namespace GwentAI.Practice
             if (workers.Count > 0)
             {
                 s_Workers = new WorkerSearch(workers, s_Settings, s_Belief, prior, log);
+            }
+            if (ArenaMatch.Enabled)
+            {
+                // A failed arena install must not take the search patches
+                // below down with it: Practice then plays without arena.
+                try
+                {
+                    s_ArenaBelief = DefaultBelief(new List<DeckSpec>());
+                    s_ArenaBelief.ArenaDeck = true;
+                    ArenaMatch.Install(harmony, log);
+                }
+                catch (Exception ex)
+                {
+                    s_ArenaBelief = null;
+                    log("Arena: not installed (Practice plays without it): " + ex);
+                }
             }
             SearchPatches.Install(harmony);
             MoveLog.Install(harmony);
@@ -254,6 +279,7 @@ namespace GwentAI.Practice
                 RolloutAim = RolloutAim,
                 DryPass = DryPass,
                 CPuct = CPuct,
+                PriorTemperature = PriorTemperature,
                 Evaluator = Scoring(Evaluator.Parse(Resource(assembly, "eval/round.json"))),
                 Prior = PolicyPrior ? PracticeBudget.LoadDefaultPrior() : null,
             };
@@ -321,7 +347,10 @@ namespace GwentAI.Practice
             {
                 seat = s_Seats[player] = s_Options.SeatFactory != null
                     ? new Seat(player, s_Options.SeatFactory(player))
-                    : new Seat(player, new FairSeat(new FairAgent(s_Settings, s_Belief, checkFairness: false, s_Workers)));
+                    : s_ArenaGame
+                        // In this process: the workers hold the roster belief.
+                        ? new Seat(player, new FairSeat(new FairAgent(s_Settings, s_ArenaBelief, checkFairness: false, null)))
+                        : new Seat(player, new FairSeat(new FairAgent(s_Settings, s_Belief, checkFairness: false, s_Workers)));
             }
             return seat;
         }
@@ -387,7 +416,18 @@ namespace GwentAI.Practice
             __instance.RandomGenerator.Copy(new MersenneTwisterRandom(seed));
             // Before LiveGame.Begin, which records the starter.
             __instance.GameInstance.Settings.StartingPlayer = starter;
-            if (s_RosterDecks)
+            // An arena match (ArenaMatch, GWENT_AI_ARENA=1): the run's
+            // drafted deck in the human's seat, a drafted deck in the AI's.
+            ArenaMatch.Game arena = s_ArenaBelief != null ? ArenaMatch.TakeNext() : null;
+            s_ArenaGame = arena != null;
+            if (arena != null)
+            {
+                EPlayerId ai = __instance.PlayerManager.GetOpponentPlayerId(humanPlayerID);
+                __instance.GameInstance.Settings.GetPlayerSettings(humanPlayerID).Deck = arena.HumanDeck;
+                __instance.GameInstance.Settings.GetPlayerSettings(ai).Deck = arena.AiDeck.ToBattleDeck();
+                s_Log($"Arena AI deck: {arena.AiDeck.Name}, {arena.AiDeck.Cards.Sum(card => card.Count)} cards");
+            }
+            else if (s_RosterDecks)
             {
                 // The AI's opponent deck from the population, in place of
                 // the client's Practice deck, before the game deals it.
@@ -412,10 +452,18 @@ namespace GwentAI.Practice
             }
             s_Seats.Clear();
             LiveGame live = LiveGame.Begin(__instance, seed);
+            // Before the record, whose game-end listener then sees the last taunt.
+            s_Emotes = PracticeEmotes.Begin(__instance, humanPlayerID, seed, s_Log);
             if (s_GamesDir != null)
             {
-                s_Record = new GameRecord(__instance, humanPlayerID, live, s_GamesDir, s_Settings, s_Seats, s_Log);
+                s_Record = new GameRecord(__instance, humanPlayerID, live, s_GamesDir, s_Settings, s_Seats, s_Emotes, s_Log, arena);
                 s_Record.Begin();
+            }
+            if (arena != null)
+            {
+                // After the record's listener: the record file is named by then.
+                string record = s_Record?.FileName;
+                __instance.EventManager.OnGameEnded.CoreEvent.AddListener((winner, reason) => ArenaMatch.Report(winner, humanPlayerID, seed, record));
             }
         }
 
@@ -558,6 +606,8 @@ namespace GwentAI.Practice
                     s_Log("Practice AI search failed; playing the first legal answer: " + job.Error);
                     moves = FirstLegal(request);
                 }
+                // A taunt, if the persona has one for this moment, before the play shows.
+                s_Emotes?.Decided(m_Player, request, moves, Answerer.Stats?.LastOrDefault());
                 foreach (Move move in moves)
                 {
                     move.Apply(m_Player, request);
@@ -620,14 +670,19 @@ namespace GwentAI.Practice
             private readonly string m_Name;
             private readonly SearchSettings m_Settings;
             private readonly Dictionary<AIPlayer, Seat> m_Seats;
+            private readonly PracticeEmotes m_Emotes;
             private readonly Action<string> m_Log;
+            // The arena match, or null for a Practice game.
+            private readonly ArenaMatch.Game m_Arena;
             private readonly DateTime m_Started = DateTime.UtcNow;
             private bool m_Ended;
             private readonly List<Dictionary<string, object>> m_Answers = new List<Dictionary<string, object>>();
 
             public GameRecord(GameController game, EPlayerId human, LiveGame live, string directory, SearchSettings settings,
-                              Dictionary<AIPlayer, Seat> seats, Action<string> log)
+                              Dictionary<AIPlayer, Seat> seats, PracticeEmotes emotes, Action<string> log, ArenaMatch.Game arena)
             {
+                m_Arena = arena;
+                m_Emotes = emotes;
                 m_Game = game;
                 m_Human = human;
                 m_Live = live;
@@ -690,10 +745,10 @@ namespace GwentAI.Practice
                 Seat ai = m_Seats.Where(entry => entry.Key.CurrentGameController == m_Game).Select(entry => entry.Value).FirstOrDefault();
                 Assembly build = typeof(PracticeAI).Assembly;
                 Dictionary<string, object> search = SearchAgent(build);
-                return new Dictionary<string, object>
+                Dictionary<string, object> game = new Dictionary<string, object>
                 {
                     ["schema"] = Schema,
-                    ["kind"] = "practice",
+                    ["kind"] = m_Arena == null ? "practice" : "arena",
                     ["file"] = m_Name + ".json",
                     ["started"] = m_Started.ToString("o"),
                     ["human"] = m_Human.ToString(),
@@ -712,6 +767,20 @@ namespace GwentAI.Practice
                     ["ai_decisions"] = ai?.Answerer.Stats,
                     ["answers"] = m_Answers,
                 };
+                // With emotes on: the persona and the taunts ("taunts").
+                m_Emotes?.Record(game);
+                // An arena match: the run before it and the AI's draft (both
+                // dealt decks are p1_deck and p2_deck).
+                if (m_Arena != null)
+                {
+                    game["arena"] = new Dictionary<string, object>
+                    {
+                        ["wins_before"] = m_Arena.WinsBefore,
+                        ["lives"] = m_Arena.Lives,
+                        ["ai_draft"] = m_Arena.AiDeck,
+                    };
+                }
+                return game;
             }
 
             // The search's entry in the record ("agent").
@@ -738,6 +807,8 @@ namespace GwentAI.Practice
                     ["rollout_aim"] = m_Settings.RolloutAim,
                     ["opponent_exploration"] = m_Settings.OpponentExploration,
                     ["keep_premium"] = m_Settings.KeepPremium,
+                    ["prior_temperature"] = m_Settings.PriorTemperature,
+                    ["opponent_temperature"] = m_Settings.OpponentTemperature,
                     ["opponent_policy"] = m_Settings.OpponentPolicy == null ? null : m_Settings.OpponentPolicy.Name,
                     ["class_b_policy"] = m_Settings.ClassBPolicy == null ? null : m_Settings.ClassBPolicy.Name,
                     ["c_puct"] = m_Settings.CPuct,
@@ -745,6 +816,7 @@ namespace GwentAI.Practice
                     ["margin"] = m_Settings.Margin,
                     ["threat_aware"] = m_Settings.ThreatAware,
                     ["policy_prior"] = m_Settings.Prior == null ? null : m_Settings.Prior.Name,
+                    ["opponent_prior"] = m_Settings.OpponentPrior == null ? null : m_Settings.OpponentPrior.Name,
                     ["deck_state"] = s_Belief.KeepDeckState,
                     ["posterior_decks"] = s_Belief.PosteriorDecks,
                     ["opponent_style"] = (s_Belief.OpponentStyle ? 1 : 0) | (m_Settings.OpponentStyle ? 2 : 0) | (m_Settings.OpponentAnswers ? 4 : 0) | (m_Settings.SelfPlayStyle ? 8 : 0),
@@ -759,7 +831,7 @@ namespace GwentAI.Practice
                 Dictionary<string, object> mine = (Dictionary<string, object>)game[human == "P1" ? "p1_deck" : "p2_deck"];
                 Dictionary<string, object> theirs = (Dictionary<string, object>)game[human == "P1" ? "p2_deck" : "p1_deck"];
                 string winner = (string)game["winner"];
-                return new Dictionary<string, object>
+                Dictionary<string, object> row = new Dictionary<string, object>
                 {
                     ["file"] = game["file"],
                     ["started"] = game["started"],
@@ -771,6 +843,12 @@ namespace GwentAI.Practice
                     ["round_scores"] = game["round_scores"],
                     ["agent"] = game["agent"],
                 };
+                // Arena rows say so; Practice rows keep their shape.
+                if ((string)game["kind"] == "arena")
+                {
+                    row["kind"] = "arena";
+                }
+                return row;
             }
 
             private Dictionary<string, object> Deck(EPlayerId id)

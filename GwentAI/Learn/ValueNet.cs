@@ -110,6 +110,29 @@ namespace GwentAI.Learn
             m_Chances = new double[m_Members.Length];
         }
 
+        // A net on the weights of another, which stay shared (nothing writes
+        // them after the constructors): its own buffers and counters.
+        private ValueNet(ValueNet weights)
+        {
+            m_Members = new Member[weights.m_Members.Length];
+            for (int i = 0; i < m_Members.Length; i++)
+            {
+                m_Members[i] = weights.m_Members[i].Fresh();
+            }
+            m_Chances = new double[m_Members.Length];
+            FullState = weights.FullState;
+            TurnStart = weights.TurnStart;
+            Pessimism = weights.Pessimism;
+            Name = weights.Name;
+            Bytes = weights.Bytes;
+        }
+
+        // A new net of the same weights with its own buffers and counters.
+        public ValueNet Fresh(string name)
+        {
+            return new ValueNet(this) { Name = name };
+        }
+
         private static void CheckEncoding(int fileVersion, int encoding)
         {
             if (encoding != StateEncoder.Version)
@@ -118,20 +141,27 @@ namespace GwentAI.Learn
             }
         }
 
+        // The weights are parsed once a process (NetCache): every call after
+        // the first for a file builds only the buffers.
         public static ValueNet Load(string path)
         {
-            return FromBytes(File.ReadAllBytes(path), Path.GetFileNameWithoutExtension(path));
+            return s_Cache.FromFile(path).Fresh(Path.GetFileNameWithoutExtension(path));
         }
 
         // A net from the bytes of its .vnet file, which it keeps (Bytes):
         // search workers receive the coordinator's net this way.
         public static ValueNet FromBytes(byte[] bytes, string name)
         {
+            return s_Cache.FromBytes(bytes).Fresh(name);
+        }
+
+        private static readonly NetCache<ValueNet> s_Cache = new NetCache<ValueNet>(bytes =>
+        {
             using (BinaryReader reader = new BinaryReader(new MemoryStream(bytes)))
             {
-                return new ValueNet(reader) { Name = name, Bytes = bytes };
+                return new ValueNet(reader) { Bytes = bytes };
             }
-        }
+        });
 
         // The .vnet file this net was read from.
         public byte[] Bytes { get; private set; }
@@ -316,6 +346,38 @@ namespace GwentAI.Learn
                 m_X = new double[m_Input];
                 m_A1 = new double[m_H1];
                 m_A2 = new double[m_H2];
+            }
+
+            // A member on the weights of another, which stay shared: its own buffers.
+            private Member(Member weights)
+            {
+                m_Vocab = weights.m_Vocab;
+                m_TemplateInputs = weights.m_TemplateInputs;
+                m_Hidden = weights.m_Hidden;
+                m_H1 = weights.m_H1;
+                m_H2 = weights.m_H2;
+                m_Input = weights.m_Input;
+                m_Index = weights.m_Index;
+                m_Templates = weights.m_Templates;
+                m_Dynamic = weights.m_Dynamic;
+                m_GlobalMean = weights.m_GlobalMean;
+                m_GlobalScale = weights.m_GlobalScale;
+                m_W1 = weights.m_W1;
+                m_B1 = weights.m_B1;
+                m_W2 = weights.m_W2;
+                m_B2 = weights.m_B2;
+                m_WOut = weights.m_WOut;
+                m_BOut = weights.m_BOut;
+                m_Zones = new double[weights.m_Zones.Length];
+                m_DynamicSums = new double[weights.m_DynamicSums.Length];
+                m_X = new double[m_Input];
+                m_A1 = new double[m_H1];
+                m_A2 = new double[m_H2];
+            }
+
+            internal Member Fresh()
+            {
+                return new Member(this);
             }
 
             private static float[] Read(BinaryReader reader, int count)

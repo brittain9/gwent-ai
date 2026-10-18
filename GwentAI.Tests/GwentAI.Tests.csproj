@@ -21,13 +21,16 @@
     <Compile Include="../GwentAI/Search/PriorSample.cs" />
     <Compile Include="../GwentAI/Search/RoundGate.cs" />
     <Compile Include="../GwentAI/Search/SplitMix64.cs" />
+    <Compile Include="../GwentAI/Sim/OracleFormat.cs" />
     <Compile Include="../GwentAI/Search/RootStat.cs" />
     <Compile Include="../GwentAI/Search/WorkBudget.cs" />
     <Compile Include="../GwentAI/Search/SecondLookChoice.cs" />
+    <Compile Include="../GwentAI/Practice/Emotes.cs" />
+    <Compile Include="../GwentAI/Practice/ArenaDraft.cs" />
     <Content Include="class-b-states.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="../data/model/fta.vnet" Link="model-fixtures/shipped-fta.vnet" CopyToOutputDirectory="PreserveNewest" />
-    <!-- The fitted nets (with their static columns) are not part of the shipped
-         project; the tests that need them skip when they are absent. -->
+    <!-- The fitted nets (with their static columns) are optional fixtures;
+         the tests that need them skip when they are absent. -->
     <Content Include="../data/eval/fta.vnet" Link="model-fixtures/fta.vnet" CopyToOutputDirectory="PreserveNewest" Condition="Exists('../data/eval/fta.vnet')" />
     <Content Include="../data/eval/fs2.vnet" Link="model-fixtures/fs2.vnet" CopyToOutputDirectory="PreserveNewest" Condition="Exists('../data/eval/fs2.vnet')" />
     <Content Include="../data/cards/roles.json" Link="card-fixtures/roles.json" CopyToOutputDirectory="PreserveNewest" />

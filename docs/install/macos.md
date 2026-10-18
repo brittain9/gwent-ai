@@ -54,6 +54,23 @@ graphics: the game's Direct3D 11 runs on Metal through DXVK and MoltenVK,
 and Metal has no transform feedback, which premium animations need. Cards
 play correctly either way.
 
+## Emotes and arena
+
+Both are on by default.
+
+- **Emotes.** The opponent uses the game's taunts like a person: some games
+  none, some games a few. To turn them off, set `GWENT_AI_EMOTES=0` before
+  you start the session.
+- **Arena, an early version.** The game's own arena screens work against
+  the AI: a free ticket, a draft of 26 cards, a leader, and a run that ends
+  at 9 wins or 3 losses. The AI drafts its deck at random, so it is easier
+  to beat in arena than in Practice. To turn it off, set `GWENT_AI_ARENA=0`
+  before you start the session. You get one new ticket each time the game
+  starts, so restart the client for a new run.
+
+Set them in the shell that runs `scripts/run-local.sh`, for example
+`GWENT_AI_EMOTES=0 scripts/run-local.sh`.
+
 ## Build from source
 
 Install the Xcode Command Line Tools (`xcode-select --install`), Python

@@ -1,6 +1,6 @@
 /*
  * Checks dist/session_net.dll in an ordinary process, without the game
- * (scripts/tests/test_session_net_windows.py builds and runs it):
+ * (the Windows session tests build and run it):
  *
  *   session_net_check DLL HOSTS LOG [galaxy]
  *

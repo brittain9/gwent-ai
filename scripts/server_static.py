@@ -7,14 +7,14 @@
     game/<version>_<secret>/config.json             the remote configuration
     game/<version>_<secret>/news.json               no news
     game/<version>_<secret>/news/1/GOG/news.initial.en-us
-    shop/platforms/GOG/products                     one card keg
+    shop/platforms/GOG/products                     one card keg, one free arena ticket
     card_definitions/prices                         card prices (see below)
 
 The client asks for its configuration under its game version and data secret,
 which it holds in the Settings asset of Gwent_Data/resources.assets; they are
 read from there, so nothing derived from the game is kept in this project. The
 response bodies are those of Somnia41205's server (MIT, server/LICENSE),
-byte for byte.
+byte for byte, except the shop's free arena ticket (server/docs/arena.md).
 
 card_definitions/prices (crafting, milling and transmutation costs per
 rarity) is the one response the client cannot supply. It is copied from
@@ -93,8 +93,15 @@ PRODUCTS = ('{"items":[{"id":"49085943257433578","platform_product_id":null,"pla
             '"available_to":"2077-01-01T01:00:00+0000","type":"normal"}],"image_url":"","image_hash":null,'
             '"translated_product_info":{"language":"en-US","name":"Gwent Card Keg",'
             '"description":"A keg containing 5 cards.","category_name":"Card Packs"},'
-            '"items":[{"type":"inventory_item","item_id":"1","count":1}],"category":{"id":"CardPacks"}}],'
-            '"total_count":1,"limit":"9223372036854775807","page_token":1,"next_page_token":null}')
+            '"items":[{"type":"inventory_item","item_id":"1","count":1}],"category":{"id":"CardPacks"}},'
+            '{"id":"8000000000000001","platform_product_id":null,"platform_specific_id":null,'
+            '"platform":"GOG","consumable":true,"country":null,"prices":[{"currency":"VIRTUAL","price":0,'
+            '"display_price":"0","available_from":"2010-01-01T01:00:00+0000",'
+            '"available_to":"2077-01-01T01:00:00+0000","type":"normal"}],"image_url":"","image_hash":null,'
+            '"translated_product_info":{"language":"en-US","name":"Arena Ticket",'
+            '"description":"One arena run, free on this server.","category_name":"Arena"},'
+            '"items":[{"type":"inventory_item","item_id":"8000","count":1}],"category":{"id":"ArenaTickets"}}],'
+            '"total_count":2,"limit":"9223372036854775807","page_token":1,"next_page_token":null}')
 
 
 def client_settings(client):

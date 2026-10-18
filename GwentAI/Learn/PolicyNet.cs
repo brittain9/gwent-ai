@@ -263,6 +263,56 @@ namespace GwentAI.Learn
             m_U = new double[m_OptionHidden];
         }
 
+        // A net on the weights of another, which stay shared (nothing writes
+        // them after the constructor above): its own buffers and counters.
+        private PolicyNet(PolicyNet weights)
+        {
+            m_Vocab = weights.m_Vocab;
+            m_TemplateInputs = weights.m_TemplateInputs;
+            m_Hidden = weights.m_Hidden;
+            m_H1 = weights.m_H1;
+            m_H2 = weights.m_H2;
+            m_Trunk = weights.m_Trunk;
+            m_OptionHidden = weights.m_OptionHidden;
+            m_Input = weights.m_Input;
+            m_Index = weights.m_Index;
+            m_TemplateInputsTable = weights.m_TemplateInputsTable;
+            m_Templates = weights.m_Templates;
+            m_Dynamic = weights.m_Dynamic;
+            m_GlobalMean = weights.m_GlobalMean;
+            m_GlobalScale = weights.m_GlobalScale;
+            m_W1 = weights.m_W1;
+            m_B1 = weights.m_B1;
+            m_W2 = weights.m_W2;
+            m_B2 = weights.m_B2;
+            m_Wt = weights.m_Wt;
+            m_Bt = weights.m_Bt;
+            m_Kind = weights.m_Kind;
+            m_OptionTemplates = weights.m_OptionTemplates;
+            m_OptionDynamic = weights.m_OptionDynamic;
+            m_OptionBias = weights.m_OptionBias;
+            m_Out = weights.m_Out;
+            m_OutBias = weights.m_OutBias;
+            m_Zones = new double[weights.m_Zones.Length];
+            m_DynamicSums = new double[weights.m_DynamicSums.Length];
+            m_X = new double[m_Input];
+            m_A1 = new double[m_H1];
+            m_A2 = new double[m_H2];
+            m_T = new double[m_Trunk];
+            m_V = new double[m_OptionHidden];
+            m_U = new double[m_OptionHidden];
+            Name = weights.Name;
+            Bytes = weights.Bytes;
+        }
+
+        // A new net of the same weights with its own buffers, counters and
+        // fold state (a net keeps scratch state, so seats that must count
+        // their passes apart each take one).
+        public PolicyNet Fresh(string name)
+        {
+            return new PolicyNet(this) { Name = name };
+        }
+
         private static float[] Read(BinaryReader reader, int count)
         {
             float[] values = new float[count];
@@ -283,20 +333,27 @@ namespace GwentAI.Learn
             return wide;
         }
 
+        // The weights are parsed once a process (NetCache): every call after
+        // the first for a file builds only the buffers.
         public static PolicyNet Load(string path)
         {
-            return FromBytes(File.ReadAllBytes(path), Path.GetFileNameWithoutExtension(path));
+            return s_Cache.FromFile(path).Fresh(Path.GetFileNameWithoutExtension(path));
         }
 
         // A net from the bytes of its .pnet file, which it keeps (Bytes):
         // search workers receive the coordinator's net this way.
         public static PolicyNet FromBytes(byte[] bytes, string name)
         {
+            return s_Cache.FromBytes(bytes).Fresh(name);
+        }
+
+        private static readonly NetCache<PolicyNet> s_Cache = new NetCache<PolicyNet>(bytes =>
+        {
             using (BinaryReader reader = new BinaryReader(new MemoryStream(bytes)))
             {
-                return new PolicyNet(reader) { Name = name, Bytes = bytes };
+                return new PolicyNet(reader) { Bytes = bytes };
             }
-        }
+        });
 
         // The .pnet file this net was read from.
         public byte[] Bytes { get; private set; }

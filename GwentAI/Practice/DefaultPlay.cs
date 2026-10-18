@@ -42,5 +42,9 @@ namespace GwentAI.Practice
         // cut; the round evaluator before it).
         public const string ValueNet = "fta";
         public const int NetFromRound = 2;
+        // The softmax temperature of the policy prior while it is the embedded net
+        // (SearchSettings.PriorTemperature); above 1 flattens the prior toward an even
+        // share of the legal steps. Any other prior is drawn at 1.
+        public const double PriorTemperature = 1;
     }
 }

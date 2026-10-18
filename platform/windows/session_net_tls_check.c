@@ -1,7 +1,7 @@
 /*
  * Checks session_net.dll's certificate acceptance in an ordinary process,
- * without the game (scripts/tests/test_session_net_windows.py builds and runs
- * it): a TLS handshake through Schannel exactly as Galaxy64.dll's libcurl
+ * without the game (the Windows session tests build and run it): a TLS
+ * handshake through Schannel exactly as Galaxy64.dll's libcurl
  * 7.57 makes one (InitSecurityInterfaceA fetched with GetProcAddress, an
  * outbound credential with SCH_CRED_AUTO_CRED_VALIDATION and
  * SCH_CRED_REVOCATION_CHECK_CHAIN, the server name as the target).

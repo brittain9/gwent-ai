@@ -14,21 +14,21 @@ namespace GwentAI.Tests
     // refused. The file's bytes decide the outputs of the net, so equal bytes
     // are equal outputs.
     //
-    // The fitted nets (data/eval) are not part of the shipped project; the tests
-    // that need one skip when it is absent, and the ones on the shipped
-    // net (data/model/fta.vnet) always run.
+    // The fitted nets (data/eval) are optional fixtures: the tests that need
+    // one skip when it is absent, and the ones on the AI's own net
+    // (data/model/fta.vnet) always run.
     public class ValueModelTests
     {
         private const int HeaderInts = 12;
 
-        // A test that needs a fitted net, which a shipped checkout lacks.
+        // A test that needs a fitted net (data/eval); it skips without one.
         private sealed class FittedNetFactAttribute : FactAttribute
         {
             public FittedNetFactAttribute(string name = "fta.vnet")
             {
                 if (!File.Exists(Path.Combine(AppContext.BaseDirectory, "model-fixtures", name)))
                 {
-                    Skip = $"{name}, a fitted net, is not in this checkout";
+                    Skip = $"{name}, an optional fitted net, is absent";
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace GwentAI.Tests
         [FittedNetFact]
         public void TheStrippedCopyTheBuildToolWritesIsTheOneTheLoaderReads()
         {
-            // data/model/fta.vnet is scripts/vnet_strip.py's copy of data/eval/fta.vnet.
+            // data/model/fta.vnet is data/eval/fta.vnet with its static columns zeroed.
             Assert.Equal(Fixture("shipped-fta.vnet"), ValueModel.Strip(Fixture("fta.vnet")));
         }
 

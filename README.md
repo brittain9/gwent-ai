@@ -48,6 +48,17 @@ hand. This project replaces it.
   that.
 - **Fair play.** It sees only what a human in its seat would see, and it
   uses the game's own rules engine, so every card works as it did in 2018.
+- **Emotes.** The opponent uses the game's taunts like a person: silent in
+  about half the games, a taunt or two in most of the rest, chatty in one
+  game in ten. Set `GWENT_AI_EMOTES=0` before starting the session to turn
+  them off.
+- **Arena, an early version.** The game's arena screens work against it: a
+  free ticket, a draft of 26 cards, a leader, and a run that ends at 9 wins
+  or 3 losses. The AI drafts at random, so its arena decks lack the synergy
+  of its Practice decks and it is easier to beat there. A later release can
+  teach it to draft for a plan. There is no rewards screen, and you get one
+  new ticket each time the game starts. Set `GWENT_AI_ARENA=0` to turn it
+  off. Emotes and arena are tested on Linux and macOS.
 - **Decks and time.** It plays the decks of the 2018 ladder, a different one
   each match, and thinks for about 10 seconds on a normal move and up to 30
   on a hard one. More processor cores make it stronger.
@@ -58,8 +69,8 @@ This is still an early release. The AI won 30 out of 30 games against the
 built-in AI—a 100% win rate in that test. It can punish mistakes and
 experimental play, but you can still beat it with a strong deck you know
 well.
-Release 0.3.0 against the previous release, head to head:
-[results/v0.3.0.md](results/v0.3.0.md).
+Release 0.4.0 plays with the same AI as 0.3.0. Release 0.3.0 against the
+release before it, head to head: [results/v0.3.0.md](results/v0.3.0.md).
 
 ## Play against it
 
@@ -75,8 +86,8 @@ the local server. What changed in each release: [CHANGELOG.md](CHANGELOG.md).
    turn premium cards off in the game's settings: their animations do not
    render on a Mac, and the cards show no art.
 
-Quick start on Windows, from the extracted `gwent-ai` folder (needs Python
-3.10+ and the .NET 10 runtime):
+Quick start on Windows, from the extracted `gwent-ai` folder (needs 64-bit
+Python 3.10 to 3.14 and the .NET 10 runtime):
 
 ```powershell
 scripts\setup.cmd       # once: downloads what it needs and prepares your client
@@ -103,8 +114,8 @@ or [macOS build steps](docs/install/macos.md#build-from-source).
 [Settings](docs/install/options.md) include the think time.
 [Architecture](docs/install/architecture.md) explains how the code is organised.
 
-Release 0.3.0 is tested on Linux (Fedora), where the AI is developed.
-Windows 11 was tested for 0.2.0 and macOS (Apple silicon) for 0.1.0.
+Release 0.4.0 is tested on Linux (Fedora), where the AI is developed, and
+on macOS (Apple silicon). Windows 11 was tested for 0.2.0.
 
 ## What is in the project
 

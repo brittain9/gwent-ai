@@ -4,6 +4,49 @@ Notable changes to the project. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] - 2026-10-18
+
+Same AI as 0.3.0, with emotes, arena mode and a Windows setup fix.
+
+### Added
+
+- Emotes: the opponent uses the game's taunts like a person. Each game it
+  draws a persona: about half the games it stays silent, most of the rest
+  a taunt or two, and one game in ten it is chatty, up to five. It reacts
+  to a round lost narrowly (Curses), a round it threw away after leading
+  (Well played), a helpful pass by you (Thanks), a big gold card about to
+  be played (Watch this), a round-3 lead with a card in hand (a threat) and
+  a lost game (Well played; nothing after a win). At least three of its own
+  decisions pass between taunts, and a muted opponent sends nothing. On by
+  default; set `GWENT_AI_EMOTES=0` before starting the session to turn it
+  off.
+- Arena, an early version: the game's own arena screens work against this
+  AI. The local server gives a free ticket, a draft of 26 cards (four offers
+  a pick, one tier per pick in a shuffled mix of 9 gold, 8 silver and 9
+  bronze, any faction, no card offered twice) and then a leader from four.
+  A run ends at 9 wins or 3 losses. Each match is a local game against the
+  AI, which drafts its own deck at random from the same offers and plays it
+  with its full search and the emotes. The local server saves progress, so
+  a run resumes after a restart. On by default; set `GWENT_AI_ARENA=0` to
+  turn it off.
+
+### Fixed
+
+- Windows: setup on a Python without a prebuilt lz4 wheel failed with a
+  compiler error ("Failed building wheel for lz4"). Setup now checks for a
+  supported Python (3.10 to 3.14, 64-bit), installs prebuilt wheels only,
+  and prints a plain message otherwise.
+
+### Known limits
+
+Arena is early: the AI picks its draft at random, so its arena decks have
+none of the synergy of its Practice decks and it is much easier to beat
+there. A later release can teach it to draft for a plan. There is no
+rewards screen after a run; the game's rewards screen may wait and show a
+timeout. You get one new ticket each time the game starts, so restart the
+client for the next run. Emotes and arena were tested on Linux and macOS
+(Apple silicon), not yet on Windows.
+
 ## [0.3.0] - 2026-10-13
 
 A trained value network judges positions from round 2 on. Wins 56% of the
@@ -13,7 +56,7 @@ simulations a move, 13 October 2026; details in
 
 ### Added
 
-- A value network (`data/eval/fta.vnet`) that judges the positions where the
+- A value network (`data/model/fta.vnet`) that judges the positions where the
   search stops looking ahead, from round 2 on. Round 1 keeps the simpler
   scorer.
 

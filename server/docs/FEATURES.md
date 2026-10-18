@@ -24,11 +24,14 @@ real matches against other people.
 - **Mill cards** you don't want for scraps.
 - **Level up** and collect your level-up rewards.
 - **Friends**, friend requests and friend-match invites.
+- **Arena draft**: a free ticket, a 26-card and leader draft, the encounter
+  screen, and wins and losses recorded by the local AI mod
+  ([arena.md](arena.md)).
 
 ## Not yet implemented
 
 - **Ranked play** — ranked matchmaking, leaderboards, and seasons.
-- **Arena mode.**
+- **Arena rewards** and arena matchmaking against other people.
 - **Buying meteorite powder.**
 - **Trinket unlocking** — all trinkets are available from the start rather than
   being unlocked.

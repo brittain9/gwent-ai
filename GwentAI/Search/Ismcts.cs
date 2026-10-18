@@ -200,6 +200,15 @@ namespace GwentAI.Search
         // determinizations that select at the node (an opponent node is
         // shared by determinizations in which its hand differs). Null: UCB.
         public GwentAI.Learn.PolicyNet Prior;
+        // Opponent modelling separated from the searcher's own policy prior
+        // (a net of its own, as OpponentPolicy is apart from Prior): at a PUCT
+        // node where the opponent of the searching seat moves, P comes from
+        // this net instead of Prior, at the same PriorTemperature and
+        // PriorSamples. Prior then guides the searching seat's own moves
+        // alone and this net predicts the opponent's. Needs Prior (the
+        // selection is PUCT only with it), and is not taken at nodes
+        // OpponentPolicy draws. Null: Prior at every node.
+        public GwentAI.Learn.PolicyNet OpponentPrior;
         public double CPuct = 1.5;
         // First-play urgency reduction an unvisited step of a PUCT
         // node is valued at the node's visited mean minus this, so low-prior
@@ -216,6 +225,9 @@ namespace GwentAI.Search
         // Softmax temperature of the prior; below 1 sharpens it toward the
         // net's favourite steps.
         public double PriorTemperature = 1;
+        // Softmax temperature of the opponent policy's draw (OpponentPolicy), apart from
+        // the prior's: a default for the prior leaves the opponent's draw as it was.
+        public double OpponentTemperature = 1;
         // Rollout policy: steps below the tree are sampled from this net's
         // softmax at RolloutTemperature instead of uniformly. Null: uniform
         // picks plus the pass rules (Rollout). RolloutPolicyFromRound: the
@@ -605,6 +617,8 @@ namespace GwentAI.Search
 
         private Ismcts[] m_Helpers;
         private long m_PriorCallsAtStart, m_HiddenFallbacksAtStart;
+        // The opponent prior's counters at the start, read as the prior's are.
+        private long m_OpponentPriorCalls, m_OpponentPriorTicks, m_OpponentPriorFallbacks;
 
         // One tree's search (or one per world in PIMC); the roots hold its
         // statistics.
@@ -651,6 +665,12 @@ namespace GwentAI.Search
                 m_HiddenFallbacksAtStart = m_Settings.Prior.HiddenFallbacks;
                 m_PriorTicks = m_Settings.Prior.Ticks;
             }
+            if (m_Settings.OpponentPrior != null)
+            {
+                m_OpponentPriorCalls = m_Settings.OpponentPrior.Calls;
+                m_OpponentPriorFallbacks = m_Settings.OpponentPrior.HiddenFallbacks;
+                m_OpponentPriorTicks = m_Settings.OpponentPrior.Ticks;
+            }
             BeginTally();
             System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
             Budget(m_Settings, m_RootType, out int budget, out m_IterationBudget);
@@ -686,8 +706,8 @@ namespace GwentAI.Search
             result.MastTrace = m_Mast?.Trace;
             if (m_Settings.Prior != null)
             {
-                result.PriorCalls = m_Settings.Prior.Calls - m_PriorCallsAtStart;
-                result.HiddenFallbacks = m_Settings.Prior.HiddenFallbacks - m_HiddenFallbacksAtStart;
+                result.PriorCalls = m_Settings.Prior.Calls - m_PriorCallsAtStart + OpponentPriorPasses();
+                result.HiddenFallbacks = m_Settings.Prior.HiddenFallbacks - m_HiddenFallbacksAtStart + OpponentPriorFallbacks();
             }
             return result;
         }
@@ -803,6 +823,23 @@ namespace GwentAI.Search
             return (m_Settings.OpponentPolicy?.Calls ?? 0) - m_OpponentCalls;
         }
 
+        // The opponent prior's passes, its time and its hidden-kind fallbacks
+        // since the search began: counted with the prior's.
+        private long OpponentPriorPasses()
+        {
+            return (m_Settings.OpponentPrior?.Calls ?? 0) - m_OpponentPriorCalls;
+        }
+
+        private long OpponentPriorTicks()
+        {
+            return (m_Settings.OpponentPrior?.Ticks ?? 0) - m_OpponentPriorTicks;
+        }
+
+        private long OpponentPriorFallbacks()
+        {
+            return (m_Settings.OpponentPrior?.HiddenFallbacks ?? 0) - m_OpponentPriorFallbacks;
+        }
+
         // The search's work so far in units (WorkWeights).
         private long WorkUnits(SearchResult result)
         {
@@ -812,7 +849,7 @@ namespace GwentAI.Search
                 valuePasses += m_ValueNets[i].Calls - m_ValueCalls[i];
             }
             return WorkWeights.Units(result.Iterations, m_Actions, valuePasses, (m_Settings.RolloutPolicy?.Calls ?? 0) - m_RolloutCalls,
-                                     (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses());
+                                     (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses() + OpponentPriorPasses());
         }
 
         private WorkTally Tally(SearchResult result)
@@ -823,9 +860,9 @@ namespace GwentAI.Search
                 Simulations = result.Iterations,
                 Actions = m_Actions,
                 RolloutPasses = (m_Settings.RolloutPolicy?.Calls ?? 0) - m_RolloutCalls,
-                PriorPasses = (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses(),
+                PriorPasses = (m_Settings.Prior == null ? 0 : m_Settings.Prior.Calls - m_PriorCallsAtStart) + OpponentPasses() + OpponentPriorPasses(),
                 RolloutMs = ((m_Settings.RolloutPolicy?.Ticks ?? 0) - m_RolloutTicks) * tick,
-                PriorMs = ((m_Settings.Prior == null ? 0 : m_Settings.Prior.Ticks - m_PriorTicks) + (m_Settings.OpponentPolicy?.Ticks ?? 0) - m_OpponentTicks) * tick,
+                PriorMs = ((m_Settings.Prior == null ? 0 : m_Settings.Prior.Ticks - m_PriorTicks) + (m_Settings.OpponentPolicy?.Ticks ?? 0) - m_OpponentTicks + OpponentPriorTicks()) * tick,
             };
             for (int i = 0; i < m_ValueNets.Count; i++)
             {
@@ -1188,7 +1225,7 @@ namespace GwentAI.Search
                 policy.Add(action, player.Id);
             }
             double[] scores = policy.Evaluate(player.CurrentGameController, player.Id, null, request, taken.Count);
-            double[] probabilities = policy.Probabilities(scores, m_Settings.PriorTemperature);
+            double[] probabilities = policy.Probabilities(scores, m_Settings.OpponentTemperature);
             GameAction best = legal[PriorSample.Draw(probabilities, legal.Count, m_Random)];
             if (!node.Children.TryGetValue(best.Key, out Node bestChild))
             {
@@ -1209,7 +1246,8 @@ namespace GwentAI.Search
         // determinization, with ISMCTS availability counts in place of the
         // parent's visits. The prior comes from the policy net, scored from
         // the mover's own view of the determinized game: the searching seat
-        // sees its real hand, the opponent its sampled one. A node's children
+        // sees its real hand, the opponent its sampled one. At the opponent's
+        // nodes it is OpponentPrior when that is set. A node's children
         // keep the running mean of their prior over the first PriorSamples
         // determinizations that select here; a child first seen later takes
         // a uniform share. Every legal step has a child, so an unvisited
@@ -1218,7 +1256,7 @@ namespace GwentAI.Search
         // visits is the expansion.
         private GameAction SelectPuct(Node node, Player player, ARequestAction request, ICollection<string> taken, List<GameAction> legal)
         {
-            PolicyNet prior = m_Settings.Prior;
+            PolicyNet prior = player.Id != m_Observer && m_Settings.OpponentPrior != null ? m_Settings.OpponentPrior : m_Settings.Prior;
             bool sample = node.PriorSamples < m_Settings.PriorSamples;
             double[] probabilities = null;
             if (sample)

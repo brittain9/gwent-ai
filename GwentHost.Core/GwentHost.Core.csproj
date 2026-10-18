@@ -31,7 +31,7 @@
     <TieredPGO>false</TieredPGO>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../GwentHost/Program.cs;../GwentHost/HostPatches.cs;../GwentHost/EnginePatches.cs;../GwentHost/RngPatches.cs;../GwentHost/EnginePack.cs;../GwentHost/FilterMemo.cs;../GwentHost/EventPatches.cs;../GwentHost/EnginePackSelfTest.cs;../GwentHost/ClientAssets.cs;../GwentHost/DeckCheck.cs;../GwentHost/UnitySort.cs;../GwentHost/SelfTest.cs" />
+    <Compile Include="../GwentHost/Program.cs;../GwentHost/HostPatches.cs;../GwentHost/EnginePatches.cs;../GwentHost/RngPatches.cs;../GwentHost/EnginePack.cs;../GwentHost/FilterMemo.cs;../GwentHost/EventPatches.cs;../GwentHost/EnginePackSelfTest.cs;../GwentHost/ClientAssets.cs;../GwentHost/DeckCheck.cs;../GwentHost/UnitySort.cs;../GwentHost/SelfTest.cs;../GwentHost/OracleDumps.cs" />
   </ItemGroup>
   <ItemGroup>
     <!-- The engine compiles against the client's assemblies and loads from

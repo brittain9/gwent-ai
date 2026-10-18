@@ -3,9 +3,10 @@ set -euo pipefail
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 [[ -x "$ROOT/.venv/bin/python" ]] || { echo 'run-local: no .venv; run scripts/setup.sh --play' >&2; exit 1; }
 # An optional local override file, .runtime/playtest/env, names the agent
-# (GWENT_AI_AGENT) and think time (GWENT_AI_THINK_MS) Practice plays, over the
-# same variables in the calling shell. Only the plain Practice session reads it;
-# a session with its own program (GWENT_SESSION_PROGRAM) does not.
+# (GWENT_AI_AGENT), think time (GWENT_AI_THINK_MS), emotes (GWENT_AI_EMOTES) and
+# arena (GWENT_AI_ARENA) Practice plays, over the same variables in the calling
+# shell. Only the plain Practice session reads it; a session with its own
+# program (GWENT_SESSION_PROGRAM) does not.
 if [[ -z "${GWENT_SESSION_PROGRAM:-}" && -f "$ROOT/.runtime/playtest/env" ]]; then
     echo "run-local: reading local overrides from $ROOT/.runtime/playtest/env" >&2
     source "$ROOT/.runtime/playtest/env"
@@ -14,6 +15,10 @@ fi
 # (PracticeAI ThinkExtend), so a 20 s budget gives about 10 s for most plays and at
 # most 30 s. Override per run (13333: about 6.7 s, at most 20 s).
 export GWENT_AI_THINK_MS="${GWENT_AI_THINK_MS:-20000}"
+# The opponent's emotes and arena mode are on unless set to 0, in the calling
+# shell or in the local override file sourced above.
+export GWENT_AI_EMOTES="${GWENT_AI_EMOTES:-1}"
+export GWENT_AI_ARENA="${GWENT_AI_ARENA:-1}"
 # Use matching .NET workers when available; downloaded releases use Mono.
 # An explicit runtime selection remains strict.
 export GWENT_WORKER_RUNTIME="${GWENT_WORKER_RUNTIME:-auto}"

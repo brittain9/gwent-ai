@@ -71,6 +71,11 @@ namespace GwentAI.Sim
             // would never pass its next state change.
             game.CanAdvanceState = true;
             RepairCopy(source, game);
+            if (CloneExact)
+            {
+                RepairCopyExact(source, game);
+            }
+            AfterClone?.Invoke(source, game);
             playout.Game.EventManager.OnGameEnded.CoreEvent.AddListener(playout.OnGameEnded);
             PhaseClock.Stop(Phase.CloneRepair, t2);
             return playout;
@@ -142,6 +147,78 @@ namespace GwentAI.Sim
                     property.DeclaringType.GetProperty(property.Name).GetSetMethod(true)
                         .Invoke(request, new object[] { copy.AbilityManager.Find(ability.Id) });
                 }
+            }
+        }
+
+        // GWENT_CLONE_EXACT=1 (default off): the copy gaps RepairCopy leaves,
+        // repaired too, so a copy's state dump (StateDump) equals its
+        // source's. Off, copies are the ones the search has always used.
+        public const string CloneExactVariable = "GWENT_CLONE_EXACT";
+        public static readonly bool CloneExact = Environment.GetEnvironmentVariable(CloneExactVariable) == "1";
+
+        // Called with the source and the finished copy, before the copy plays:
+        // a clone check compares their state dumps here.
+        public static Action<GameController, GameController> AfterClone;
+
+        private static readonly MethodInfo s_SetTriggerInfo = AccessTools.PropertySetter(typeof(AbilityInstance), nameof(AbilityInstance.TriggerInfo));
+        private static readonly MethodInfo s_SetBeingPlayed = AccessTools.PropertySetter(typeof(Card), nameof(Card.IsBeingPlayed));
+
+        // The copy gaps that RepairCopy does not repair:
+        // - 8: ListExt.MapReferences(List<Location>) clears its list and then
+        //   loops to the cleared count, so BattleRestrictions.ForcePlayLocations
+        //   and ForcedSelectionOptions.ValidLocations are empty in every copy.
+        //   They are mapped from the source's lists onto the copy's board.
+        // - 9: Player.Copy does not copy HasMadeInitialMoveForCurrentTurn.
+        // - 10: AbilityInstance.Clone clones its own TriggerInfo, so instances
+        //   that shared one info (one trigger firing several passives) hold
+        //   distinct infos in the copy, and AbortForAll/AbortForAbility, which
+        //   compare infos by reference, abort nothing there. The copy's
+        //   instances are regrouped onto one clone per source info.
+        // - 12 (found by comparing state dumps): Card.Copy does not copy
+        //   IsBeingPlayed, so a card on the execution stack being played is
+        //   seen by its new owner's side (Card.IsVisibleTo) and pops as moved,
+        //   not played (PopCardFromExecutionStackAction), in the copy.
+        // Gap 11 (DrawAction.Copy sets UseAllDeck from Random) is not a gap:
+        // the method assigns UseAllDeck = drawAction.UseAllDeck again two
+        // lines later, and a copy's state dump shows no difference.
+        private static void RepairCopyExact(GameController source, GameController copy)
+        {
+            BoardManager board = copy.CardManager.BoardManager;
+            for (int i = 0; i < copy.PlayerManager.Players.Length; i++)
+            {
+                Player original = source.PlayerManager.Players[i];
+                Player player = copy.PlayerManager.Players[i];
+                player.HasMadeInitialMoveForCurrentTurn = original.HasMadeInitialMoveForCurrentTurn;
+                MapRows(player.Restrictions.ForcePlayLocations, original.Restrictions.ForcePlayLocations, board);
+                MapRows(player.Restrictions.ForcedSelectionOptions.ValidLocations, original.Restrictions.ForcedSelectionOptions.ValidLocations, board);
+            }
+            Card[] sourceCards = source.CardManager.AllCards;
+            Card[] copyCards = copy.CardManager.AllCards;
+            for (int i = 0; i < copyCards.Length && i < sourceCards.Length; i++)
+            {
+                if (copyCards[i] != null && sourceCards[i] != null && copyCards[i].IsBeingPlayed != sourceCards[i].IsBeingPlayed)
+                {
+                    s_SetBeingPlayed.Invoke(copyCards[i], new object[] { sourceCards[i].IsBeingPlayed });
+                }
+            }
+            List<AbilityInstance> originals = source.AbilityManager.ActiveInstances;
+            List<AbilityInstance> copies = copy.AbilityManager.ActiveInstances;
+            int[] shares = OracleFormat.ShareGroups(originals.Select(instance => (object)instance.TriggerInfo).ToList());
+            for (int i = 0; i < copies.Count && i < originals.Count; i++)
+            {
+                if (shares[i] != i && copies[i].Id == originals[i].Id)
+                {
+                    s_SetTriggerInfo.Invoke(copies[i], new object[] { copies[shares[i]].TriggerInfo });
+                }
+            }
+        }
+
+        private static void MapRows(List<Location> rows, List<Location> originals, BoardManager board)
+        {
+            rows.Clear();
+            foreach (Location row in originals)
+            {
+                rows.Add(board.GetLocation(row.PlayerId, row.Loc));
             }
         }
 

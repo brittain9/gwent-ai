@@ -37,6 +37,26 @@ BIND_HOST = os.environ.get("GWENT_BIND_HOST", "127.0.0.1")
 # Path to the game's card templates XML — update this to your data_definitions file path
 CARD_TEMPLATES_FILE = os.path.join(DATA_DIR, "Data_definitions/Templates.xml")
 
+# ── Arena (quest runs, draft, results): server/deploy/arena.py, docs/arena.md ──
+import arena as _arena
+_arena_store = _arena.ArenaStore(DATA_DIR, lambda: _arena.load_tier_pool(CARD_TEMPLATES_FILE))
+
+
+def _push_quest_notification(uid, notification):
+    """Ask the broker (trigger port 8446) to push a quest_updated notification."""
+    try:
+        import socket as _socket
+        trigger = json.dumps({"type": "quest_updated", "target_user_id": str(uid),
+                              "notification": notification})
+        s = _socket.socket(_socket.AF_INET, _socket.SOCK_STREAM)
+        s.settimeout(3.0)
+        s.connect(("127.0.0.1", 8446))
+        s.sendall(("POST / HTTP/1.1\r\nContent-Length: " + str(len(trigger)) + "\r\n\r\n").encode() + trigger.encode())
+        s.recv(64)
+        s.close()
+    except Exception as e:
+        print(f"[Arena] Broker trigger failed: {e}")
+
 # In-memory session deltas, now per-user: { user_id_str: {1: 0, 2: 0, 3: 0} }
 session_currency_deltas = {}
 _user_data_locks = {}  # Per-user file locks: { user_id_str: threading.Lock() }
@@ -1164,6 +1184,29 @@ class GwentHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def arena_route(self, method, raw_body=b""):
+        """Serve an arena route (arena.handle_client); True when handled."""
+        from urllib.parse import urlparse, parse_qs as _pq
+        parsed = urlparse(self.path)
+        query = {k: v[0] for k, v in _pq(parsed.query).items()}
+        try:
+            body = json.loads(raw_body) if raw_body else {}
+        except ValueError:
+            body = {}
+        out = _arena.handle_client(_arena_store, method, parsed.path, query, body)
+        if out is None:
+            return False
+        status, obj, notification = out
+        if obj is None:
+            self.send_response(status)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+        else:
+            self.send_json(obj, status=status)
+        if notification is not None:
+            _push_quest_notification(_extract_user_id(parsed.path), notification)
+        return True
+
     def collection_response(self, items):
         return {"items": items, "total_count": len(items), "limit": 100, "page_token": "", "next_page_token": ""}
 
@@ -1226,7 +1269,9 @@ class GwentHandler(BaseHTTPRequestHandler):
 
             # Track kegs in inventory
             inventory = data.setdefault("inventory", {})
-            total_kegs = sum(p.get("count", 1) for p in products)
+            # The free arena ticket product (scripts/server_static.py) is not a keg.
+            total_kegs = sum(p.get("count", 1) for p in products
+                             if _arena.TICKET_PRODUCT_ID not in json.dumps(p))
             inventory["1"] = inventory.get("1", 0) + total_kegs
             save_data(data, uid)
 
@@ -1271,6 +1316,8 @@ class GwentHandler(BaseHTTPRequestHandler):
     # --- GET ---
     def do_GET(self):
         path = self.path.split("?")[0]
+        if self.arena_route("GET"):
+            return
         uid = _extract_user_id(path)
         data = load_data(uid)
 
@@ -1573,15 +1620,12 @@ class GwentHandler(BaseHTTPRequestHandler):
         # game's ServiceEvents fired ServiceTimeout -> GlobalNetworkManager
         # "Enqueue connection lost" -> [SessionManager] Connection lost -> sign
         # out (this was the real "service interrupted" cause; see GwentClient.log).
-        # Return EMPTY collections: satisfies the request with no quest-reward
-        # logic to implement. (gwent-quests.gog.com is now in the redirect lists.)
+        # (gwent-quests.gog.com is now in the redirect lists.) The only quest
+        # served is the arena run: its definition here; user quests, quest
+        # decks, the ticket's consumption and arena opponents in arena_route
+        # (arena.py, server/docs/arena.md). Daily quests stay empty.
         elif re.match(r"^/quest_definitions$", path):
-            self.send_json({"items": [], "total_count": 0, "limit": 100,
-                            "page_token": "", "next_page_token": None})
-
-        elif re.match(r"^/users/\d+/quests$", path):
-            self.send_json({"items": [], "total_count": 0, "limit": 100,
-                            "page_token": "", "next_page_token": None})
+            self.send_json(_arena.collection([_arena.quest_definition()]))
 
         # ---- User products / payment methods ----
         elif re.match(r"^/users/\d+/products$", path):
@@ -1636,6 +1680,9 @@ class GwentHandler(BaseHTTPRequestHandler):
                     "state": "Equipped" if v["id"] in equipped_ids else "New",
                     "user_id": int(uid or "50069134988124048")
                 })
+            if uid:
+                arena_doc = _arena_store.load(uid)
+                items.append(_arena.ticket_item(uid, consumed=_arena_store.active(arena_doc) is not None))
 
             self.send_json(self.collection_response(items))
 
@@ -1935,6 +1982,8 @@ class GwentHandler(BaseHTTPRequestHandler):
         path = self.path.split("?")[0]
         length = int(self.headers.get("Content-Length", 0))
         raw_body = self.rfile.read(length) if length else b""
+        if self.arena_route("POST", raw_body):
+            return
 
         # ---- User registration (handled before uid/data parsing) ----
         if path == "/register":
@@ -2896,7 +2945,29 @@ class InternalHandler(BaseHTTPRequestHandler):
         "nilfgaard": "Nilfgaard", "scoiatael": "Scoiatael", "skellige": "Skellige",
     }
 
+    def _arena(self, method):
+        """Mod routes /internal/arena/{uid}[/result|/retire] (arena.py)."""
+        if not self.path.startswith("/internal/arena/"):
+            return False
+        body = {}
+        if method == "POST":
+            length = int(self.headers.get("Content-Length", 0))
+            try:
+                body = json.loads(self.rfile.read(length)) if length else {}
+            except ValueError:
+                body = {}
+        out = _arena.handle_internal(_arena_store, method, self.path, body)
+        if out is None:
+            return False
+        status, obj, notification = out
+        self._send_json(status, obj)
+        if notification is not None:
+            _push_quest_notification(self.path.split("/")[3], notification)
+        return True
+
     def do_GET(self):
+        if self._arena("GET"):
+            return
         m = re.match(r"^/internal/user_battle_deck/(\d+)$", self.path)
         if m:
             uid = m.group(1)
@@ -2977,6 +3048,8 @@ class InternalHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_POST(self):
+        if self._arena("POST"):
+            return
         if re.match(r"^/internal/game_invitations/\d+$", self.path):
             target_id = int(self.path.split("/")[-1])
             length = int(self.headers.get("Content-Length", 0))

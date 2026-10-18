@@ -7,7 +7,7 @@ with the same search workers as Linux and macOS.
 ## What you need
 
 - The [client](client.md), extracted to a folder named `client`.
-- Python 3.10 or later, and the .NET 10 runtime for the AI's search workers.
+- Python 3.10 to 3.14 (64-bit), and the .NET 10 runtime for the AI's search workers.
   In PowerShell:
 
   ```powershell
@@ -59,6 +59,25 @@ the game, which is weaker), `--stock-ai` (the game's own AI). See
 [options.md](options.md). `scripts\run-local.cmd --smoke` checks the server
 and a search worker without starting the game.
 
+## Emotes and arena
+
+Both are on by default. They were tested on Linux and macOS, not yet on
+Windows.
+
+- **Emotes.** The opponent uses the game's taunts like a person: some games
+  none, some games a few. To turn them off, set `GWENT_AI_EMOTES=0` before
+  you start the session.
+- **Arena, an early version.** The game's own arena screens work against
+  the AI: a free ticket, a draft of 26 cards, a leader, and a run that ends
+  at 9 wins or 3 losses. The AI drafts its deck at random, so it is easier
+  to beat in arena than in Practice. To turn it off, set `GWENT_AI_ARENA=0`
+  before you start the session. You get one new ticket each time the game
+  starts, so restart the client for a new run.
+
+The session reads them from the environment of the shell that runs
+`scripts\run-local.cmd`. In `cmd`, run `set GWENT_AI_EMOTES=0`; in
+PowerShell, run `$env:GWENT_AI_EMOTES = "0"`. Do this before you run it.
+
 ## What it changes on your PC
 
 Nothing outside two folders, and no administrator rights:
@@ -105,6 +124,9 @@ trusted certificate if you added one. Then delete the `gwent-ai` folder.
 
 - **Setup says .NET 10 is missing:** run the `winget` line above, then open
   a new window.
+- **"Failed building wheel for lz4":** your Python has no prebuilt lz4
+  wheel. Install Python 3.12 with the `winget` line above, open a new
+  window and run setup again.
 - **"Ports in use":** another program holds a port the server needs. GOG
   Galaxy holds 9977, so quit it; a local web server or VPN client may hold
   443.

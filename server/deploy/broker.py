@@ -938,6 +938,15 @@ def notification_trigger_server():
                     args=(target_uid, payload.get("notification", {})),
                     daemon=True,
                 ).start()
+            elif notif_type == "quest_updated":
+                # Arena runs (server/deploy/arena.py): the client's QuestListener
+                # adds or updates the quest from payload.user_quest.
+                print(f"[BROKER] Trigger quest_updated target={target_uid}")
+                threading.Thread(
+                    target=push_notification,
+                    args=(payload.get("notification", {}), target_uid),
+                    daemon=True,
+                ).start()
             elif notif_type == "good_game":
                 print(f"[BROKER] Trigger good_game target={target_uid}: {payload}")
                 threading.Thread(

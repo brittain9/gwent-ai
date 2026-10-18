@@ -25,10 +25,12 @@ namespace GwentHost
     // checks deck files (DeckSpec JSON) with the engine's own deck validator
     // and exits 1 if any is not legal.
     //
-    //   mono -O=-float32 dist/host/GwentHost.exe --client DIR --loader DIR --self-test NAME
+    //   mono -O=-float32 dist/host/GwentHost.exe --client DIR --loader DIR --self-test NAME [--out DIR]
     //
     // runs one of the host's patch checks (SelfTest.cs: ushort-indexof,
-    // engine-pack) and exits 0 if it passes.
+    // engine-pack) and exits 0 if it passes, or writes one of the reference
+    // tables of the client's rules (OracleDumps.cs: loader-dump, enum-dump,
+    // cardpower-dump) into DIR (default .runtime/engine/oracle).
     //
     // On .NET (GwentHost.Core):
     //
@@ -42,7 +44,7 @@ namespace GwentHost
     {
         public static int Main(string[] args)
         {
-            string client = null, loader = null, selfTest = null;
+            string client = null, loader = null, selfTest = null, outDir = null;
             System.Collections.Generic.List<string> decks = null;
             bool worker = false;
             int port = 0;
@@ -56,6 +58,7 @@ namespace GwentHost
                     case "--validate-decks": decks = new System.Collections.Generic.List<string>(); break;
                     case "--search-worker": worker = true; break;
                     case "--self-test": selfTest = args[++i]; break;
+                    case "--out": outDir = args[++i]; break;
                     case "--port": port = int.Parse(args[++i]); break;
                     case "--memory-limit": memoryLimitMB = long.Parse(args[++i]); break;
                     default:
@@ -80,7 +83,7 @@ namespace GwentHost
             }
             if (selfTest != null)
             {
-                return SelfTest.Run(selfTest, client);
+                return SelfTest.Run(selfTest, client, outDir);
             }
             if (worker)
             {
@@ -181,6 +184,8 @@ namespace GwentHost
             ActionTrace.Install(harmony);
             MoveLog.Install(harmony);
             AnswerLog.Install(harmony);
+            // Off unless GWENT_TRACE_LEGAL or GWENT_TRACE_STATE is set: no patch then.
+            OracleTrace.Install(harmony);
             VirtualClock.Install(harmony);
             GwentAI.Search.SearchPatches.Install(harmony);
             HostPatches.Install(harmony);

@@ -1,8 +1,8 @@
 /*
  * Checks that dist/session_net.dll patches a client module loaded after its
  * install, as the client loads the Wwise engine (AkSoundEngine.dll) after the
- * plugin's last rescan (scripts/tests/test_session_net_windows.py builds and
- * runs it). One source, two builds:
+ * plugin's last rescan (the Windows session tests build and run it). One
+ * source, two builds:
  *
  *   -DLATE_MODULE -shared   late.dll, whose bind_any() binds a UDP socket to
  *                           0.0.0.0 and returns the address it landed on, and

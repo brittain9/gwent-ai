@@ -66,8 +66,8 @@ namespace GwentAI.Learn
             });
         }
 
-        // A copy of the file's bytes with every row's static columns zeroed,
-        // as scripts/vnet_strip.py writes it: the file the AI embeds.
+        // A copy of the file's bytes with every row's static columns zeroed:
+        // the file the AI embeds.
         public static byte[] Strip(byte[] full)
         {
             float[] zero = new float[StaticColumns];

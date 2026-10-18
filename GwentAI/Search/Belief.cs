@@ -55,6 +55,14 @@ namespace GwentAI.Search
         // deck past UnknownDeckMismatches. False: the best fits alone.
         public bool PosteriorDecks;
         public const double MisfitWeight = 0.1;
+        // The opponent drafted their deck (arena): no meta deck is guessed,
+        // and the unseen cards are drawn in a drafted deck's shape
+        // (ArenaRandomDeck) in place of RandomDeck's constructed one.
+        public bool ArenaDeck;
+        // A drafted deck's tiers (ArenaDraft: 9.3 gold, 8.3 silver, 8.3
+        // bronze on average), one copy of each card, any faction.
+        private const int ArenaGolds = 9;
+        private const int ArenaSilvers = 8;
         private static readonly System.Reflection.FieldInfo s_Blacklist = HarmonyLib.AccessTools.Field(typeof(RequestMulliganAction), "m_BlacklistedTemplates");
         private static readonly System.Reflection.FieldInfo s_CopiesCount = HarmonyLib.AccessTools.Field(typeof(HasNCopiesOfDefinitions), "Count");
         private static readonly Dictionary<int, int> s_CopyRules = new Dictionary<int, int>();
@@ -430,7 +438,12 @@ namespace GwentAI.Search
             Dictionary<int, int> known = prepared.Known;
             MetaDeck guess;
             int mismatches;
-            if (PosteriorDecks)
+            if (ArenaDeck)
+            {
+                mismatches = prepared.Mismatches;
+                guess = null;
+            }
+            else if (PosteriorDecks)
             {
                 guess = PosteriorPick(prepared, random, out mismatches);
             }
@@ -451,8 +464,15 @@ namespace GwentAI.Search
             else
             {
                 result.Deck = null;
-                prepared.BronzeRule = prepared.BronzeRule ?? CopyRule(copy, known);
-                deck = RandomDeck(copy.PlayerManager.GetPlayer(opponent).FactionId, DeckSize(copy, opponent), known, prepared.BronzeRule.Value, random);
+                if (ArenaDeck)
+                {
+                    deck = ArenaRandomDeck(DeckSize(copy, opponent), known, random);
+                }
+                else
+                {
+                    prepared.BronzeRule = prepared.BronzeRule ?? CopyRule(copy, known);
+                    deck = RandomDeck(copy.PlayerManager.GetPlayer(opponent).FactionId, DeckSize(copy, opponent), known, prepared.BronzeRule.Value, random);
+                }
             }
             List<int> unseen = Expand(Excess(deck, known));
             Shuffle(unseen, random);
@@ -872,6 +892,44 @@ namespace GwentAI.Search
             Fill(deck, faction, Pool(faction, PoolKind.Bronze), Math.Max(size - DeckGolds - DeckSilvers, 0),
                  bronzeRule > 0 ? bronzeRule : 1, bronzeRule > 0 ? bronzeRule : BronzeCopies, random);
             return deck;
+        }
+
+        // A drafted deck of the opponent's (public) size, holding every card
+        // seen, filled out at random: ArenaGolds golds and ArenaSilvers
+        // silvers, bronzes for the rest, one copy each, from every faction
+        // and neutral alike.
+        private static Dictionary<int, int> ArenaRandomDeck(int size, Dictionary<int, int> known, Random random)
+        {
+            Dictionary<int, int> deck = new Dictionary<int, int>(known);
+            Fill(deck, AnyFaction, ArenaPool(ECardTier.Gold), ArenaGolds, 1, 1, random);
+            Fill(deck, AnyFaction, ArenaPool(ECardTier.Silver), ArenaSilvers, 1, 1, random);
+            Fill(deck, AnyFaction, ArenaPool(ECardTier.Bronze), Math.Max(size - ArenaGolds - ArenaSilvers, 0), 1, 1, random);
+            return deck;
+        }
+
+        // No faction is weighted over another (Weight).
+        private const EFactionId AnyFaction = (EFactionId)(-1);
+
+        // The collectible cards of every faction of a tier, leaders
+        // included, in id order: the arena draft's pools. Kind Normal, as
+        // the local server's pool (server/deploy/arena.py load_tier_pool):
+        // one base-set bronze template (200234) has no kind.
+        private static readonly Dictionary<ECardTier, List<CardTemplate>> s_ArenaPools = new Dictionary<ECardTier, List<CardTemplate>>();
+
+        public static List<CardTemplate> ArenaPool(ECardTier tier)
+        {
+            lock (s_ArenaPools)
+            {
+                if (!s_ArenaPools.TryGetValue(tier, out List<CardTemplate> pool))
+                {
+                    pool = s_ArenaPools[tier] = GameSharedData.Instance.SharedRuntimeTemplates.Values
+                        .Select(runtime => runtime.Template)
+                        .Where(template => template.Availability == EAvailability.BaseSet && template.Kind == ECardKind.Normal && template.Tier == tier)
+                        .OrderBy(template => template.Id)
+                        .ToList();
+                }
+                return pool;
+            }
         }
 
         // The copies per card a seen card's ability wants of its owner's

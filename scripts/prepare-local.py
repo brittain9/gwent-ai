@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Install the build into your client and prepare the local runtime data."""
 from pathlib import Path
+import hashlib
 import runpy
 import shutil
 import subprocess
@@ -26,6 +27,14 @@ with zipfile.ZipFile(loader) as archive:
 (client / 'Mods').mkdir(exist_ok=True)
 for mod in ['GwentBetaRestorationMod.dll', 'GwentAI.dll']:
     shutil.copy2(root / 'dist' / mod, client / 'Mods' / mod)
+# Companion assemblies of the mod (dist/GwentAI.*.dll) are installed beside it
+# when a build has them; a player's download has none.
+companions = sorted(p for p in (root / 'dist').glob('GwentAI.*.dll') if p.is_file())
+for companion in companions:
+    shutil.copy2(companion, client / 'Mods' / companion.name)
+if companions:
+    for mod in ['GwentAI.dll', *(p.name for p in companions)]:
+        print(f'{mod} md5 {hashlib.md5((client / "Mods" / mod).read_bytes()).hexdigest()}')
 cards = client / 'UserData/GwentAI/cards'
 cards.mkdir(parents=True, exist_ok=True)
 for name in ['roles.json', 'answer-params.json', 'manifest.json']:

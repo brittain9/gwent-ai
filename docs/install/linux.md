@@ -54,6 +54,23 @@ AppArmor. Setup reports this. Options (untested here): allow them for the
 session (`sudo sysctl kernel.apparmor_restrict_unprivileged_userns=0`) or
 add an AppArmor profile allowing `userns` for `/usr/bin/bwrap` and `/usr/bin/unshare`.
 
+## Emotes and arena
+
+Both are on by default.
+
+- **Emotes.** The opponent uses the game's taunts like a person: some games
+  none, some games a few. To turn them off, set `GWENT_AI_EMOTES=0` before
+  you start the session.
+- **Arena, an early version.** The game's own arena screens work against
+  the AI: a free ticket, a draft of 26 cards, a leader, and a run that ends
+  at 9 wins or 3 losses. The AI drafts its deck at random, so it is easier
+  to beat in arena than in Practice. To turn it off, set `GWENT_AI_ARENA=0`
+  before you start the session. You get one new ticket each time the game
+  starts, so restart the client for a new run.
+
+Set them in the shell that runs `scripts/run-local.sh`, for example
+`GWENT_AI_EMOTES=0 scripts/run-local.sh`.
+
 ## Build from source
 
 To build instead, also install .NET SDK 10 and MinGW-w64 GCC

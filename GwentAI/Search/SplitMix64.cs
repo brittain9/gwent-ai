@@ -32,6 +32,16 @@ namespace GwentAI.Search
             }
         }
 
+        // The seeded random agent rand-sm's draw: seat 0 is P1, 1 is P2;
+        // decision counts the seat's steps from 0. One SplitMix64 output from
+        // the state (uint)seed << 32 | (2 * decision + seat), reduced
+        // modulo n (n > 0).
+        public static int Pick(int seed, int seat, int decision, int n)
+        {
+            ulong state = ((ulong)(uint)seed << 32) | (uint)(2 * decision + seat);
+            return (int)(new SplitMix64(state).NextULong() % (ulong)n);
+        }
+
         // In [0, 1), 53 bits.
         public double NextDouble()
         {

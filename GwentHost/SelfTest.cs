@@ -30,15 +30,19 @@ namespace GwentHost
         [DllImport("libc", SetLastError = true)]
         private static extern int mprotect(IntPtr address, UIntPtr length, int protection);
 
-        public static int Run(string name, string client)
+        public static int Run(string name, string client, string outDir = null)
         {
+            if (Array.IndexOf(OracleDumps.Names, name) >= 0)
+            {
+                return OracleDumps.Run(name, client, outDir);
+            }
             if (name == "engine-pack")
             {
                 return EnginePackSelfTest.Run(client);
             }
             if (name != "ushort-indexof")
             {
-                Console.Error.WriteLine($"GwentHost: no self-test {name}; known: ushort-indexof, engine-pack");
+                Console.Error.WriteLine($"GwentHost: no self-test {name}; known: ushort-indexof, engine-pack, " + string.Join(", ", OracleDumps.Names));
                 return 2;
             }
             HarmonyLib.Harmony harmony = new HarmonyLib.Harmony("gwent-host-self-test");

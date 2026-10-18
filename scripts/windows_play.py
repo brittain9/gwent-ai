@@ -175,6 +175,23 @@ def choose_client(argument, state):
     return client
 
 
+PYTHON_RANGE = ((3, 10), (3, 14))
+WINGET_PYTHON = "winget install Python.Python.3.12"
+
+
+def supported_python(version=None, maxsize=None):
+    """None when this Python can run the setup, else the message to print."""
+    version = tuple(sys.version_info[:3]) if version is None else tuple(version)
+    maxsize = sys.maxsize if maxsize is None else maxsize
+    low, high = PYTHON_RANGE
+    if not low <= version[:2] <= high:
+        return (f"Python {'.'.join(map(str, version))} is not supported: use Python "
+                f"{low[0]}.{low[1]} to {high[0]}.{high[1]}.\nInstall it with\n    {WINGET_PYTHON}")
+    if maxsize <= 2**32:
+        return "A 64-bit Python is needed; this one is 32-bit.\nInstall it with\n    " + WINGET_PYTHON
+    return None
+
+
 def setup(args):
     global CLIENT
     state = paths.load_state() if paths.STATE.is_file() else {}
@@ -193,8 +210,9 @@ def setup(args):
         return
 
     step("Prerequisites")
-    if sys.version_info < (3, 10):
-        raise SystemExit("Python 3.10 or later is needed (winget install Python.Python.3.12)")
+    problem = supported_python()
+    if problem:
+        raise SystemExit(problem)
     require_dotnet()
     say("  .NET 10 runtime: ready")
 
@@ -236,8 +254,15 @@ def setup(args):
     step("Python environment for the server (.venv)")
     if not paths.VENV_PYTHON.is_file():
         subprocess.run([sys.executable, "-m", "venv", str(ROOT / ".venv")], check=True)
-    venv_run("-m", "pip", "install", "--quiet", "--disable-pip-version-check",
-             "-r", ROOT / "server" / "requirements.txt", *paths.UNITYPY)
+    try:
+        venv_run("-m", "pip", "install", "--quiet", "--disable-pip-version-check",
+                 "--only-binary", "lz4", "-r", ROOT / "server" / "requirements.txt", *paths.UNITYPY,
+                 capture_output=True, text=True)
+    except subprocess.CalledProcessError as error:
+        say("A prebuilt lz4 wheel for this Python was not found. Use Python 3.10 to 3.14 (64-bit): "
+            + WINGET_PYTHON)
+        say(error.stdout + error.stderr)
+        raise
     say("  .venv: ready")
 
     step("Your client")

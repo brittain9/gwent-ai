@@ -33,7 +33,7 @@ SESSION_NET_FAILED = 0x5E55
 
 # The variables the optional local override file .runtime/playtest/env sets for
 # Practice (run-local.sh sources the same file).
-PLAYTEST_VARIABLES = ("GWENT_AI_AGENT", "GWENT_AI_THINK_MS")
+PLAYTEST_VARIABLES = ("GWENT_AI_AGENT", "GWENT_AI_THINK_MS", "GWENT_AI_EMOTES", "GWENT_AI_ARENA")
 
 
 def playtest_env(path=None):
@@ -268,6 +268,9 @@ def run(args, job=None, worker_job=None):
     for name, value in playtest.items():
         print(f"Local override (.runtime/playtest/env): {name}={value}", flush=True)
     env.setdefault("GWENT_AI_THINK_MS", "20000")
+    # On unless set to 0, in the environment or in the local override file.
+    env.setdefault("GWENT_AI_EMOTES", "1")
+    env.setdefault("GWENT_AI_ARENA", "1")
     test_data = None
     if args.smoke:
         test_data = Path(tempfile.mkdtemp(prefix="smoke-", dir=paths.RUNTIME))
